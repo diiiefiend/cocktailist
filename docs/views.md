@@ -1,26 +1,32 @@
 # View Wireframes
 
-## New Session
+Not indicative of real styling. Black boxes are to be interpreted as placeholders/containers.
+
+## Login/Signup
 ![new-session]
 
-## Feed Show (landing page)
-![feed-show]
+## Feed Index (landing page)
+![feed-index]
 
-## Blog Show
-![blog-show]
+## List Show
+![list-show]
 
-## Post Show
-![post-show]
+## Entry Show
+![entry-show]
 
-## Post Form
-![post-form]
+## Review Form
+![review-form]
 
-## Search Results
-![search-results]
+## Recommendations Index
+![recs-index]
 
-[new-session]: ./wireframes/new_session.png
-[feed-show]: ./wireframes/feed_show.png
-[blog-show]: ./wireframes/blog_show.png
-[post-show]: ./wireframes/post_show.png
-[post-form]: ./wireframes/post_form.png
-[search-results]: ./wireframes/search_results.png
+## Recs Show Subview
+![recs-show]
+
+[new-session]: ./wireframes/signuplogin.jpg
+[feed-index]: ./wireframes/feedindex.jpg
+[list-show]: ./wireframes/listshow.jpg
+[entry-show]: ./wireframes/entryshow.jpg
+[review-form]: ./wireframes/reviewform.jpg
+[recs-index]: ./wireframes/recsindex.jpg
+[recs-show]: ./wireframes/recsshow.jpg

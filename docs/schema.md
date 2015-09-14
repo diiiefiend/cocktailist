@@ -1,26 +1,35 @@
 # Schema Information
 
-## blogs
+## cocktails
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-owner_id    | integer   | not null, foreign key (references users)
-title       | string    | not null
+bar_id      | integer   | not null, foreign key (references bars)
+name        | string    | not null
+ingredients | string    | not null
 
-## followings
+## bars
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-blog_id     | integer   | not null, foreign key (references blogs)
-follower_id | integer   | not null, foreign key (references users)
+name        | string    | not null
+address     | string    | not null
 
-## posts
+## ratings
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 author_id   | integer   | not null, foreign key (references users)
-title       | string    | not null
-body        | string    |
+rating      | integer   | not null
+body        | string    | 
+date        | date      | 
+
+## cocktailreviews
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+rating_id   | integer   | not null, foreign key (references ratings)
+cocktail_id | integer   | not null, foreign key (references cocktails)
 
 ## tags
 column name | data type | details
@@ -32,13 +41,14 @@ label       | string    | not null, unique
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-post_id     | integer   | not null, foreign key (references posts)
+cocktail_id | integer   | not null, foreign key (references cocktails)
 tag_id      | integer   | not null, foreign key (references tags)
 
 ## users
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
+username        | string    | not null
 email           | string    | not null, unique
 password_digest | string    | not null
 session_token   | string    | not null, unique
