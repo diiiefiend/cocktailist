@@ -1,20 +1,24 @@
-# Phase 4: User Feeds
+# Phase 4: Browsing Cocktails, User Lists
 
 ## Rails
 ### Models
+* List
 
 ### Controllers
-Api::PostsController (feed)
+Api::ListsController (create, new, show, update, edit, delete, index)
 
 ### Views
-posts/feed.json.jbuilder
+lists/show.json.jbuilder
 
 ## Backbone
 ### Models
+* List
 
 ### Collections
+* Lists
 
 ### Views
-* FeedShow (composite view, contains PostsIndex subview)
+* ListShow (composite view)
+* BrowseIndex (composite view)
 
 ## Gems/Libraries

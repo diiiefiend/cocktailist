@@ -1,29 +1,31 @@
-# Phase 2: Viewing Blogs and Posts
+# Phase 2: Rating Cocktails, Viewing Cocktails and Scores
 
 ## Rails
 ### Models
 
 ### Controllers
-Api::BlogsController (create, destroy, index, show)
-Api::PostsController (create, destroy, show, update)
+Api::CocktailsController (create, destroy, index, show, update, edit)
+Api::BarController (create, destroy, update)
+Api::RatingsController (create, destroy, show, update, edit, new)
 
 ### Views
-* blogs/show.json.jbuilder
+* cocktails/show.json.jbuilder
 
 ## Backbone
 ### Models
-* Blog (parses nested `posts` association)
-* Post
+* Cocktail (parses nested `ratings` association)
+* Rating
 
 ### Collections
-* Blogs
-* Posts
+* Cocktails
+* Ratings
 
 ### Views
-* BlogForm
-* BlogShow (composite view, contains PostsIndex subview)
-* PostsIndex (composite view, contains PostsIndexItem subviews)
-* PostsIndexItem
-* PostShow
+* ReviewForm
+* FeedIndex (composite view)
+* FeedShow 
+* EntryShow (composite view)
+* ReviewShow (composite view)
+* BarShow (called barInfo in the wireframes)
 
 ## Gems/Libraries

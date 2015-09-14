@@ -1,22 +1,26 @@
-# Phase 5: Searching for Blogs and Posts
+# Phase 7: Recommendations
 
 ## Rails
 ### Models
+* Tag (may add some helper methods)
+* Cocktail (ditto)
 
 ### Controllers
-Api::BlogsController (search)
-Api::PostsController (search)
+* Api::TagController (recs)
+* Api::CocktailController (recs)
 
 ### Views
 
 ## Backbone
 ### Models
+* Rec
 
 ### Collections
+* Recs
 
 ### Views
-* BlogSearchItem
-* SearchShow (composite view, contains BlogsIndex and PostsIndex subviews)
+* RecsIndex (composite view)
+* RecsShow
 
 ## Gems/Libraries
 

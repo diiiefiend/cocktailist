@@ -1,11 +1,11 @@
-# Cocktailist
+# cocktailist
 
 [Heroku link][heroku]
 
 [heroku]: http://cocktailist.herokuapp.com
 
 ## Minimum Viable Product
-Cocktailist is a clone of Goodreads with some Yelp elements built on Rails and Backbone. Users can:
+cocktailist is a clone of Goodreads with some Yelp elements built on Rails and Backbone. Users can:
 
 <!-- This is a Markdown checklist. Use it to keep track of your progress! -->
 
@@ -39,15 +39,15 @@ to phase 2.
 
 [Details][phase-one]
 
-### Phase 2: Reviewing Cocktails, Viewing Cocktails and Scores  (~2 days)
-I will add API routes to serve entry and review data as JSON, then add Backbone
-models and collections that fetch data from those routes. Review data will be processed and aggregated.
-By the end of this phase, users will be able to create entries and view both entries and reviews, all
+### Phase 2: Rating Cocktails, Viewing Cocktails and Scores  (~2 days)
+I will add API routes to serve entry and rating data as JSON, then add Backbone
+models and collections that fetch data from those routes. Rating data will be processed and aggregated.
+By the end of this phase, users will be able to create entries/reviews and view both entries and ratings, all
 inside a single Backbone app.
 
 [Details][phase-two]
 
-### Phase 3: More Advanced Cocktail Entries (~1-2 days)
+### Phase 3: More Advanced Cocktail Entries (~1 day)
 I plan to use third-party libraries to add functionality to the `CocktailNew` and
 `CocktailShow` views in this phase. I want to integrate Filepicker for file upload so
 users can add images during entry creation and possibly reviews. In addition, I would like to utilize the

@@ -1,22 +1,26 @@
-# Phase 5: Searching for Blogs and Posts
+# Phase 6: Tagging Cocktails, Browsing by Tag
 
 ## Rails
 ### Models
+* Tag
+* Rating, Cocktail, and User will get updated associations
 
 ### Controllers
-Api::BlogsController (search)
-Api::PostsController (search)
+Api::TagsController (create, new)
 
 ### Views
 
 ## Backbone
 ### Models
+* Tag
 
 ### Collections
+* Tags
 
 ### Views
-* BlogSearchItem
-* SearchShow (composite view, contains BlogsIndex and PostsIndex subviews)
+* ReviewForm
+* EntryShow
+* BrowseIndex
 
 ## Gems/Libraries
 

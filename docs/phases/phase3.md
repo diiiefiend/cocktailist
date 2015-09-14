@@ -1,4 +1,4 @@
-# Phase 3: Editing and Displaying Posts
+# Phase 3: More Advanced Cocktail Entries
 
 ## Rails
 ### Models
@@ -13,9 +13,9 @@
 ### Collections
 
 ### Views
-* PostForm
+* ReviewForm
+* EntryShow
 
 ## Gems/Libraries
 * Filepicker
-* Markdown-js
-* Bootstrap Markdown
+* Google Maps
