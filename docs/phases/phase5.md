@@ -4,8 +4,8 @@
 ### Models
 
 ### Controllers
-Api::CocktailsController (search)
-Api::BarController (search)
+* Api::CocktailsController (search)
+* Api::BarController (search)
 
 ### Views
 
