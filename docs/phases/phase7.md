@@ -20,7 +20,6 @@
 
 ### Views
 * RecsIndex (composite view)
-* RecsShow
 
 ## Gems/Libraries
 

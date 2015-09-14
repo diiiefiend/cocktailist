@@ -8,6 +8,9 @@ Not indicative of real styling. Black boxes are to be interpreted as placeholder
 ## Feed Index (landing page)
 ![feed-index]
 
+## Browse Index
+![browse-index]
+
 ## List Show
 ![list-show]
 
@@ -17,16 +20,21 @@ Not indicative of real styling. Black boxes are to be interpreted as placeholder
 ## Review Form
 ![review-form]
 
+## Search Show
+![search-show]
+
 ## Recommendations Index
 ![recs-index]
 
-## Recs Show Subview
-![recs-show]
+## Category Show Subview
+![category-show]
 
 [new-session]: ./wireframes/signuplogin.jpg
 [feed-index]: ./wireframes/feedindex.jpg
+[browse-index]: ./wireframes/browseindex.jpg
 [list-show]: ./wireframes/listshow.jpg
 [entry-show]: ./wireframes/entryshow.jpg
 [review-form]: ./wireframes/reviewform.jpg
 [recs-index]: ./wireframes/recsindex.jpg
-[recs-show]: ./wireframes/recsshow.jpg
+[category-show]: ./wireframes/categoryshow.jpg
+[search-show]: ./wireframes/searchshow.jpg

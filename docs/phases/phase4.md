@@ -20,5 +20,6 @@ lists/show.json.jbuilder
 ### Views
 * ListShow (composite view)
 * BrowseIndex (composite view)
+* CategoryShow
 
 ## Gems/Libraries

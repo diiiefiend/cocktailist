@@ -26,6 +26,6 @@ Api::RatingsController (create, destroy, show, update, edit, new)
 * FeedShow 
 * EntryShow (composite view)
 * ReviewShow (composite view)
-* BarShow (called barInfo in the wireframes)
+* BarShow
 
 ## Gems/Libraries
