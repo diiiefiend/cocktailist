@@ -8,4 +8,8 @@ Rails.application.routes.draw do
       get 'destroy', as: 'delete'
     end
   end
+
+  namespace :api, defaults: {format: :json} do
+    resources :cocktails, except: [:new, :edit]
+  end
 end
