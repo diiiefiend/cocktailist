@@ -6,6 +6,7 @@ column name | data type | details
 id          | integer   | not null, primary key
 bar_id      | integer   | not null, foreign key (references bars)
 name        | string    | not null
+liquor      | string    | not null
 ingredients | string    | not null
 
 ## bars
