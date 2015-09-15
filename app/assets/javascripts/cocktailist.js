@@ -4,7 +4,8 @@ window.Cocktailist = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    new Cocktailist.Routers.Router({$el: $("#js-main")});
+    Backbone.history.start();
   }
 };
 
