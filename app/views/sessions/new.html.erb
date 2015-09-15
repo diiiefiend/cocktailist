@@ -1,0 +1,7 @@
+<p>Don't have an account? <a href="<%= new_user_url %>">Sign up.</a></p>
+<form action="<%= session_url %>" method="post">
+  <%= form_auth %>
+  <input type="text" value="<%= @user.nil? ? "email" : @user.email %>" name="user[email]">
+  <input type="password" value="<%= @user.nil? ? "password" : @user.password %>" name="user[password]">
+  <button>Log In</button>
+</form>

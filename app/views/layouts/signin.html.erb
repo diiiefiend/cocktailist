@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cocktailist</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="window">
+  <div id="signinbox">
+    <img src="<%= image_url ("logo.png") %>" alt="cocktailist">
+    <%= yield %>
+    
+    <% if flash[:errors]  %>
+      <div class="flashbox">
+        <% flash[:errors].each do |error| %>
+        <p><%= error %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+</body>
+</html>
