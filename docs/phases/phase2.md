@@ -5,7 +5,6 @@
 
 ### Controllers
 Api::CocktailsController (create, destroy, index, show, update, edit)
-Api::BarController (create, destroy, update)
 Api::RatingsController (create, destroy, show, update, edit, new)
 
 ### Views
@@ -26,6 +25,5 @@ Api::RatingsController (create, destroy, show, update, edit, new)
 * FeedShow 
 * EntryShow (composite view)
 * ReviewShow (composite view)
-* BarShow
 
 ## Gems/Libraries

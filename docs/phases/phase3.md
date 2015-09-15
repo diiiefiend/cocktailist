@@ -18,4 +18,3 @@
 
 ## Gems/Libraries
 * Filepicker
-* Google Maps

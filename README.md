@@ -5,7 +5,7 @@
 [heroku]: http://cocktailist.herokuapp.com
 
 ## Minimum Viable Product
-cocktailist is a clone of Goodreads with some Yelp elements built on Rails and Backbone. Users can:
+cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
 
 <!-- This is a Markdown checklist. Use it to keep track of your progress! -->
 
@@ -15,11 +15,7 @@ cocktailist is a clone of Goodreads with some Yelp elements built on Rails and B
 - [ ] Review cocktails
 - [ ] View cocktail summaries and reviews/scores
 - [ ] Add cocktails to had/want to try/not interested lists
-- [ ] Browse cocktails by bar or ingredient
-- [ ] Searching for cocktails by name or by bar
-- [ ] Tag cocktails (i.e. spicy, adventurous, traditional, etc.)
-- [ ] Browse cocktails by tag
-- [ ] Get recommendations based on drinking history, tags, and location
+- [ ] Searching for cocktails
 
 ## Design Docs
 * [View Wireframes][views]
@@ -49,40 +45,30 @@ inside a single Backbone app.
 
 ### Phase 3: More Advanced Cocktail Entries (~1 day)
 I plan to use third-party libraries to add functionality to the `CocktailNew` and
-`CocktailShow` views in this phase. I want to integrate Filepicker for file upload so
-users can add images during entry creation and possibly reviews. In addition, I would like to utilize the
-Google Maps API to display the location of the associated bar.
+`CocktailShow` views in this phase. I want to integrate Filepicker/Amazon S3 for file upload so
+users can add images during entry creation and possibly reviews.
 
 [Details][phase-three]
 
 ### Phase 4: Browsing Cocktails, User Lists (~2 days)
-Users will be able to browse cocktails either by associated bar or by ingredient (which liquor, etc). They will 
-be able to add cocktails to one of several lists: "experienced", "want to try", and "not interested." 
-A 'ListShow' view will be added to display each of these lists and some stats on the entry. 
+Users will be able to browse cocktails by liquor. They will be able to add cocktails to one of several lists: 
+"experienced", "want to try", and "not interested." A 'ListShow' view will be added to display each of 
+these lists and some stats on the entry. 
 
 [Details][phase-four]
 
 ### Phase 5: Searching for Cocktails (~1 day)
-Users will be able to search for cocktails by bar or name. (Simple straightforward search for now.) A search 
+Users will be able to search for cocktails by name. (Simple straightforward search for now.) A search 
 results view will be added.
 
 [Details][phase-five]
 
-### Phase 6: Tagging Cocktails, Browsing by Tag (~2 days)
-Users will be able to add additional tags to cocktail entries, such as 'spicy', 'fizzy', 'traditional', and so on. 
-There will be a list of most popular tags, or users can create their own. Then users will be able to browse by
-particular tags.
-
-[Details][phase-six]
-
-### Phase 7: Recommendations (~2-3 days)
-I plan to write a simple algorithm that will sort through a user's lists to come up with recommended untried 
-cocktails based on ingredients/tags they have frequently tried/liked. Depending on the Google Map API, I 
-hope to sort by proximity. There will be a 'RecommendationsShow' view.
-
-[Details][phase-seven]
 
 ### Bonus Features (TBD)
+- [ ] Browse cocktails by bar or ingredient (integrating Google Map API)
+- [ ] Tag cocktails (i.e. spicy, adventurous, traditional, etc.)
+- [ ] Browse cocktails by tag
+- [ ] Get recommendations based on drinking history, tags, and location
 - [ ] A 2-d graph view of cocktails, plotted out based on tags, if I can find a way to quantify the tags
 - [ ] User activity feeds
 - [ ] Ability to follow users, comments on their activity, etc

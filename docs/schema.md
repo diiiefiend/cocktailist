@@ -20,16 +20,18 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 author_id   | integer   | not null, foreign key (references users)
+cocktail_id | integer   | not null, foreign key (references cocktails)
 rating      | integer   | not null
 body        | string    | 
 date        | date      | 
 
-## cocktailreviews
+## userlists
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-rating_id   | integer   | not null, foreign key (references ratings)
+user_id     | integer   | not null, foreign key (references users)
 cocktail_id | integer   | not null, foreign key (references cocktails)
+name        | string    | not null
 
 ## tags
 column name | data type | details

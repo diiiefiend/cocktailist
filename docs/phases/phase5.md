@@ -5,7 +5,6 @@
 
 ### Controllers
 * Api::CocktailsController (search)
-* Api::BarController (search)
 
 ### Views
 
