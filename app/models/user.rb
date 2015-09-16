@@ -11,6 +11,12 @@ class User < ActiveRecord::Base
   validates :password, length: {minimum: 5, allow_nil: true}
   after_initialize :ensure_session_token
 
+  has_many :feed_items,
+    class_name: "Feed",
+    foreign_key: :user_id,
+    primary_key: :id,
+    dependent: :destroy
+
   attr_reader :password
 
   def self.find_by_credentials(email, password)

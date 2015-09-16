@@ -5,4 +5,7 @@
 class Feed < ActiveRecord::Base
   validates :user_id, :cocktail_id, :activity, presence: true
 
+  belongs_to :user
+  belongs_to :cocktail
+
 end

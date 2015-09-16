@@ -1,6 +1,8 @@
 Cocktailist.Routers.Router = Backbone.Router.extend({
   routes: {
     "" : "feed",
+    "cocktails/new" : "createEntry",
+    "cocktails/:id": "showEntry",
     "browse" : "browse"
   },
 
@@ -12,8 +14,18 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
   feed: function (){
     this._feedItems.fetch();
-    var view = new Cocktailist.Views.CocktailsFeed({collection: this._feedItems});
+    var view = new Cocktailist.Views.CocktailsFeed({collection: this._feedItems, cocktails: this._cocktails});
     this._swapView(view);
+  },
+
+  createEntry: function (){
+    var entry = new Cocktailist.Models.Cocktail();
+    var view = new Cocktailist.Views.CocktailsNew({model: entry});
+    this._swapView(view);
+  },
+
+  showEntry: function (id){
+    alert("on cocktail show");
   },
 
   browse: function (){
