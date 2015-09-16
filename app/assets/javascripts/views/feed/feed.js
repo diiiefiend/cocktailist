@@ -1,9 +1,5 @@
 Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend({
-  template: {
-    "main" : JST['feed/show'],
-    "feed" : JST['feed/_feed'],
-    "side" : JST['feed/_rside']
-  },
+  template: JST['feed/show'],
 
   events: {
     "click .addEntry" : "showForm"
@@ -22,14 +18,14 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend({
       this._showForm = false;
     } else {
       var newModel = new Cocktailist.Models.Cocktail();
-      var view = new Cocktailist.Views.CocktailsNew({model: newModel, collection: this._cocktails});
+      var view = new Cocktailist.Views.CocktailsForm({model: newModel, collection: this._cocktails});
       this.$el.find(".left").html(view.render().$el);
       this._showForm = true;
     };
   },
 
   render: function (){
-    var template = this.template["main"]({feedItems: this.collection});
+    var template = this.template({feedItems: this.collection});
     this.$el.html(template);
     return this;
   }

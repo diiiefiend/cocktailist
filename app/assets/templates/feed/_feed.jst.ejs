@@ -1,8 +1,8 @@
 <% feedItems.each(function (feedItem){ %>
 <div class="box">
   <h2><%= feedItem.escape('username') %> <%= feedItem.escape('activity') %></h2>
-  <h1><%= feedItem.escape('cocktailName') %></h1>
-  <p>Filler</p>
+  <h1><a href="#cocktails/<%= feedItem.escape('cocktail_id') %>"><%= feedItem.escape('cocktailName') %></a></h1>
+  <p>Metadata</p>
   <p class="subtext">@ <%= feedItem.escape('created_at') %></p>
 </div>
 <% }); %>

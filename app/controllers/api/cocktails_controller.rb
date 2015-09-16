@@ -11,8 +11,10 @@ module Api
     end
 
     def create
+      #insert lowercase logic here
       @cocktail = Cocktail.new(cocktail_params)
       if @cocktail.save
+        Feed.create(user_id: current_user.id, cocktail_id: @cocktail.id, activity: "added")
         render json: @cocktail
       else
         render json: @cocktail.errors.full_messages, status: :unprocessable_entity

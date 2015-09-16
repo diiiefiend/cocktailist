@@ -100,6 +100,7 @@
    padding: 5%;
    color: white;
    font: 24px 'Montserrat', sans-serif;
+   opacity: 1;
  }
 
  #signinbox button{
@@ -304,6 +305,14 @@
   right: 350px;
 }
 
+form a.toggle{
+  float: right;
+}
+form input.toggle{
+  display: none;
+  margin-left: 110px;
+}
+
 .clearfix:after{
   clear: both;
   display: block;
@@ -330,18 +339,18 @@ label{
   padding-right: 10px;
 }
 
-input{
+input, select{
   display: block;
   padding: 3px;
-  background: white;
+  background: transparent;
   opacity: 0.8;
-  color: black;
-  border-bottom: 1px solid black;
+  color: white;
+  border-bottom: 1px solid white;
   font: 18px 'ChaparralPro', 'Palatino', serif;
   margin-bottom: 10px;
   width: 50%;
 }
-input:focus{
+input:focus, select:focus{
   opacity: 1;
 }
 
@@ -365,4 +374,10 @@ a{
 }
 #content a:hover{
   color: white;
+}
+.wide h1 a{
+  color: #999;
+}
+.wide h1 a:hover{
+  color: #cc8042;
 }

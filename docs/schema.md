@@ -16,6 +16,7 @@ id          | integer   | not null, primary key
 user_id     | integer   | not null, foreign key (references users)
 cocktail_id | string    | not null, foreign key (references cocktails)
 activity    | string    | not null (rated, added, listed)
+data        | string    | not null (rated: first 10 words of review, added: ingredients & bar, listed: list)
 
 ## bars
 column name | data type | details

@@ -2,17 +2,18 @@
   <h1><%= entry.isNew() ? "Add" : "Edit" %> Cocktail Entry</h1>
   <form class="cocktailForm">
     <label for="cName">Name</label>
-    <input type="text" value="<%= entry.name %>" name="cocktail[name]" id="cName">
+    <input type="text" value="<%= entry.escape('name') %>" name="cocktail[name]" id="cName">
     <label for="liquor">Liquor</label>
+    <a class="toggle" href="javascript:void(0);">or add new</a>
     <select name="cocktail[liquor]">
-      <% entry.LIQUORS.each( function (liquor){ %>
-        <option value="<%= liquor.toLowerCase() %>"><%= liquor %></option>
+      <option value=""></option>
+      <% liquorTypes.forEach( function (liquor){ %>
+        <option value="<%= liquor %>"><%= liquor %></option>
       <% }); %>
     </select>
-
-    <!-- <input type="text" value="<%= entry.liquor %>" name="cocktail[liquor]" id="liquor"> -->
+    <input class="toggle" type="text" placeholder="add new liquor" id="liquor">
     <label for="ingredients">Ingredients</label>
-    <input type="text" value="<%= entry.ingredients %>" name="cocktail[ingredients]" id="ingredients">
+    <input type="text" value="<%= entry.escape('ingredients') %>" name="cocktail[ingredients]" id="ingredients">
     <button class="submit">Save</button>
   </form>
 </div>

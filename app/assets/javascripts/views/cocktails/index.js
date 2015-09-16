@@ -1,4 +1,4 @@
-Cocktailist.Views.CocktailsIndex = Backbone.CompositeView.extend({
+Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
   template: JST['cocktails/index'],
 
   initialize: function(){
