@@ -14,16 +14,16 @@ class SessionsController < ApplicationController
       params[:user][:password]
     )
     if @user.nil?
-      flash.now[:errors] = ["Invalid username/password combo"]
-      render :new
+      flash[:errors] = ["Invalid username/password combo"]
+      redirect_to new_session_url
     else
       log_in!(@user)
-      redirect_to user_url(@user)
+      redirect_to root_url
     end
   end
 
   def destroy
     log_out!
-    render :new
+    redirect_to new_session_url
   end
 end

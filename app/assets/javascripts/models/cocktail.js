@@ -1,3 +1,3 @@
-Cocktailist.Models.Cocktail = Backbone.Model.extends({
+Cocktailist.Models.Cocktail = Backbone.Model.extend({
   urlRoot: 'api/cocktails/'
 });

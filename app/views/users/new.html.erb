@@ -1,8 +1,8 @@
 <p>Already have an account? <a href="<%= new_session_url %>">Log in.</a></p>
 <form action="<%= users_url %>" method="post">
   <%= form_auth %>
-  <input type="text" value="<%= @user.username.nil? ? "username" : @user.username %>" name="user[username]">
-  <input type="text" value="<%= @user.email.nil? ? "email" : @user.email %>" name="user[email]">
-  <input type="password" value="<%= @user.password.nil? ? "password" : @user.password %>" name="user[password]">
+  <input type="text" value="<%= @user.username %>" placeholder="username" name="user[username]">
+  <input type="text" value="<%= @user.email %>" placeholder="email" name="user[email]">
+  <input type="password" value="<%= @user.password %>" placeholder="password" name="user[password]">
   <button>Sign Up</button>
 </form>

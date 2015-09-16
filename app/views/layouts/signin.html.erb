@@ -11,9 +11,9 @@
 
 <div id="window">
   <div id="signinbox">
-    <img src="<%= image_url ("logo.png") %>" alt="cocktailist">
+    <img src="<%= asset_url ("logo.png") %>" alt="cocktailist">
     <%= yield %>
-    
+
     <% if flash[:errors]  %>
       <div class="flashbox">
         <% flash[:errors].each do |error| %>

@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-  def root
-    render :root
-  end
+  before_action :ensure_logged_in
+
+  def root; end
 end

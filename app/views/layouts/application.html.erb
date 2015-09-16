@@ -15,12 +15,13 @@
       <a href="/"><img src="<%= image_url("logo.png") %>" id="logo" alt="cocktailist"></a>
 
       <form class="search">
-        <input type="text" value="search..." name="search[q]">
+        <input type="text" placeholder="search" name="search[q]">
       </form>
 
       <div id="user-menu">
         <img src="<%= image_url("user.png") %>" alt="user menu">
         <ul>
+          <li>Logged in as <%= current_user.username %></li>
           <li><a href="#">Profile</a></li>
           <li><a href="<%= delete_session_url %>">Log out</a></li>
         </ul>
@@ -34,11 +35,15 @@
       </ul>
     </div>
   </div>
+
   <div id="content">
     <div id="js-main" class="container clearfix">
-        <%= yield %>
+
+      <%= yield %>
+
     </div>
   </div>
+
   <div id="footer">
     <div class="container clearfix">
       <p>&copy; 2015 Ariel Hou</p>

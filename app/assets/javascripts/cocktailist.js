@@ -8,7 +8,3 @@ window.Cocktailist = {
     Backbone.history.start();
   }
 };
-
-$(document).ready(function(){
-  Cocktailist.initialize();
-});
