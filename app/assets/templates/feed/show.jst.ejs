@@ -1,0 +1,19 @@
+<div class="left wide">
+  <% feedItems.each(function (feedItem){ %>
+  <div class="box">
+    <h2><%= feedItem.escape('user_id') %> <%= feedItem.escape('activity') %></h2>
+    <h1><%= feedItem.escape('cocktail_id') %></h1>
+    <p>Filler</p>
+    <p class="subtext">@ <%= feedItem.escape('date_created') %></p>
+  </div>
+  <% }); %>
+</div>
+
+<div class="rule-right"></div>
+
+<div class="right bar">
+  <div class="box">
+  </div>
+  <div class="box">
+  </div>
+</div>

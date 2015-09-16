@@ -9,8 +9,8 @@ cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
 
 <!-- This is a Markdown checklist. Use it to keep track of your progress! -->
 
-- [ ] Create accounts
-- [ ] Create sessions (log in)
+- [x] Create accounts
+- [x] Create sessions (log in)
 - [ ] Create cocktail entries
 - [ ] Review cocktails
 - [ ] View cocktail summaries and reviews/scores
@@ -39,7 +39,7 @@ to phase 2.
 I will add API routes to serve entry and rating data as JSON, then add Backbone
 models and collections that fetch data from those routes. Rating data will be processed and aggregated.
 By the end of this phase, users will be able to create entries/reviews and view both entries and ratings, all
-inside a single Backbone app.
+inside a single Backbone app. The feed view will also be created.
 
 [Details][phase-two]
 

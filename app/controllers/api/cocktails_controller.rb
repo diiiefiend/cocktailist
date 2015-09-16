@@ -2,7 +2,7 @@ module Api
   class CocktailsController < ApplicationController
     def index
       @cocktails = Cocktail.all
-      render json: @cocktails
+      render :index
     end
 
     def show

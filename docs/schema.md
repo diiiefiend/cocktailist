@@ -9,6 +9,14 @@ name        | string    | not null
 liquor      | string    | not null
 ingredients | string    | not null
 
+## feeds
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+user_id     | integer   | not null, foreign key (references users)
+cocktail_id | string    | not null, foreign key (references cocktails)
+activity    | string    | not null (rated, added, listed)
+
 ## bars
 column name | data type | details
 ------------|-----------|-----------------------

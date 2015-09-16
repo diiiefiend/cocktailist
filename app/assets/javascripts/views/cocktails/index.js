@@ -2,6 +2,7 @@ Cocktailist.Views.CocktailsIndex = Backbone.CompositeView.extend({
   template: JST['cocktails/index'],
 
   initialize: function(){
+    //collection = cocktails
     this.listenTo(this.collection, "sync", this.render);
   },
 
