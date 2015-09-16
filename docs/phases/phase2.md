@@ -5,10 +5,13 @@
 
 ### Controllers
 Api::CocktailsController (create, destroy, index, show, update, edit)
+Api::FeedsController (show)
 Api::RatingsController (create, destroy, show, update, edit, new)
 
 ### Views
+* cocktails/index.json.jbuilder
 * cocktails/show.json.jbuilder
+* feed/show.json.jbuilder
 
 ## Backbone
 ### Models
