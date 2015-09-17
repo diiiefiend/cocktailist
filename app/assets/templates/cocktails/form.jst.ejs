@@ -3,19 +3,29 @@
   <form class="cocktailForm">
     <label for="cName">Name</label>
     <input type="text" value="<%= entry.escape('name') %>" name="cocktail[name]" id="cName">
+
     <label for="liquor">Liquor</label>
-    <a class="toggle" href="javascript:void(0);">or add new</a>
-    <select name="cocktail[liquor]">
+    <a class="toggle-liquor" href="javascript:void(0);">or add new</a>
+    <select class="toggle-liquor" name="cocktail[liquor]">
       <option value=""></option>
       <% liquorTypes.forEach( function (liquor){ %>
         <option value="<%= liquor %>"><%= liquor %></option>
       <% }); %>
     </select>
-    <input class="toggle" type="text" placeholder="add new liquor" id="liquor">
+    <input class="toggle-liquor" type="text" placeholder="add new liquor" id="liquor">
+
     <label for="ingredients">Ingredients</label>
     <input type="text" value="<%= entry.escape('ingredients') %>" name="cocktail[ingredients]" id="ingredients">
+
     <label for="bar">Bar</label>
-    <input type="text" value="<%= entry.escape('bar_id') %>" name="cocktail[bar_id]" id="bar">
+    <a class="toggle-bar" href="javascript:void(0);">or add new</a>
+    <select class="toggle-bar" name="cocktail[bar_id]">
+      <option value=""></option>
+      <% $.each(bars, function (barId, barName){ %>
+        <option value="<%= barId %>"><%= barName %></option>
+      <% }); %>
+    </select>
+    <input class="toggle-bar" type="text" placeholder="add new bar" id="bar_id">
     <button class="submit">Save</button>
   </form>
 </div>

@@ -3,26 +3,40 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
 
   events: {
     "click .submit" : "create",
-    "click a.toggle" : "toggleInput"
+    "click a.toggle-liquor" : "toggleLiquor",
+    "click a.toggle-bar" : "toggleBar"
   },
 
-  initialize: function (options){
+  initialize: function (){
     //model: cocktail
     //collection: cocktails
-    this.listenTo(this.collection, "sync", this._liquorTypes);
+    this.listenTo(this.collection, "sync", this.makeList());
     this.listenTo(this.collection, "sync", this.render);
-    this.liquorTypes = options.liquorTypes;
   },
 
-  toggleInput: function (e){
-    $input = this.$el.find("input.toggle");
+  toggleLiquor: function (e){
+    $input = this.$el.find("input.toggle-liquor");
     $input.toggle();
-    var $select = this.$el.find("select");
+    var $select = this.$el.find("select.toggle-liquor");
     if($select.attr("disabled")){
       $input.attr("name", "");
       $select.attr("disabled", false);
     } else {
       $input.attr("name", "cocktail[liquor]");
+      $select.val("");
+      $select.attr("disabled", true);
+    };
+  },
+
+  toggleBar: function (e){
+    $input = this.$el.find("input.toggle-bar");
+    $input.toggle();
+    var $select = this.$el.find("select.toggle-bar");
+    if($select.attr("disabled")){
+      $input.attr("name", "");
+      $select.attr("disabled", false);
+    } else {
+      $input.attr("name", "cocktail[bar_id]");
       $select.val("");
       $select.attr("disabled", true);
     };
@@ -39,8 +53,14 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
     });
   },
 
+
+  makeList: function (){
+    this.liquorTypes();
+    this.bars();
+  },
+
   render: function (){
-    var template = this.template({entry: this.model, liquorTypes: this._liquorTypes()});
+    var template = this.template({entry: this.model, liquorTypes: this._liquors, bars: this._bars});
     this.$el.html(template);
     return this;
   }

@@ -305,10 +305,10 @@
   right: 350px;
 }
 
-form a.toggle{
+form a[class*="toggle-"]{
   float: right;
 }
-form input.toggle{
+form input[class*="toggle-"]{
   display: none;
   margin-left: 110px;
 }
