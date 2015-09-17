@@ -36,7 +36,8 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
       $input.attr("name", "");
       $select.attr("disabled", false);
     } else {
-      $input.attr("name", "cocktail[bar_id]");
+      $input.eq(0).attr("name", "cocktail[bar_name]");
+      $input.eq(1).attr("name", "cocktail[bar_address]");
       $select.val("");
       $select.attr("disabled", true);
     };

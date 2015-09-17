@@ -14,7 +14,13 @@ module Api
       clean_params = cocktail_params
       clean_params[:ingredients] = clean_params[:ingredients].downcase
       clean_params[:liquor] = clean_params[:liquor].downcase
-      clean_params[:bar_id] = clean_params[:bar_id].to_i
+      bar = Bar.find_by(name: clean_params[:bar_name])
+      if bar.nil?
+        Bar.create(name: clean_params[:bar_name], address: clean_params[:bar_address])
+      end
+      clean_params[:bar_id] = Bar.find_by(name: clean_params[:bar_name]).id
+      clean_params.delete(:bar_name)
+      clean_params.delete(:bar_address)
       @cocktail = Cocktail.new(clean_params)
       if @cocktail.save
         Feed.create(user_id: current_user.id, cocktail_id: @cocktail.id, activity: "added", data: @cocktail.ingredients+"; "+@cocktail.bar.name)
@@ -45,7 +51,7 @@ module Api
     end
 
     def cocktail_params
-      params.require(:cocktail).permit(:name, :liquor, :ingredients, :bar_id)
+      params.require(:cocktail).permit(:name, :liquor, :ingredients, :bar_name, :bar_address)
     end
   end
 end

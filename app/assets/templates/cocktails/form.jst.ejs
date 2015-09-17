@@ -19,13 +19,14 @@
 
     <label for="bar">Bar</label>
     <a class="toggle-bar" href="javascript:void(0);">or add new</a>
-    <select class="toggle-bar" name="cocktail[bar_id]">
+    <select class="toggle-bar" name="cocktail[bar_name]">
       <option value=""></option>
       <% $.each(bars, function (barId, barName){ %>
-        <option value="<%= barId %>"><%= barName %></option>
+        <option value="<%= barName %>"><%= barName %></option>
       <% }); %>
     </select>
-    <input class="toggle-bar" type="text" placeholder="add new bar" id="bar_id">
+    <input class="toggle-bar" type="text" placeholder="add new bar: name" id="bar">
+    <input class="toggle-bar" type="text" placeholder="add new bar: address">
     <button class="submit">Save</button>
   </form>
 </div>
