@@ -1,7 +1,7 @@
 module Api
   class CocktailsController < ApplicationController
     def index
-      @cocktails = Cocktail.all
+      @cocktails = Cocktail.all.includes(:bar)
       render :index
     end
 
@@ -11,10 +11,13 @@ module Api
     end
 
     def create
-      #insert lowercase logic here
-      @cocktail = Cocktail.new(cocktail_params)
+      clean_params = cocktail_params
+      clean_params[:ingredients] = clean_params[:ingredients].downcase
+      clean_params[:liquor] = clean_params[:liquor].downcase
+      clean_params[:bar_id] = clean_params[:bar_id].to_i
+      @cocktail = Cocktail.new(clean_params)
       if @cocktail.save
-        Feed.create(user_id: current_user.id, cocktail_id: @cocktail.id, activity: "added")
+        Feed.create(user_id: current_user.id, cocktail_id: @cocktail.id, activity: "added", data: @cocktail.ingredients+"; "+@cocktail.bar.name)
         render json: @cocktail
       else
         render json: @cocktail.errors.full_messages, status: :unprocessable_entity
@@ -38,7 +41,7 @@ module Api
 
     private
     def current_cocktail
-      Cocktail.find(params[:id])
+      Cocktail.includes(:bar).find(params[:id])
     end
 
     def cocktail_params

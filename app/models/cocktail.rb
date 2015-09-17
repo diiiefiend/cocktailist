@@ -12,4 +12,9 @@ class Cocktail < ActiveRecord::Base
     primary_key: :id,
     dependent: :destroy
 
+  belongs_to :bar,
+    class_name: "Bar",
+    foreign_key: :bar_id,
+    primary_key: :id
+
 end

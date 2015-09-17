@@ -14,6 +14,8 @@
     <input class="toggle" type="text" placeholder="add new liquor" id="liquor">
     <label for="ingredients">Ingredients</label>
     <input type="text" value="<%= entry.escape('ingredients') %>" name="cocktail[ingredients]" id="ingredients">
+    <label for="bar">Bar</label>
+    <input type="text" value="<%= entry.escape('bar_id') %>" name="cocktail[bar_id]" id="bar">
     <button class="submit">Save</button>
   </form>
 </div>

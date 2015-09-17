@@ -1,1 +1,1 @@
-json.extract! @cocktail, :id, :name, :liquor, :ingredients
+json.(@cocktail, :id, :name, :liquor, :ingredients, :bar)

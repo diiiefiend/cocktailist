@@ -1,8 +1,10 @@
 <% feedItems.each(function (feedItem){ %>
 <div class="box">
+  <% var splitData = feedItem.escape('data').split("; ") %>
   <h2><%= feedItem.escape('username') %> <%= feedItem.escape('activity') %></h2>
   <h1><a href="#cocktails/<%= feedItem.escape('cocktail_id') %>"><%= feedItem.escape('cocktailName') %></a></h1>
-  <p>Metadata</p>
+  <h3>at <%= splitData[1] %></h3>
+  <p><%= splitData[0] %></p>
   <p class="subtext">@ <%= feedItem.escape('created_at') %></p>
 </div>
 <% }); %>

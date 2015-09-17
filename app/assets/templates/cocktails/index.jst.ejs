@@ -2,6 +2,7 @@
   <% cocktails.each(function (cocktail){ %>
   <div class="box">
     <h1><%= cocktail.escape('name') %></h1>
+    <h3>at <%= cocktail.bar().name %></h3>
     <h2><%= cocktail.escape('liquor') %></h2>
     <p><%= cocktail.escape('ingredients') %></p>
   </div>
