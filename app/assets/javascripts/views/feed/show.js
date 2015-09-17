@@ -14,12 +14,14 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend({
 
   showForm: function (e){
     if(this._showForm){
+      this._form.remove();
       this.render();
       this._showForm = false;
     } else {
       var newModel = new Cocktailist.Models.Cocktail();
-      var view = new Cocktailist.Views.CocktailsForm({model: newModel, collection: this._cocktails});
-      this.$el.find(".left").html(view.render().$el);
+      this._form = new Cocktailist.Views.CocktailsForm({model: newModel, collection: this._cocktails});
+      this.$el.find(".left").html(this._form.render().$el);
+      this.$el.find("a.addEntry").text("Cancel");
       this._showForm = true;
     };
   },

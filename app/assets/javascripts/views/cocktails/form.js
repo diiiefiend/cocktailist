@@ -2,7 +2,7 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
   template: JST['cocktails/form'],
 
   events: {
-    "click .submit" : "create",
+    "submit" : "create",
     "click a.toggle-liquor" : "toggleLiquor",
     "click a.toggle-bar" : "toggleBar"
   },
@@ -45,7 +45,7 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
 
   create: function (e){
     e.preventDefault();
-    var formData = this.$el.find(".cocktailForm").serializeJSON().cocktail;
+    var formData = this.$el.find("form").serializeJSON().cocktail;
     this.model.save(formData, {
       success: function (){
         this.collection.add(this.model);

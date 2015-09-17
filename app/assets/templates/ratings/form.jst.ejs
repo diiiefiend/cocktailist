@@ -1,0 +1,14 @@
+<form>
+  <label for="rating">Rating</label>
+  <select name="rating[rating_num]">
+    <option value=""></option>
+    <% for(var i = 1; i<=5; i++){ %>
+      <option value="<%= i %>"><%= i %></option>
+    <% }; %>
+  </select>
+
+  <label for="body">Review</label>
+  <textarea name="rating[body]"></textarea>
+
+  <button class="submitRating">submit</button>
+</form>

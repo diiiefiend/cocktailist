@@ -21,7 +21,7 @@
     <a class="toggle-bar" href="javascript:void(0);">or add new</a>
     <select class="toggle-bar" name="cocktail[bar_name]">
       <option value=""></option>
-      <% $.each(bars, function (barId, barName){ %>
+        <% bars.forEach ( function (barName){ %>
         <option value="<%= barName %>"><%= barName %></option>
       <% }); %>
     </select>

@@ -11,16 +11,20 @@ Backbone.LiquorView = Backbone.CompositeView.extend({
   },
 
   bars: function (){
-    this._bars = this._bars || {};
+    // hash version, not sorted
+    // this._bars = this._bars || {};
+    // this.collection.each( function(cocktail){
+    //   if(!this._bars.hasOwnProperty(cocktail.bar().id)){
+    //     this._bars[cocktail.bar().id] = (cocktail.bar().name);
+    //   };
+    // }.bind(this));
+
+    this._bars = this._bars || [];
     this.collection.each( function(cocktail){
-      if(!this._bars.hasOwnProperty(cocktail.bar().id)){
-        this._bars[cocktail.bar().id] = (cocktail.bar().name);
+      if(this._bars.indexOf(cocktail.bar().name) === -1){
+        this._bars.push(cocktail.bar().name);
       };
     }.bind(this));
-    //trying to sort, but not really working. figure it out later
-    // this._bars = Object.values(this._bars).sort( function (a,b){
-    //   return this._bars[a]-this._bars[b];
-    // }.bind(this));
-    return this._bars;
+    return this._bars.sort();
   }
 });

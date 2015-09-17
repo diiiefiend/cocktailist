@@ -1,4 +1,4 @@
-Cocktailist.Views.CocktailShow = Backbone.View.extend({
+Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   template: JST['cocktails/show'],
 
   initialize: function (){
@@ -9,6 +9,11 @@ Cocktailist.Views.CocktailShow = Backbone.View.extend({
   render: function (){
     var template = this.template({cocktail: this.model});
     this.$el.html(template);
+
+    var newRating = new Cocktailist.Models.Rating([], {cocktail: this.model});
+    var reviewFormView = new Cocktailist.Views.RatingForm({model: newRating, collection: this.model.ratings(), cocktail: this.model});
+
+    this.$el.find("#rating-form").html(reviewFormView.render().$el);
     return this;
   }
 });

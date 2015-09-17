@@ -59,7 +59,7 @@
  }
 
  ul{
-   list-style: inside;
+   list-style: square inside;
  }
 
  #window{
@@ -246,8 +246,23 @@
   padding: 20px;
   line-height: 200%;
 }
-#content .box:last-child{
+ #content .box:last-child{
   margin-bottom: 0;
+}
+
+#content .header-box{
+  background: white;
+  color: black;
+  padding: 5px 10px;
+}
+
+#content .box .header-box{
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+#content .box .header-box a:hover{
+  color: black;
 }
 
 .bar h1{
@@ -313,10 +328,32 @@ form input[class*="toggle-"]{
   margin-left: 110px;
 }
 
-.clearfix:after{
+.clearfix:after, .box:after{
   clear: both;
   display: block;
   content: "";
+}
+
+.image-placeholder{
+  height: 200px;
+  width: 150px;
+  float: right;
+  background: white;
+  opacity: 0.25;
+  margin-left: 20px;
+}
+.image-placeholder:before{
+  content: "placeholder";
+  color: black;
+}
+
+button.add-to-lists{
+  margin-right: 15px;
+  clear: right;
+  float: right;
+  width: auto;
+  background: white;
+  color: black;
 }
 
 /* tag stuff */
@@ -339,19 +376,18 @@ label{
   padding-right: 10px;
 }
 
-input, select{
+input, select, textarea{
   display: block;
   padding: 3px;
   background: transparent;
-  opacity: 0.8;
   color: white;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #aaa;
   font: 18px 'ChaparralPro', 'Palatino', serif;
   margin-bottom: 10px;
-  width: 50%;
+  width: 60%;
 }
-input:focus, select:focus{
-  opacity: 1;
+input:focus, select:focus, textarea:focus{
+  border-bottom: 1px solid white;
 }
 
 h1{
