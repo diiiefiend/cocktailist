@@ -1,7 +1,7 @@
 module Api
   class CocktailsController < ApplicationController
     def index
-      @cocktails = Cocktail.all.includes(:bar)
+      @cocktails = Cocktail.all.includes(:bar, :ratings)
       render :index
     end
 
@@ -47,7 +47,7 @@ module Api
 
     private
     def current_cocktail
-      Cocktail.includes(:bar).find(params[:id])
+      Cocktail.includes(:bar, :ratings).find(params[:id])
     end
 
     def cocktail_params

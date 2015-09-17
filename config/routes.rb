@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: {format: :json} do
-    resources :cocktails, except: [:new, :edit]
+    resources :cocktails, except: [:new, :edit] do
+      member do
+        resources :ratings, only: [:create, :update, :destroy]
+      end
+    end
     resource :feed, only: [:show]
   end
 end

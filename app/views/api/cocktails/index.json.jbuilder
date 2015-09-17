@@ -1,1 +1,1 @@
-json.array! @cocktails, :id, :name, :liquor, :ingredients, :created_at, :bar
+json.array! @cocktails, :id, :name, :liquor, :ingredients, :created_at, :bar, :ratings

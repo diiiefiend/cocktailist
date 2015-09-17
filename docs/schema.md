@@ -29,11 +29,11 @@ address     | string    | not null
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-author_id   | integer   | not null, foreign key (references users)
+user_id     | integer   | not null, foreign key (references users)
 cocktail_id | integer   | not null, foreign key (references cocktails)
 rating      | integer   | not null
 body        | string    | 
-date        | date      | 
+date        | date      | (from timestamps)
 
 ## userlists
 column name | data type | details

@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
     primary_key: :id,
     dependent: :destroy
 
+  has_many :ratings,
+    dependent: :destroy
+
   attr_reader :password
 
   def self.find_by_credentials(email, password)

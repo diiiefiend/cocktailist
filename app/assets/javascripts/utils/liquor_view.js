@@ -13,7 +13,7 @@ Backbone.LiquorView = Backbone.CompositeView.extend({
   bars: function (){
     this._bars = this._bars || {};
     this.collection.each( function(cocktail){
-      if(this._bars.hasOwnProperty(cocktail.bar().id) == false){
+      if(!this._bars.hasOwnProperty(cocktail.bar().id)){
         this._bars[cocktail.bar().id] = (cocktail.bar().name);
       };
     }.bind(this));
