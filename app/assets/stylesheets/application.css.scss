@@ -242,13 +242,13 @@
 
 #content .box{
   background: asset-url("boxbg.jpg");
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   padding: 20px;
   line-height: 200%;
 }
- #content .box:last-child{
-  margin-bottom: 0;
-}
+//  #content .wide .box:last-child{
+//   margin-bottom: 0;
+// }
 
 #content .header-box{
   background: white;

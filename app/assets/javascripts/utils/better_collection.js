@@ -15,7 +15,7 @@ Backbone.BetterCollection = Backbone.Collection.extend({
 
     return model;
   }
-  //
+  // 
   // reverseSort: function (sortByFunction){
   //   return function(left, right) {
   //     var l = sortByFunction(left);

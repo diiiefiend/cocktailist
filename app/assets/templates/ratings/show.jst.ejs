@@ -1,3 +1,5 @@
-<h2><%= rating.escape('username') %> rated it <%= rating.escape('rating') %></h2>
-<h4><%= rating.escape('created_at') %></h4>
-<p><%= rating.escape('body') %></p>
+<div class="box">
+  <h2><%= rating.escape('username') %> rated it <%= rating.escape('rating') %> stars</h2>
+  <p><%= rating.escape('body') %></p>
+  <h4>on <%= rating.escape('time') %></h4>
+</div>

@@ -18,3 +18,4 @@
 
 ## Gems/Libraries
 * Filepicker
+* OmniAuth

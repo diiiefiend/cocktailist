@@ -12,7 +12,7 @@ cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
 - [x] Create accounts
 - [x] Create sessions (log in)
 - [X] Create cocktail entries
-- [ ] Review cocktails
+- [x] Review cocktails
 - [ ] View cocktail summaries and reviews/scores
 - [ ] Add cocktails to had/want to try/not interested lists
 - [ ] Searching for cocktails
@@ -46,7 +46,8 @@ inside a single Backbone app. The feed view will also be created.
 ### Phase 3: More Advanced Cocktail Entries (~1 day)
 I plan to use third-party libraries to add functionality to the `CocktailNew` and
 `CocktailShow` views in this phase. I want to integrate Filepicker/Amazon S3 for file upload so
-users can add images during entry creation and possibly reviews.
+users can add images during entry creation and possibly reviews. I also would like to use OmniAuth to
+allow for Facebook login.
 
 [Details][phase-three]
 

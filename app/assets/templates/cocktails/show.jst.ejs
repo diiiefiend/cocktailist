@@ -18,12 +18,9 @@
   </div>
 
   <h1 class="header-box">Ratings</h1>
-  <!--  put this in the view file and prepend so it's in reverse order  -->
-  <% cocktail.ratings().each( function(rating){ %>
-    <div class="box">
-      <%= JST['ratings/show']({rating: rating}) %>
-    </div>
-  <% }); %>
+  <div id="reviews">
+  </div>
+
 </div>
 
 <div class="rule-right"></div>

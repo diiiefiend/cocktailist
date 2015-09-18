@@ -13,8 +13,13 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
     var newRating = new Cocktailist.Models.Rating([], {cocktail: this.model});
     var reviewFormView = new Cocktailist.Views.RatingForm({model: newRating, collection: this.model.ratings(), cocktail: this.model});
-
     this.$el.find("#rating-form").html(reviewFormView.render().$el);
+
+    this.model.ratings().each( function(rating){
+      var ratingShowView = new Cocktailist.Views.RatingShow({model: rating});
+      this.$el.find("#reviews").prepend(ratingShowView.render().$el);
+    }.bind(this));
+
     return this;
   }
 });
