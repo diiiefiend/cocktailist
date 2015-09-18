@@ -10,7 +10,7 @@ module Api
       @rating = Rating.new(clean_params)
       if @rating.save
         Feed.create(user_id: current_user.id, cocktail_id: @rating.cocktail_id, activity: "rated", data: truncate(@rating.body, length: 150, separator: ' ')+"; "+@rating.cocktail.bar.name)
-        render json: @rating
+        render :create 
       else
         render json: @rating.errors.full_messages, status: :unprocessable_entity
       end
@@ -32,6 +32,7 @@ module Api
     end
 
     private
+
     def rating_params
       params.require(:rating).permit(:cocktail_id, :rating_num, :body)
     end

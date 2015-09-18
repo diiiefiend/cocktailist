@@ -16,10 +16,10 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
     e.preventDefault();
     var formData = this.$el.find("form").serializeJSON().rating;
     formData.cocktail_id = this.cocktail.id
-    debugger
     this.model.save(formData, {
       success: function(){
         this.collection.add(this.model);
+        this.$el.find("form").find("input").val("");
       }.bind(this)
     });
   },
