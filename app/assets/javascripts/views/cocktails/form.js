@@ -79,7 +79,10 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
         formData.append("cocktail["+key+"]", jsonData[key]);
       };
     };
-    formData.append("cocktail[img]", file);
+
+    if(file){
+      formData.append("cocktail[img]", file);
+    };
     this.model.saveFormData(formData, {
       success: function (){
         this.collection.add(this.model);
