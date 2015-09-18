@@ -1,7 +1,11 @@
 <div class="left wide">
   <div class="box">
     <h1 class="header-box"><%= cocktail.escape('name') %></h1>
-    <div class="image-placeholder"></div>
+    <div class="image-placeholder">
+      <% if(cocktail.get('img_url')){%>
+        <img src="<%= cocktail.get('img_url') %>" alt="img">
+      <% } %>
+    </div>
     <button class="add-to-lists">want to try</button>
     <h3>at <%= cocktail.bar().name %></h3>
     <h2><%= cocktail.escape('liquor') %></h2>

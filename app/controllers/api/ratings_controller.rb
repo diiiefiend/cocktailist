@@ -1,6 +1,7 @@
 module Api
   class RatingsController < ApplicationController
     include ActionView::Helpers::TextHelper
+    wrap_parameters false
 
     def create
       clean_params = rating_params
@@ -9,13 +10,13 @@ module Api
       clean_params.delete(:rating_num)
       @rating = Rating.new(clean_params)
       if @rating.save
+        rating_num = @rating.rating
         Feed.create(user_id: current_user.id,
           cocktail_id: @rating.cocktail_id,
           activity: "rated",
-          data: truncate(@rating.body, length: 100, separator: ' ') + "; " +
-          @rating.cocktail.bar.name + "; " +
-          @rating.rating)
-        byebug
+          data: "#{truncate(@rating.body, length: 100, separator: ' ', ommission: '[...]')}; #{@rating.cocktail.bar.name}; #{rating_num}",
+          feedable_id: @rating.id,
+          feedable_type: "Rating")
         render :create
       else
         render json: @rating.errors.full_messages, status: :unprocessable_entity

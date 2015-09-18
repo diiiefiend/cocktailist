@@ -8,4 +8,5 @@ class Feed < ActiveRecord::Base
   belongs_to :user
   belongs_to :cocktail
 
+  belongs_to :feedable, polymorphic: true
 end

@@ -10,4 +10,6 @@ class Rating < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :cocktail
+
+  has_many :feed_items, as: :feedable, class_name: "Feed", dependent: :destroy
 end

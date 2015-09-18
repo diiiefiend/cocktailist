@@ -265,6 +265,19 @@
   color: black;
 }
 
+img#image-preview{
+  width: 75px;
+  height: auto;
+  float: right;
+  background: black;
+  border: 2px solid white;
+  margin: 0 0 10px 10px;
+  position: relative;
+}
+img#image-preview:hover{
+  opacity: 0.25;
+}
+
 .bar h1{
   font-size: 24px;
 }
@@ -335,16 +348,16 @@ form input[class*="toggle-"]{
 }
 
 .image-placeholder{
-  height: 200px;
-  width: 150px;
+  min-height: 200px;
+  min-width: 150px;
   float: right;
-  background: white;
-  opacity: 0.25;
+  background: #111;
   margin-left: 20px;
 }
-.image-placeholder:before{
-  content: "placeholder";
-  color: black;
+.image-placeholder img{
+  height: 200px;
+  width: auto;
+  opacity: 1;
 }
 
 button.add-to-lists{
@@ -367,6 +380,7 @@ button{
   font-variant: small-caps;
   display: block;
   width: 50%;
+  clear: both;
 }
 
 label{

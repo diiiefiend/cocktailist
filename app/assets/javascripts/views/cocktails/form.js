@@ -4,7 +4,9 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
   events: {
     "submit" : "create",
     "click a.toggle-liquor" : "toggleLiquor",
-    "click a.toggle-bar" : "toggleBar"
+    "click a.toggle-bar" : "toggleBar",
+    "change #attach-image" : "attachImage",
+    "click a.remove-img" : "removeImage"
   },
 
   initialize: function (){
@@ -43,10 +45,42 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
     };
   },
 
+  attachImage: function (e){
+    var file = e.currentTarget.files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function (){
+      this._updatePreview(reader.result);
+    }.bind(this);
+
+    if(file){
+      reader.readAsDataURL(file);
+    } else {
+      this._updatePreview("");
+    };
+  },
+
+  _updatePreview: function (src){
+    this.$el.find("#image-preview").attr("src", src);
+  },
+
+  removeImage: function (e){
+    this.resetFormElement(this.$("#attach-image"));
+    this._updatePreview("");
+  },
+
   create: function (e){
     e.preventDefault();
-    var formData = this.$el.find("form").serializeJSON().cocktail;
-    this.model.save(formData, {
+    var file = this.$("#attach-image")[0].files[0];
+    var formData = new FormData();
+    var jsonData = this.$el.find("form").serializeJSON().cocktail;
+    for (var key in jsonData){
+      if(jsonData.hasOwnProperty(key)){
+        formData.append("cocktail["+key+"]", jsonData[key]);
+      };
+    };
+    formData.append("cocktail[img]", file);
+    this.model.saveFormData(formData, {
       success: function (){
         this.collection.add(this.model);
         Backbone.history.navigate("#cocktails/"+this.model.id, {trigger: true});

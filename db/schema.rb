@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917150250) do
+ActiveRecord::Schema.define(version: 20150918144709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,26 +22,33 @@ ActiveRecord::Schema.define(version: 20150917150250) do
   end
 
   create_table "cocktails", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.string   "liquor",      null: false
-    t.string   "ingredients", null: false
-    t.integer  "bar_id",      null: false
+    t.string   "name",             null: false
+    t.string   "liquor",           null: false
+    t.string   "ingredients",      null: false
+    t.integer  "bar_id",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
   end
 
   add_index "cocktails", ["bar_id"], name: "index_cocktails_on_bar_id", using: :btree
 
   create_table "feeds", force: :cascade do |t|
-    t.integer  "user_id",     null: false
-    t.integer  "cocktail_id", null: false
-    t.string   "activity",    null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "user_id",       null: false
+    t.integer  "cocktail_id",   null: false
+    t.string   "activity",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "data"
+    t.integer  "feedable_id",   null: false
+    t.string   "feedable_type", null: false
   end
 
   add_index "feeds", ["cocktail_id"], name: "index_feeds_on_cocktail_id", using: :btree
+  add_index "feeds", ["feedable_id"], name: "index_feeds_on_feedable_id", using: :btree
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|

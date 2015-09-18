@@ -26,5 +26,11 @@ Backbone.LiquorView = Backbone.CompositeView.extend({
       };
     }.bind(this));
     return this._bars.sort();
+  },
+
+  //for file input form resets
+  resetFormElement: function ($e) {
+    $e.wrap('<form>').closest('form').get(0).reset();
+    $e.unwrap();
   }
 });
