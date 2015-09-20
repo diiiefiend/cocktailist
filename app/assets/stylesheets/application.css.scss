@@ -381,24 +381,32 @@ button.add-to-lists{
   width: 100px;
   background: #111;
   overflow: hidden;
-  border: 3px solid white;
-  margin-right: 10px;
+  border: 3px solid #aaa;
+  margin-right: 12px;
+  margin-bottom: 15px;
   list-style: none;
+}
+.category-show-list li:nth-child(5n){
+  margin-right: 0;
+}
+
+.category-show-list li:hover{
+  border-color: white;
 }
 .category-show-list li:after{
   z-index: 1;
   content: attr(title);
   font-size: 14px;
-  line-height: auto;
+  line-height: normal;
   position: absolute;
   bottom: 0;
   left: 0;
+  color: #aaa;
   background: black;
   opacity: 0.75;
 }
 .category-show-list li:hover:after{
-  color: black;
-  background: white;
+  color: white;
 }
 
 .filter-list{

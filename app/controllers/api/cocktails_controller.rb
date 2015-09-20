@@ -26,14 +26,13 @@ module Api
         bar_params[:name] = clean_params[:bar_name]
         bar_params[:address] = clean_params[:bar_address]
         @bar = Bar.new(bar_params)
-        if @bar.save
-          clean_params[:bar_id] = Bar.find_by(name: clean_params[:bar_name]).id
-        else
+        if !@bar.save
           errors << "Need bar details:"
           errors.concat(@bar.errors.full_messages)
           return render json: errors, status: :unprocessable_entity
         end
       end
+      clean_params[:bar_id] = Bar.find_by(name: clean_params[:bar_name]).id
       clean_params.delete(:bar_name)
       clean_params.delete(:bar_address)
       @cocktail = Cocktail.new(clean_params)
