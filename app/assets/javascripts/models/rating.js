@@ -4,7 +4,7 @@ Cocktailist.Models.Rating = Backbone.Model.extend({
   },
 
   initialize: function (models, options){
-    this.cocktail = options.cocktail;
+    this.cocktail = options.cocktail || options.collection.cocktail;
   },
 
   toJSON: function (){

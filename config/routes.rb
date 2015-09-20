@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :cocktails, except: [:new, :edit] do
       member do
-        resources :ratings, only: [:create, :update, :destroy]
+        resources :ratings, only: [:create, :update, :destroy, :show]
       end
     end
     resource :feed, only: [:show]

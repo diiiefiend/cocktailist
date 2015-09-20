@@ -23,6 +23,11 @@ module Api
       end
     end
 
+    def show
+      @rating = Rating.find(params[:id])
+      render json: @rating
+    end
+
     def update
       @rating = Rating.find(params[:id])
       if @rating.update(rating_params)

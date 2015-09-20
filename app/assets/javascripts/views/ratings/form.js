@@ -20,7 +20,8 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
     this.model.save(formData, {
       success: function(){
         this.collection.add(this.model);
-        this.$el.find("form").find("input").val("");
+        this.model.set("userRatingId", this.model.id);
+        // this.$el.find("form").find("input").val("");
         this.$el.find("button").removeProp("disabled");
       }.bind(this),
       error: function (data, res){

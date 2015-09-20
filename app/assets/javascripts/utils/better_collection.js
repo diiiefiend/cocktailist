@@ -1,21 +1,20 @@
 Backbone.BetterCollection = Backbone.Collection.extend({
-  getOrFetch: function (id){
+  getOrFetch: function (id, options){
     var collection = this;
     var model = collection.get(id);
-
     if(model !== undefined){
-      model.fetch();
+      model.fetch(options);
     } else {
       model = new collection.model({id: id});
       collection.add(model);
-      model.fetch({
+      model.fetch({ options,
         error: function (){ collection.remove(model); }
       });
     };
 
     return model;
   }
-  // 
+  //
   // reverseSort: function (sortByFunction){
   //   return function(left, right) {
   //     var l = sortByFunction(left);
