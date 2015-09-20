@@ -13,7 +13,7 @@ module Api
     end
 
     def create
-      errors = ["Bar input errors:"]
+      errors = []
       clean_params = cocktail_params
       clean_params[:ingredients] = clean_params[:ingredients].downcase
       clean_params[:liquor] = clean_params[:liquor].downcase
@@ -27,7 +27,9 @@ module Api
         if @bar.save
           clean_params[:bar_id] = Bar.find_by(name: clean_params[:bar_name]).id
         else
+          errors << "Need bar details:"
           errors.concat(@bar.errors.full_messages)
+          return render json: errors, status: :unprocessable_entity
         end
       end
       clean_params.delete(:bar_name)
@@ -42,7 +44,7 @@ module Api
           feedable_type: "Cocktail")
         render json: @cocktail
       else
-        render json: @cocktail.errors.full_messages + errors, status: :unprocessable_entity
+        render json: @cocktail.errors.full_messages, status: :unprocessable_entity
       end
     end
 

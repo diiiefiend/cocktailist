@@ -91,6 +91,7 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
         Backbone.history.navigate("#cocktails/"+this.model.id, {trigger: true});
       }.bind(this),
       error: function (data, res){
+        this.$el.find("button").removeProp("disabled");
         $("#errors").empty();
         res.responseJSON.forEach( function (error){
           $("#errors").append("<li>"+error+"</li>");

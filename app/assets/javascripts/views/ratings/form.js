@@ -24,6 +24,7 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
         this.$el.find("button").removeProp("disabled");
       }.bind(this),
       error: function (data, res){
+        this.$el.find("button").removeProp("disabled");
         $("#errors").empty();
         res.responseJSON.forEach( function (error){
           $("#errors").append("<li>"+error+"</li>");
