@@ -1,14 +1,13 @@
 <form>
   <label for="rating">Rating</label>
-  <select name="rating[rating_num]">
-    <option value=""></option>
     <% for(var i = 1; i<=5; i++){ %>
-      <option value="<%= i %>"><%= i %></option>
+      <label class="radio">
+      <input type="radio" name="rating[rating_num]" value="<%= i %>"> <%= i %>
+      </label>
     <% }; %>
-  </select>
 
   <label for="body">Review</label>
   <textarea name="rating[body]"></textarea>
-
+  <ul id="errors"></ul>
   <button class="submitRating">submit</button>
 </form>

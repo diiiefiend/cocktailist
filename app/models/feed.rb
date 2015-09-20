@@ -4,6 +4,7 @@
 
 class Feed < ActiveRecord::Base
   validates :user_id, :cocktail_id, :activity, presence: true
+  validates :activity, inclusion: {in: %w(added rated listed), message: "invalid activity"}
 
   belongs_to :user
   belongs_to :cocktail

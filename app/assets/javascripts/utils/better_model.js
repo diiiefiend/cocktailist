@@ -18,5 +18,5 @@ Backbone.BetterModel = Backbone.Model.extend({
       }
     });
   }
-  
+
 });

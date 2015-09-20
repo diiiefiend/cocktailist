@@ -264,7 +264,7 @@
 }
 
 img#image-preview, img.feed-img{
-  width: 75px;
+  width: 100px;
   height: auto;
   float: right;
   background: black;
@@ -277,7 +277,7 @@ img#image-preview:hover{
 }
 
 img.feed-img{
-  transform: translatey(-25%);
+  transform: translateY(-25%);
 }
 
 .bar h1{
@@ -404,6 +404,21 @@ input, select, textarea{
 }
 input:focus, select:focus, textarea:focus{
   border-bottom: 1px solid white;
+}
+
+input[type="radio"]{
+  border: 0;
+  padding: 0;
+  width: 20px;
+  float: left;
+}
+
+label.radio{
+  width: auto;
+}
+
+label.radio+label:not(.radio){
+  clear: left;
 }
 
 h1{

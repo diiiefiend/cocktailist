@@ -7,6 +7,7 @@
 
 class Rating < ActiveRecord::Base
   validates :user_id, :cocktail_id, :rating, presence: true
+  validates :rating, numericality: {greater_than: 0}
 
   belongs_to :user
   belongs_to :cocktail

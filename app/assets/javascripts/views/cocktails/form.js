@@ -71,6 +71,7 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
 
   create: function (e){
     e.preventDefault();
+    this.$el.find("button").prop("disabled");
     var file = this.$("#attach-image")[0].files[0];
     var formData = new FormData();
     var jsonData = this.$el.find("form").serializeJSON().cocktail;
@@ -86,7 +87,14 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
     this.model.saveFormData(formData, {
       success: function (){
         this.collection.add(this.model);
+        this.$el.find("button").removeProp("disabled");
         Backbone.history.navigate("#cocktails/"+this.model.id, {trigger: true});
+      }.bind(this),
+      error: function (data, res){
+        $("#errors").empty();
+        res.responseJSON.forEach( function (error){
+          $("#errors").append("<li>"+error+"</li>");
+        }.bind(this))
       }.bind(this)
     });
   },
