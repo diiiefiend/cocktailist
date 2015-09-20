@@ -2,14 +2,14 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
   template: JST['ratings/form'],
 
   events: {
-    "submit" : "createRating"
+    "submit" : "createRating",
+    "click #delete-rating" : "deleteRating"
   },
 
   initialize: function (options){
     //model: rating
     //collection: ratings
     this.cocktail = options.cocktail;
-    // this.listenTo(this.model, "sync", this.render);
   },
 
   createRating: function (e){
@@ -30,6 +30,15 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
         res.responseJSON.forEach( function (error){
           $("#errors").append("<li>"+error+"</li>");
         }.bind(this))
+      }.bind(this)
+    });
+  },
+
+  deleteRating: function (e){
+    this.model.destroy({cocktail: this.cocktail,
+      success: function (){
+        this.cocktail._userRatingId = -1;
+        this.collection.trigger("afterRemove");
       }.bind(this)
     });
   },

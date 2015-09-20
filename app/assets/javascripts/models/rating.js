@@ -1,6 +1,6 @@
 Cocktailist.Models.Rating = Backbone.Model.extend({
   urlRoot: function(){
-    return 'api/cocktails/'+ this.cocktail.id +'/ratings'
+    return 'api/cocktails/'+ this.cocktail.id +'/ratings';
   },
 
   initialize: function (models, options){
