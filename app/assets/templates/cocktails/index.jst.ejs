@@ -1,19 +1,45 @@
 <div class="left wide">
-  <% cocktails.each(function (cocktail){ %>
-  <div class="box">
-    <h1 class="header-box"><a href="<%= '#cocktails/' + cocktail.id %>" ><%= cocktail.escape('name') %></a></h1>
-    <h3>at <%= cocktail.bar().name %></h3>
-    <h2><%= cocktail.escape('liquor') %></h2>
-    <p><%= cocktail.escape('ingredients') %></p>
-  </div>
-  <% }); %>
+  <% for(liquor in groups){ %>
+    <div class="box">
+      <h2>Latest in <span class="capitalize" id="browse-<%= liquor %>"><%= liquor %></span></h2>
+      <ul class="category-show-list clearfix">
+        <% groups[liquor].forEach(function (cocktail){ %>
+          <li title="<%= cocktail.get('name') %> @ <%= cocktail.bar().name %>">
+            <a href="#cocktails/<%= cocktail.id %>">
+            <% if(cocktail.get('cocktailPic') !== 'placeholder.png'){ %>
+              <% if(cocktail.get('cocktailPic').indexOf('queensparkswizzle') > -1){ %>
+                  <img src="https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/000/000/008/small/queensparkswizzle.jpg" alt="<%= cocktail.get('name') %> <%= cocktail.get('bar') %>">
+              <% } else { %>
+                <img src="<%= cocktail.get('cocktailPic') %>" alt="<%= cocktail.get('name') %> <%= cocktail.get('bar') %>">
+              <% }; %>
+            <% } else { %>
+              <img src="https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/placeholder.png" alt="<%= cocktail.get('name') %> <%= cocktail.get('bar') %>">
+            <% }; %>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+  <% }; %>
 </div>
 
 <div class="rule-right"></div>
 
 <div class="right bar">
+  <!-- soon take this out into its own view -->
   <div class="box">
+    <h1>Categorize by:</h1>
+    <ul class="filter-list">
+      <li><a href="#" <%= filterType==='Spirits' ? "class='bolded'" : "" %> >Spirit</a></li>
+      <li><a href="#" <%= filterType==='Bars' ? "class='bolded'" : "" %> >Bar</a></li>
+    </ul>
   </div>
   <div class="box">
+    <h1><%= filterType %></h1>
+    <ul>
+      <% list.forEach(function (listItem){ %>
+        <li><a href="#browse-<%= listItem %>"><%= listItem %></a></li>
+      <% }); %>
+    </ul>
   </div>
 </div>

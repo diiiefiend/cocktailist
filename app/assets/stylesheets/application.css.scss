@@ -263,23 +263,6 @@
   color: black;
 }
 
-img#image-preview, img.feed-img{
-  width: 100px;
-  height: auto;
-  float: right;
-  background: black;
-  border: 3px solid white;
-  margin: 0 0 10px 10px;
-  position: relative;
-}
-img#image-preview:hover{
-  opacity: 0.25;
-}
-
-img.feed-img{
-  transform: translateY(-25%);
-}
-
 .bar h1{
   font-size: 24px;
 }
@@ -349,6 +332,23 @@ form input[class*="toggle-"]{
   content: "";
 }
 
+img#image-preview, img.feed-img{
+  width: 100px;
+  height: auto;
+  float: right;
+  background: black;
+  border: 3px solid white;
+  margin: 0 0 10px 10px;
+  position: relative;
+}
+img#image-preview:hover{
+  opacity: 0.25;
+}
+
+img.feed-img{
+  transform: translateY(-25%);
+}
+
 .image-placeholder{
   min-height: 225px;
   min-width: 225px;
@@ -372,6 +372,46 @@ button.add-to-lists{
   width: auto;
   background: white;
   color: black;
+}
+
+.category-show-list li{
+  position: relative;
+  float: left;
+  height: 150px;
+  width: 100px;
+  background: #111;
+  overflow: hidden;
+  border: 3px solid white;
+  margin-right: 10px;
+  list-style: none;
+}
+.category-show-list li:after{
+  z-index: 1;
+  content: attr(title);
+  font-size: 14px;
+  line-height: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: black;
+  opacity: 0.75;
+}
+.category-show-list li:hover:after{
+  color: black;
+  background: white;
+}
+
+.filter-list{
+  font-size: 20px;
+  list-style: none;
+}
+
+.bolded{
+  font-weight: bold;
+}
+
+.capitalize{
+  text-transform: capitalize;
 }
 
 /* tag stuff */

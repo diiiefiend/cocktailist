@@ -6,8 +6,13 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
     this.listenTo(this.collection, "sync", this.render);
   },
 
-  render: function (){
-    var template = this.template({cocktails: this.collection});
+  render: function (res, models, options){
+    var filterList = (options && options.filterList ? options.filterList : this.liquorTypes());
+    var filterType = (options && options.filterType ? options.filterType : "Spirits");
+    var liquorGroups = this.collection.groupBy(function (cocktail){
+      return cocktail.get("liquor");
+    });
+    var template = this.template({groups: liquorGroups, list: filterList, filterType: filterType});
     this.$el.html(template);
     return this;
   }
