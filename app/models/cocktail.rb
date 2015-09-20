@@ -5,7 +5,7 @@
 
 class Cocktail < ActiveRecord::Base
   validates :name, :liquor, :ingredients, presence: true
-  has_attached_file :img, default_url: "placeholder.png"
+  has_attached_file :img, default_url: "placeholder.png", styles: {small: "150x150>"}
   validates_attachment_content_type :img, content_type: /\Aimage\/.*\Z/
 
   has_many :ratings,

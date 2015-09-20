@@ -31,7 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'backbone-on-rails'
 gem 'paperclip', '~> 4.3'
-gem 'figaro'
+gem 'figaro', '~> 1.0.0'
 gem 'aws-sdk', '< 2.0'
 
 group :development, :test do
