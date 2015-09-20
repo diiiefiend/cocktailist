@@ -9,7 +9,7 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
     //model: rating
     //collection: ratings
     this.cocktail = options.cocktail;
-    this.listenTo(this.model, "sync", this.render);
+    // this.listenTo(this.model, "sync", this.render);
   },
 
   createRating: function (e){
@@ -19,8 +19,8 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
     formData.cocktail_id = this.cocktail.id;
     this.model.save(formData, {
       success: function(){
+        this.cocktail._userRatingId=this.model.id;
         this.collection.add(this.model);
-        this.model.set("userRatingId", this.model.id);
         // this.$el.find("form").find("input").val("");
         this.$el.find("button").removeProp("disabled");
       }.bind(this),

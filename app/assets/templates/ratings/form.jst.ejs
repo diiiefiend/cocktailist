@@ -1,6 +1,6 @@
 <form>
   <% if(!rating.isNew()){ %>
-    <p>You already reviewed this on <%= rating.escape('time') %>. Feel free to edit it below!</p>
+    <p>You reviewed this on <%= rating.escape('time') %>. Feel free to edit it below!</p>
   <% } %>
   <label for="rating">Rating</label>
     <% for(var i = 1; i<=5; i++){ %>

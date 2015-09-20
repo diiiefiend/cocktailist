@@ -350,20 +350,23 @@ form input[class*="toggle-"]{
 }
 
 .image-placeholder{
-  min-height: 200px;
-  min-width: 150px;
+  min-height: 225px;
+  min-width: 225px;
   float: right;
-  background: #111;
+  background: asset-url("imgborderbg-black.png") no-repeat;
+  background-size: contain;
   margin-left: 20px;
 }
 .image-placeholder img{
-  height: 200px;
-  width: auto;
+  height: auto;
+  width: 150px;
   opacity: 1;
+  display: block;
+  margin: 10px auto;
 }
 
 button.add-to-lists{
-  margin-right: 15px;
+  margin-right: 45px;
   clear: right;
   float: right;
   width: auto;

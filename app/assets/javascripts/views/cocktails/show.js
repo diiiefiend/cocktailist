@@ -5,8 +5,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     //model: cocktail
     this._ratings = this.model.ratings();
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this._ratings, "sync add", this.renderForm);
-    this.listenTo(this._ratings, "add remove update", this.renderRatings); //later optimize this to only render the new comment?
+    this.listenTo(this._ratings, "add change", this.renderForm);
+    this.listenTo(this._ratings, "update change", this.renderRatings); //later optimize this to only render the new comment?
   },
 
   render: function (){
@@ -25,7 +25,6 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   },
 
   renderForm: function (){
-    //need to trigger a refetch of the collection here somehow
     if(this.model.userRatingId() > -1){
       var rating = this._ratings.getOrFetch( this.model.userRatingId(), {cocktail: this.model} );
     } else {

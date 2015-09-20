@@ -30,7 +30,10 @@ module Api
 
     def update
       @rating = Rating.find(params[:id])
-      if @rating.update(rating_params)
+      clean_params = rating_params
+      clean_params[:rating] = rating_params[:rating_num]
+      clean_params.delete(:rating_num)
+      if @rating.update(clean_params)
         render json: @rating
       else
         render json: @rating.errors.full_messages, status: :unprocessable_entity
