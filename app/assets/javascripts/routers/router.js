@@ -22,19 +22,19 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
   createEntry: function (){
     var entry = new Cocktailist.Models.Cocktail();
-    var view = new Cocktailist.Views.CocktailsForm({model: entry});
+    var view = new Cocktailist.Views.CocktailsForm({model: entry, collection: this._cocktails});
     this._swapView(view);
   },
 
   editEntry: function (){
     var entry = this.collection.getOrFetch(id);
-    var view = new Cocktailist.Views.CocktailsForm({model: entry});
+    var view = new Cocktailist.Views.CocktailsForm({model: newModel, collection: this._cocktails});
     this._swapView(view);
   },
 
   showEntry: function (id){
     var entry = this._cocktails.getOrFetch(id);
-    var view = new Cocktailist.Views.CocktailShow({model: entry});
+    var view = new Cocktailist.Views.CocktailShow({model: entry, collection: this._cocktails});
     this._swapView(view);
   },
 

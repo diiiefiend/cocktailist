@@ -3,14 +3,26 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
   initialize: function (){
     //model: cocktail
+    //collection: cocktails
     this._ratings = this.model.ratings();
-    this.listenTo(this.model, "sync", this.render);
+    this.listenToOnce(this.collection, "sync", this.setSimilarCocktail);
+    this.listenTo(this.model, "sync afterSimilarCocktail", this.render);
     this.listenTo(this._ratings, "add change afterRemove", this.renderForm);
     this.listenTo(this._ratings, "update change", this.renderRatings); //later optimize this to only render the new comment?
   },
 
+  setSimilarCocktail: function (){
+    var similarCocktails = this.collection.where({liquor: this.model.get('liquor')});
+    this._similarCocktail = this.collection.getOrFetch(similarCocktails[Math.floor(Math.random() * similarCocktails.length)], {
+        success: function (){
+          this.model.trigger("afterSimilarCocktail");
+        }.bind(this)
+      }
+    );
+  },
+
   render: function (){
-    var template = this.template({cocktail: this.model});
+    var template = this.template({cocktail: this.model, similarCocktail: this._similarCocktail});
     this.$el.html(template);
 
     this.renderForm();

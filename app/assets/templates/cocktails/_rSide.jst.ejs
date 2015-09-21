@@ -1,9 +1,13 @@
 <div class="box">
   <h1><%= bar.name %></h1>
   <p><strong><%= bar.address %></strong></p>
-  <p>(placeholder for barshow subview, if ever I make it)</p>
 </div>
 <div class="box">
-  <h1>Similar Browse</h1>
-  <p>(placeholder for browse subview)</p>
+  <h1>Similar</h1>
+  <% if(similarCocktail){ %>
+  <ul class="category-show-list clearfix">
+    <%= JST['cocktails/_categoryShowItem']({cocktail: similarCocktail, standalone: true}) %>
+  </ul>
+  <p><a href="#cocktails/browse/<%= similarCocktail.escape('liquor') %>">Browse <%= similarCocktail.escape('liquor') %> drinks</a></p>
+  <% }; %>
 </div>
