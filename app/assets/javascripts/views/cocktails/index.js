@@ -15,8 +15,8 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
     if(!$link.hasClass("bolded")){
       if($link.text() === "Liquor"){
         this.render([],[], {filterList: this.liquorTypes(), filterType: "Liquors", groupFn: function (cocktail){ return cocktail.get("liquor"); }});
-      } else if($link.text() === "Bar"){
-        this.render([],[], {filterList: this.bars(), filterType: "Bars", groupFn: function (cocktail){ return cocktail.bar().name; }});
+      } else if($link.text() === "Establishment"){
+        this.render([],[], {filterList: this.bars(), filterType: "Establishments", groupFn: function (cocktail){ return cocktail.bar().name; }});
       };
     };
   },

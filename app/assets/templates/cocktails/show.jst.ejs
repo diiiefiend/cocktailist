@@ -6,9 +6,16 @@
         <img src="<%= cocktail.get('img_url') %>" alt="img">
       <% } %>
     </div>
-    <button class="add-to-lists">want to try</button>
+    <div class="user-stats">
+      <button class="add-to-lists">want to try</button>
+    </div>
     <h3>at <%= cocktail.bar().name %></h3>
+
     <h2><%= cocktail.escape('liquor') %></h2>
+
+    <p>Average Rating: <%= cocktail.get('average_rating') === null ? "N/A" : cocktail.get('average_rating') %>
+    <span class="subtext">(<%= cocktail.ratings().length %> vote<%= cocktail.ratings().length !== 1 ? "s" : "" %>)</span></p>
+
     <h3>Ingredients:</h3>
     <ul>
       <% cocktail.escape('ingredients').split(',').forEach( function(el){ %>

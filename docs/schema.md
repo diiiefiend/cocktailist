@@ -35,13 +35,19 @@ rating      | integer   | not null
 body        | string    | 
 date        | date      | (from timestamps)
 
-## userlists
+## lists
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-user_id     | integer   | not null, foreign key (references users)
-cocktail_id | integer   | not null, foreign key (references cocktails)
 name        | string    | not null
+user_id     | integer   | not null, foreign key (references users)
+
+## listitems
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+cocktail_id | integer   | not null, foreign key (references cocktails)
+list_id     | integer   | not null, foreign key (references lists)
 
 ## tags
 column name | data type | details

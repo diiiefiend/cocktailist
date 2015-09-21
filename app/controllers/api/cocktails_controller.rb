@@ -11,6 +11,7 @@ module Api
       @cocktail = current_cocktail
       user_rating = @cocktail.ratings.find_by(user_id: current_user.id)
       @user_rating_id = user_rating.nil? ? -1 : user_rating.id
+      @average_rating = @cocktail.ratings.average(:rating)
       render :show
     end
 

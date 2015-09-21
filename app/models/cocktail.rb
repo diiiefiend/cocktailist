@@ -11,6 +11,9 @@ class Cocktail < ActiveRecord::Base
   has_many :ratings,
     dependent: :destroy
 
+  has_many :list_items,
+    dependent: :destroy
+
   belongs_to :bar,
     class_name: "Bar",
     foreign_key: :bar_id,

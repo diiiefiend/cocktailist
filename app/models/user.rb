@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
   has_many :ratings,
     dependent: :destroy
 
+  has_many :lists,
+    dependent: :destroy
+
   attr_reader :password
 
   def self.find_by_credentials(email, password)

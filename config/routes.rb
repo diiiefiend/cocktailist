@@ -2,7 +2,15 @@ Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
   root to: 'main#root'
 
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create, :show] do
+    member do
+      resources :lists do
+        member do
+          resources :listitems
+        end
+      end
+    end
+  end
 
   resource :session, only: [:new, :create] do
     member do

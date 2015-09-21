@@ -294,7 +294,7 @@
   font-size: 14px;
 }
 
-#footer a{
+#footer a.toplink{
   font-size: 24px;
   float: right;
 }
@@ -369,10 +369,15 @@ img.feed-img{
   margin: 10px auto;
 }
 
-button.add-to-lists{
-  margin-right: 45px;
+.user-stats{
+  text-align: center;
   clear: right;
   float: right;
+  width: 225px;
+}
+
+.user-stats button.add-to-lists{
+  margin: 0 auto;
   width: auto;
   background: white;
   color: black;
@@ -427,6 +432,10 @@ button.add-to-lists{
 
 .capitalize{
   text-transform: capitalize;
+}
+
+.subtext{
+  color: #aaa;
 }
 
 /* tag stuff */

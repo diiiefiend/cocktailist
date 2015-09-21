@@ -7,6 +7,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this._ratings = this.model.ratings();
     this.listenToOnce(this.collection, "sync", this.setSimilarCocktail);
     this.listenTo(this.model, "sync afterSimilarCocktail", this.render);
+    this.listenTo(this._ratings, "add change afterRemove", this.render);
     this.listenTo(this._ratings, "add change afterRemove", this.renderForm);
     this.listenTo(this._ratings, "update change", this.renderRatings); //later optimize this to only render the new comment?
   },

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920031640) do
+ActiveRecord::Schema.define(version: 20150921040320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,25 @@ ActiveRecord::Schema.define(version: 20150920031640) do
   add_index "feeds", ["cocktail_id"], name: "index_feeds_on_cocktail_id", using: :btree
   add_index "feeds", ["feedable_id"], name: "index_feeds_on_feedable_id", using: :btree
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
+
+  create_table "listitems", force: :cascade do |t|
+    t.integer  "cocktail_id", null: false
+    t.integer  "list_id",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "listitems", ["cocktail_id"], name: "index_listitems_on_cocktail_id", using: :btree
+  add_index "listitems", ["list_id"], name: "index_listitems_on_list_id", using: :btree
+
+  create_table "lists", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lists", ["user_id"], name: "index_lists_on_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "user_id",     null: false
