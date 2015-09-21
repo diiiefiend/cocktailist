@@ -4,16 +4,26 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     "browse" : "browse",
     "cocktails/new" : "createEntry",
     "cocktails/:id" : "showEntry",
-    "cocktails/:id/edit" : "editEntry"
+    "cocktails/:id/edit" : "editEntry",
+
+    "users/new": "newuser",
+    "users/:id": "showUser",
+    "session/new": "signIn"
   },
 
   initialize: function (options){
     this.$el = options.$el;
     this._cocktails = new Cocktailist.Collections.Cocktails();
     this._feedItems = new Cocktailist.Collections.FeedItems();
+
+    this._users = new Cocktailist.Collections.Users();
+    this._users.fetch();
   },
 
   feed: function (){
+    var callback = this.index.bind(this);
+    if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
+
     this._feedItems.fetch();
     this._cocktails.fetch();
     var view = new Cocktailist.Views.CocktailsFeed({collection: this._feedItems, cocktails: this._cocktails});
@@ -42,6 +52,62 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this._cocktails.fetch();
     var view = new Cocktailist.Views.CocktailsIndex({collection: this._cocktails});
     this._swapView(view);
+  },
+
+  // user routes stuff
+
+  newUser: function (){
+    if(!this._requireSignedOut()) {return;}         //if not signed out, return
+    var model = new this._users.model();
+    var view = new Cocktailist.Views.UsersForm({
+      collection: this._users,
+      model: model
+    });
+    this._swapView(formView);
+  },
+
+  showUser: function(id){
+    var callback = this.showUser.bind(this, id);      //if not signed in, return
+    if (!this._requireSignedIn(callback)) { return; }
+
+    var model = this._users.getOrFetch(id);
+    var showView = new Cocktailist.Views.UsersShow({
+      model: model
+    });
+    this._swapView(showView);
+  },
+
+  signIn: function(callback){
+    if (!this._requireSignedOut(callback)) { return; }    //if not signed out, return
+
+    var signInView = new Cocktailist.Views.SignIn({
+      callback: callback
+    });
+    this._swapView(signInView);
+  },
+
+  _requireSignedIn: function(callback){
+    if (!Cocktailist.currentUser.isSignedIn()) {
+      callback = callback || this._goHome.bind(this);
+      this.signIn(callback);
+      return false;
+    }
+
+    return true;
+  },
+
+  _requireSignedOut: function(callback){
+    if (Cocktailist.currentUser.isSignedIn()) {
+      callback = callback || this._goHome.bind(this);
+      callback();
+      return false;
+    }
+
+    return true;
+  },
+
+  _goHome: function(){
+    Backbone.history.navigate("", { trigger: true });
   },
 
   _swapView: function (view){
