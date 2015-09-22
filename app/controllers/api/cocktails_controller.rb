@@ -15,7 +15,6 @@ module Api
         user_rating = nil
       end
       @user_rating_id = user_rating.nil? ? -1 : user_rating.id
-      @average_rating = @cocktail.ratings.average(:rating)
       render :show
     end
 

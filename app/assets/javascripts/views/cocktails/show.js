@@ -43,7 +43,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     if(Cocktailist.currentUser.isSignedIn()){
       this.renderForm();
     } else {
-      this.$el.find("#rating-form").html("<p>Log in to rate</p>");  //placeholder for now
+      this.$el.find("#rating-form").html("<p><a href='#session/new'>Log in</a> to rate!</p>");  //placeholder for now
     };
 
     // this._ratings.each( function(rating){

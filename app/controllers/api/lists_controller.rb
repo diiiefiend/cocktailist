@@ -6,9 +6,23 @@ module Api
     end
 
     def create
+      clean_params = list_params
+      clean_params[:user_id] = current_user.id
+      @list = List.new(clean_params)
+      if @list.save
+        render json: @list
+      else
+        render json: @list.errors.full_messages, status: :unprocessable_entity
+      end
     end
 
     def update
+      @list = current_list
+      if @list.update(list_params)
+        render json: @list
+      else
+        render json: @list.errors.full_messages, status: :unprocessable_entity
+      end
     end
 
     def show

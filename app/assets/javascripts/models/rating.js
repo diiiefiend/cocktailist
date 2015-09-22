@@ -9,9 +9,9 @@ Cocktailist.Models.Rating = Backbone.Model.extend({
 
   toJSON: function (){
     return {rating: _.clone(this.attributes)};
-  },
-
-  parse: function (res){
-    return res;
   }
+
+  // parse: function (res){
+  //   return res;
+  // }
 });
