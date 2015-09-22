@@ -6,9 +6,6 @@
   <div class="box">
     <h1>Your Lists</h1>
     <ul class="filter-list">
-      <% lists.each( function (list){ %>
-        <li><a href="#" <% listShowId === list.id ? "class=bolded" : "" %> ><%= list.escape('name') %></a></li>
-      <% }); %>
     </ul>
   </div>
 </div>

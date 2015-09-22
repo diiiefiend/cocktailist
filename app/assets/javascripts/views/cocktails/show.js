@@ -4,6 +4,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   initialize: function (){
     //model: cocktail
     //collection: cocktails
+    window.scrollTo(0, 0);
+
     this._ratings = this.model.ratings();
     this.ratingAvg = "N/A";
     this.collection.fetch();

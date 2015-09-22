@@ -1,16 +1,38 @@
 Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
-  template: JST['lists/index'],
+  template: {
+    "main" : JST['lists/index'],
+    "side" : JST['lists/side']
+  },
 
   events: {
     "click .filter-list li a" : "changeList"
   },
 
-  initialize: function(){
-    //collection = lists
-    this.collection.fetch();
+  initialize: function (){
+    //collection = lists (route is rails' #index!)
+    //model will be the specific list in question
     this._user = Cocktailist.currentUser;
-    this.listenTo(this._user, "sync", this.render);
-    this.listenToOnce(this.collection, "sync", this.render);  //fix the infinite rendering tmrw
+    this._user.fetch();
+
+    this.listenToOnce(this._user, "sync", this.getLists);
+
+    this._listShowId = 1;
+
+    this.listenToOnce(this.collection, "sync", this.setModel);
+
+    // this.listenTo(this.collection, "change update", this.getLists);
+    // this.listenTo(this.collection, "change update", this.setModel);
+
+    this.model = new Cocktailist.Models.List([], {user: this._user});
+    this.listenTo(this.collection, "update change", this.render);  //fix the infinite rendering tmrw
+  },
+
+  getLists: function (){
+    this.collection.fetch();
+  },
+
+  setModel: function (){
+    this.model = this.collection.getOrFetch(this._listShowId, {url: 'api/users/'+this._user.id+'/lists'});
   },
 
   changeList: function (e){
@@ -24,15 +46,22 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
     };
   },
 
+  renderSidebar: function (){
+    var template = this.template['side']({lists: this.collection, listShowId: this._listShowId});
+    this.$el.find(".filter-list").html(template);
+    return this;
+  },
+
   render: function (res, models, options){
     // var filterList = (options && options.filterList ? options.filterList : this.liquorTypes());
-    var listShowId = (options && options.listShowId ? options.listShowId : 1);
-    // debugger
-    var model = this.collection.getOrFetch(listShowId, {user: this._user});
+    this._listShowId = (options && options.listShowId ? options.listShowId : 1);
     // var groupType = (options && options.groupFn ? options.groupFn : function (cocktail){ return cocktail.get("liquor"); });
     // var groups = this.collection.groupBy(groupType);
-    var template = this.template({user: this._user, lists: this.collection, list: model, listShowId: listShowId});
+    var template = this.template['main']({list: this.model});
     this.$el.html(template);
+
+    this.renderSidebar();
+
     return this;
   }
 });

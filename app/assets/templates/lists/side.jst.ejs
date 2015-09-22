@@ -1,0 +1,3 @@
+  <% lists.each( function (list){ %>
+    <li><a href="#" <%= listShowId === list.id ? "class=bolded" : "" %> ><%= list.escape('name') %></a></li>
+  <% }); %>

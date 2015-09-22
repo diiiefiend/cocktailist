@@ -66,7 +66,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   //lists stuff
   lists: function (){
     var view = new Cocktailist.Views.ListsIndex({collection: this._lists});
-    this._swapView(view);
+    this._swapView(view, {wait: true});
   },
 
   createList: function (){
@@ -132,9 +132,13 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     Backbone.history.navigate("", { trigger: true });
   },
 
-  _swapView: function (view){
+  _swapView: function (view, options){
     this._currentView && this._currentView.remove();
     this._currentView = view;
-    this.$el.html(view.render().$el);
+    if(options && options.wait === true){
+      this.$el.html(view.$el);              //don't render right away
+    } else {
+      this.$el.html(view.render().$el);
+    };
   }
 });

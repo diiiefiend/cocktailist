@@ -59,10 +59,10 @@ Cocktailist.Models.CurrentUser = Cocktailist.Models.User.extend({
   fireSessionEvent: function (){
     if(this.isSignedIn()){
       this.trigger("signIn");
-      console.log("currentUser is signed in!", this);
+      // console.log("currentUser is signed in!", this);
     } else {
       this.trigger("signOut");
-      console.log("currentUser is signed out!", this);
+      // console.log("currentUser is signed out!", this);
     }
   }
 

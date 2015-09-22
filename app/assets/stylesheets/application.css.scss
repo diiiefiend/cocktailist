@@ -52,7 +52,7 @@
  body{
   background: asset-url("contbg.jpg");
   font: 16px 'ChaparralPro', 'Palatino', serif;
-  color: white;
+  color: #eee;
  }
 
  a{
@@ -85,6 +85,7 @@
 
  #signinbox h1{
    text-align: center;
+   color: black;
  }
 
  #signinbox p{
@@ -500,6 +501,7 @@ input:focus, select:focus, textarea:focus{
 
 textarea{
   height: 70px;
+  background: #222;
 }
 
 select option{
@@ -525,6 +527,10 @@ h1{
 
 h2{
   font: 24px 'ChaparralPro', 'Palatino', serif;
+}
+
+h1, h2, h3, strong{
+  color: white;
 }
 
 h1, h2, h3, p{

@@ -10,6 +10,11 @@ window.Cocktailist = {
     this.siteNav = new Cocktailist.Views.Nav({el: "#nav"});
     this.userMenu = new Cocktailist.Views.UserMenu({el: "#user-menu ul"});
 
+    $("a[href='#header']").click(function() {
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+      return false;
+    });
+
     new Cocktailist.Routers.Router({$el: $("#js-main")});
     Backbone.history.start();
   }
