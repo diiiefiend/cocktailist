@@ -17,6 +17,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
   setSimilarCocktail: function (){
     var similarCocktails = this.collection.where({liquor: this.model.get('liquor')});
+    similarCocktails.splice(_.findIndex(similarCocktails, this.model.id), 1); //debug why this is not removing the current cocktail
     this._similarCocktail = this.collection.getOrFetch(similarCocktails[Math.floor(Math.random() * similarCocktails.length)], {
         success: function (){
           this.model.trigger("afterSimilarCocktail");

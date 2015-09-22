@@ -2,6 +2,8 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   routes: {
     "" : "feed",
     "browse" : "browse",
+    "lists" : "lists",
+
     "cocktails/new" : "createEntry",
     "cocktails/:id" : "showEntry",
     "cocktails/:id/edit" : "editEntry",
@@ -15,6 +17,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this.$el = options.$el;
     this._cocktails = new Cocktailist.Collections.Cocktails();
     this._feedItems = new Cocktailist.Collections.FeedItems();
+    this._lists = new Cocktailist.Collections.Lists([], {user: Cocktailist.currentUser});
 
     this._users = new Cocktailist.Collections.Users();
     this._users.fetch();
@@ -26,6 +29,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
     this._feedItems.fetch();
     this._cocktails.fetch();
+    this._lists.fetch();
     var view = new Cocktailist.Views.CocktailsFeed({collection: this._feedItems, cocktails: this._cocktails});
     this._swapView(view);
   },
@@ -39,7 +43,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
-  editEntry: function (){
+  editEntry: function (){   //currently not used
     var entry = this.collection.getOrFetch(id);
     var view = new Cocktailist.Views.CocktailsForm({model: newModel, collection: this._cocktails});
     this._swapView(view);
@@ -47,6 +51,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
   showEntry: function (id){
     var entry = this._cocktails.getOrFetch(id);
+    this._cocktails.fetch();
     var view = new Cocktailist.Views.CocktailShow({model: entry, collection: this._cocktails});
     this._swapView(view);
   },
@@ -54,6 +59,13 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   browse: function (){
     this._cocktails.fetch();
     var view = new Cocktailist.Views.CocktailsIndex({collection: this._cocktails});
+    this._swapView(view);
+  },
+
+  //lists stuff
+  lists: function (){
+    this._lists.fetch();
+    var view = new Cocktailist.Views.ListsIndex({collection: this._lists});
     this._swapView(view);
   },
 

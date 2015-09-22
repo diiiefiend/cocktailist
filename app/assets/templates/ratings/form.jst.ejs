@@ -14,7 +14,7 @@
     <% }; %>
 
   <label for="body">Review</label>
-  <textarea name="rating[body]"><%= rating.escape('body') %></textarea>
+  <textarea name="rating[body]" placeholder="comments (optional)"><%= rating.escape('body') %></textarea>
   <ul id="errors"></ul>
   <button class="submitRating">submit</button>
   <% if(!rating.isNew()){ %>
