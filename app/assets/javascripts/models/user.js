@@ -1,10 +1,15 @@
 Cocktailist.Models.User = Backbone.BetterModel.extend({
   urlRoot: "/api/users",
 
+  username: function (){
+    return this.escape('username');
+  },
+
   toJSON: function (){
     return { user: _.clone(this.attributes) };
   }
 });
+
 
 Cocktailist.Models.CurrentUser = Cocktailist.Models.User.extend({
   url: "/api/session",
@@ -23,7 +28,6 @@ Cocktailist.Models.CurrentUser = Cocktailist.Models.User.extend({
       "user[email]": options.email,
       "user[password]": options.password
     };
-
     $.ajax({
       url: this.url,
       type: "POST",

@@ -6,7 +6,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     "cocktails/:id" : "showEntry",
     "cocktails/:id/edit" : "editEntry",
 
-    "users/new": "newuser",
+    "users/new": "newUser",
     "users/:id": "showUser",
     "session/new": "signIn"
   },
@@ -21,8 +21,8 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   },
 
   feed: function (){
-    var callback = this.index.bind(this);
-    if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
+    var callback = this.feed;
+    if (!this._requireSignedIn(callback.bind(this))) { return; } //if not signed in, return
 
     this._feedItems.fetch();
     this._cocktails.fetch();
@@ -31,6 +31,9 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   },
 
   createEntry: function (){
+    var callback = this.feed.bind(this);
+    if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
+
     var entry = new Cocktailist.Models.Cocktail();
     var view = new Cocktailist.Views.CocktailsForm({model: entry, collection: this._cocktails});
     this._swapView(view);
@@ -59,11 +62,11 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   newUser: function (){
     if(!this._requireSignedOut()) {return;}         //if not signed out, return
     var model = new this._users.model();
-    var view = new Cocktailist.Views.UsersForm({
+    var view = new Cocktailist.Views.UserForm({
       collection: this._users,
       model: model
     });
-    this._swapView(formView);
+    this._swapView(view);
   },
 
   showUser: function(id){
@@ -71,20 +74,23 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     if (!this._requireSignedIn(callback)) { return; }
 
     var model = this._users.getOrFetch(id);
-    var showView = new Cocktailist.Views.UsersShow({
+    var view = new Cocktailist.Views.UserShow({
       model: model
     });
-    this._swapView(showView);
+    this._swapView(view);
   },
 
   signIn: function(callback){
     if (!this._requireSignedOut(callback)) { return; }    //if not signed out, return
 
-    var signInView = new Cocktailist.Views.SignIn({
+    var view = new Cocktailist.Views.SignIn({
       callback: callback
     });
-    this._swapView(signInView);
+    this._swapView(view);
   },
+
+
+// "private" methods
 
   _requireSignedIn: function(callback){
     if (!Cocktailist.currentUser.isSignedIn()) {

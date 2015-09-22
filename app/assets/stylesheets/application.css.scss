@@ -77,18 +77,14 @@
  /* login page stuff */
  #signinbox{
    width: 300px;
-   margin: 0 auto;
+   margin: 20px auto;
    background: white;
    position: relative;
-   padding-top: 20px;
-   top: 50%;
-   transform: translateY(-50%);
    color: black;
  }
 
- #signinbox img{
-   margin: 0 auto;
-   display: block;
+ #signinbox h1{
+   text-align: center;
  }
 
  #signinbox p{
@@ -122,7 +118,10 @@
    padding: 10px;
    position: absolute;
    left: 350px;
-   top: 115px;
+   top: 100px;
+ }
+ .flashbox p.subtext{
+   text-align: left;
  }
 
  /* header area stuff */
@@ -214,6 +213,11 @@
   color: #cc8042;
 }
 
+#header a.grayed, #header #nav li:last-child a.grayed{
+  color: #ccc;
+}
+
+
 /* content area stuff */
 #content{
   border-top: 1px solid #cc8042;
@@ -274,6 +278,11 @@
 .bar h2{
   font-size: 20px;
 }
+
+#signinbox{
+    margin-top: 20px;
+}
+
 /* footer area stuff */
 #footer{
   border-top: 1px solid #130503;
@@ -367,6 +376,10 @@ img.feed-img{
   opacity: 1;
   display: block;
   margin: 10px auto;
+}
+
+#delete-rating{
+  float: right;
 }
 
 .user-stats{
@@ -471,6 +484,11 @@ input, select, textarea{
 }
 input:focus, select:focus, textarea:focus{
   border-bottom: 1px solid white;
+}
+
+textarea{
+  height: 70px;
+  background: #222;
 }
 
 select option{

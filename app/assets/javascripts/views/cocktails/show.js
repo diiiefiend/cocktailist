@@ -5,7 +5,10 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     //model: cocktail
     //collection: cocktails
     this._ratings = this.model.ratings();
+    this.ratingAvg = "N/A";
     this.listenToOnce(this.collection, "sync", this.setSimilarCocktail);
+    this.listenToOnce(this._ratings, "sync", this._calcAvgRating);
+    this.listenTo(this._ratings, "add change afterRemove", this._calcAvgRating);
     this.listenTo(this.model, "sync afterSimilarCocktail", this.render);
     this.listenTo(this._ratings, "add change afterRemove", this.render);
     this.listenTo(this._ratings, "add change afterRemove", this.renderForm);
@@ -22,11 +25,26 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     );
   },
 
+  _calcAvgRating: function (){
+    var ratings = this._ratings.pluck("rating");
+    if(ratings.length > 0){
+      var sum = ratings.reduce(function (a, b) {return a+b; });
+      this.ratingAvg = sum/ratings.length;
+    } else {
+      this.ratingAvg = "N/A";
+    };
+    this.render();
+  },
+
   render: function (){
-    var template = this.template({cocktail: this.model, similarCocktail: this._similarCocktail});
+    var template = this.template({cocktail: this.model, ratingAvg: this.ratingAvg, similarCocktail: this._similarCocktail, signedIn: Cocktailist.currentUser.isSignedIn()});
     this.$el.html(template);
 
-    this.renderForm();
+    if(Cocktailist.currentUser.isSignedIn()){
+      this.renderForm();
+    } else {
+      this.$el.find("#rating-form").html("<p>Log in to rate</p>");  //placeholder for now
+    };
 
     // this._ratings.each( function(rating){
     //   this.renderRatings(rating);

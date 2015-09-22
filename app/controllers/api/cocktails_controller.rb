@@ -9,7 +9,11 @@ module Api
 
     def show
       @cocktail = current_cocktail
-      user_rating = @cocktail.ratings.find_by(user_id: current_user.id)
+      if logged_in?
+        user_rating = @cocktail.ratings.find_by(user_id: current_user.id)
+      else
+        user_rating = nil
+      end
       @user_rating_id = user_rating.nil? ? -1 : user_rating.id
       @average_rating = @cocktail.ratings.average(:rating)
       render :show
@@ -50,7 +54,7 @@ module Api
       end
     end
 
-    def edit
+    def update
       @cocktail = current_cocktail
       if @cocktail.update(cocktail_params)
         render json: @cocktail

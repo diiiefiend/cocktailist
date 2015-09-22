@@ -1,27 +1,24 @@
 Cocktailist.Views.SignIn = Backbone.CompositeView.extend({
-
-  initialize: function(options){
-    this.callback = options.callback;
-    this.listenTo(Cocktailist.currentUser, "signIn", this.signInCallback);
-  },
+  template: JST['shared/signIn'],
 
   events: {
     "submit form": "submit"
   },
 
-  template: JST['shared/sign_in'],
+  initialize: function (options){
+    this.callback = options.callback;
+    this.listenTo(Cocktailist.currentUser, "signIn", this.signInCallback);
+  },
 
-  render: function(){
+  render: function (){
     this.$el.html(this.template());
-
     return this;
   },
 
-  submit: function(event){
-    event.preventDefault();
-    var $form = $(event.currentTarget);
+  submit: function (e){
+    e.preventDefault();
+    var $form = $(e.currentTarget);
     var formData = $form.serializeJSON().user;
-
     Cocktailist.currentUser.signIn({
       email: formData.email,
       password: formData.password,
@@ -31,7 +28,7 @@ Cocktailist.Views.SignIn = Backbone.CompositeView.extend({
     });
   },
 
-  signInCallback: function(event){
+  signInCallback: function (){
     if(this.callback) {
       this.callback();
     } else {

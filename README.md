@@ -13,7 +13,7 @@ cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
 - [x] Create sessions (log in)
 - [X] Create cocktail entries
 - [x] Review cocktails
-- [ ] View cocktail summaries and reviews/scores
+- [x] View cocktail summaries and reviews/scores
 - [ ] Add cocktails to had/want to try/not interested lists
 - [ ] Searching for cocktails
 

@@ -1,7 +1,5 @@
 class Api::SessionsController < ApplicationController
-  layout "signin"
-
-  before_action :ensure_logged_in, only: :destroy
+  wrap_parameters false
 
   def show
     if current_user
@@ -17,9 +15,9 @@ class Api::SessionsController < ApplicationController
       params[:user][:password]
     )
     if @user.nil?
-      # flash[:errors] = ["Invalid username/password combo"]
+      # flash.now[:errors] = ["Invalid username/password combo"]
       # redirect_to new_session_url
-      header :unprocessable_entity
+      render json: {}, status: :unprocessable_entity
     else
       log_in!(@user)
       render :show

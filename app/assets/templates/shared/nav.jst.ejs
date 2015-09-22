@@ -1,0 +1,5 @@
+<li><a href="" <%= !currentUser.isSignedIn() ? "class=grayed" : "" %> >Feed</a></li>
+<li><a href="#" <%= !currentUser.isSignedIn() ? "class=grayed" : "" %> >My Lists</a></li>
+<li><a href="#browse">Browse</a></li>
+<li><a href="#" <%= !currentUser.isSignedIn() ? "class=grayed" : "" %> >Recommendations</a></li>
+<li><a href="#cocktails/new" <%= !currentUser.isSignedIn() ? "class=grayed" : "" %> >Add Entry</a></li>
