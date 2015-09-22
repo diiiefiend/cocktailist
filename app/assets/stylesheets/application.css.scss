@@ -93,6 +93,10 @@
    margin: 10px;
  }
 
+ #signinbox strong{
+   color: inherit;
+ }
+
  #signinbox input{
    background: asset-url("boxbg.jpg");
    width: 90%;

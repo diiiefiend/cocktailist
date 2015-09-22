@@ -20,13 +20,13 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
     $input = this.$el.find("input.toggle-liquor");
     $input.toggle();
     var $select = this.$el.find("select.toggle-liquor");
-    if($select.attr("disabled")){
+    if($select.prop("disabled", true)){
       $input.attr("name", "");
-      $select.attr("disabled", false);
+      $select.prop("disabled", false);
     } else {
       $input.attr("name", "cocktail[liquor]");
       $select.val("");
-      $select.attr("disabled", true);
+      $select.prop("disabled", true);
     };
   },
 
@@ -34,14 +34,14 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
     $input = this.$el.find("input.toggle-bar");
     $input.toggle();
     var $select = this.$el.find("select.toggle-bar");
-    if($select.attr("disabled")){
+    if($select.prop("disabled", true)){
       $input.attr("name", "");
-      $select.attr("disabled", false);
+      $select.prop("disabled", false);
     } else {
       $input.eq(0).attr("name", "cocktail[bar_name]");
       $input.eq(1).attr("name", "cocktail[bar_address]");
       $select.val("");
-      $select.attr("disabled", true);
+      $select.prop("disabled", true);
     };
   },
 
@@ -71,7 +71,7 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
 
   create: function (e){
     e.preventDefault();
-    this.$el.find("button").prop("disabled");
+    this.$el.find("button").prop("disabled", true);
     var file = this.$("#attach-image")[0].files[0];
     var formData = new FormData();
     var jsonData = this.$el.find("form").serializeJSON().cocktail;
@@ -87,11 +87,11 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
     this.model.saveFormData(formData, {
       success: function (){
         this.collection.add(this.model);
-        this.$el.find("button").removeProp("disabled");
+        this.$el.find("button").prop("disabled", false);
         Backbone.history.navigate("#cocktails/"+this.model.id, {trigger: true});
       }.bind(this),
       error: function (data, res){
-        this.$el.find("button").removeProp("disabled");
+        this.$el.find("button").prop("disabled", false);
         $("#errors").empty();
         res.responseJSON.forEach( function (error){
           $("#errors").append("<li>"+error+"</li>");
