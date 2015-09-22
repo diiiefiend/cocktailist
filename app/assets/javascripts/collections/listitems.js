@@ -1,4 +1,4 @@
-Cocktailist.Collections.Listsitems = Backbone.BetterCollection.extend({
+Cocktailist.Collections.Listitems = Backbone.BetterCollection.extend({
   model: Cocktailist.Models.Listitem,
 
   url: function(){

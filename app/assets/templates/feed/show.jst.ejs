@@ -1,5 +1,7 @@
 <div class="left wide">
-  <%= JST['feed/_feed']({feedItems: feedItems}) %>
+  <% feedItems.each(function (feedItem){ %>
+    <%= JST['feed/_feed']({feedItem: feedItem}) %>
+  <% }); %>
 </div>
 
 <div class="rule-right"></div>

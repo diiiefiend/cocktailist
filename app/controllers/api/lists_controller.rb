@@ -1,7 +1,7 @@
 module Api
   class ListsController < ApplicationController
     def index
-      @list = List.all
+      @list = List.all.where("user_id=#{current_user.id}")
       render :index
     end
 

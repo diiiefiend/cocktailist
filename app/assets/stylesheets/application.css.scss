@@ -242,7 +242,12 @@
 
 #content .wide{
   width: 625px;
+}
+#content .wide .left{
   margin-right: 25px;
+}
+#content .wide .right{
+  margin-left: 25px;
 }
 
 #content .bar{
@@ -277,6 +282,13 @@
 
 .bar h2{
   font-size: 20px;
+}
+
+.bar ul{
+  list-style: none;
+}
+.bar ul li:first-letter{
+  text-transform: uppercase;
 }
 
 #signinbox{
@@ -325,7 +337,7 @@
   content: "";
 }
 .rule-left:before{
-  left: 300px;
+  left: 350px;
 }
 .rule-right:before{
   right: 350px;
@@ -488,7 +500,6 @@ input:focus, select:focus, textarea:focus{
 
 textarea{
   height: 70px;
-  background: #222;
 }
 
 select option{

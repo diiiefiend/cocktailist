@@ -1,4 +1,3 @@
-<% feedItems.each(function (feedItem){ %>
 <div class="box">
   <% var splitData = feedItem.get('data').split("; ") %>
   <h2><%= feedItem.escape('username') %> <%= feedItem.escape('activity') %>
@@ -19,4 +18,3 @@
   <p><%= splitData[0] %></p>
   <p class="subtext">@ <%= feedItem.escape('time') %></p>
 </div>
-<% }); %>

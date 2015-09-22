@@ -1,0 +1,28 @@
+<div class="left bar">
+  <div class="box">
+    <h1><a href="#lists/new">Create List</a></h1>
+  </div>
+
+  <div class="box">
+    <h1>Your Lists</h1>
+    <ul class="filter-list">
+      <% lists.each( function (list){ %>
+        <li><a href="#" <% listShowId === list.id ? "class=bolded" : "" %> ><% list.escape('name') %></a></li>
+      <% }); %>
+    </ul>
+  </div>
+</div>
+
+<div class="rule-left"></div>
+
+<div class="right wide">
+  <% if(listitems.length > 0){ %>
+    <% listitems.each( function (listitem){%>
+      <div class="box">
+        <h1><% listitem.escape('cocktail') %></h1>
+      </div>
+    <% }); %>
+  <% } else { %>
+    <h2>This list is empty!</h2>
+  <% } %>
+</div>

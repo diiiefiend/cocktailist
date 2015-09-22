@@ -1,4 +1,4 @@
-Cocktailist.Models.List = Backbone.Model.extend({
+Cocktailist.Models.Listitem = Backbone.Model.extend({
   urlRoot: function(){
     return 'api/users/'+ this.list.user.id +'/lists/' + this.list.id + '/listitems';
   },

@@ -9,6 +9,8 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      List.create(user_id: @user.id, name: 'to-try')
+      List.create(user_id: @user.id, name: 'experienced')
       log_in!(@user)
       render :show
     else

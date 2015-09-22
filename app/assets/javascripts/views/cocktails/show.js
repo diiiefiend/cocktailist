@@ -6,6 +6,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     //collection: cocktails
     this._ratings = this.model.ratings();
     this.ratingAvg = "N/A";
+    this.collection.fetch();
+
     this.listenToOnce(this.collection, "sync", this.setSimilarCocktail);
     this.listenToOnce(this._ratings, "sync", this._calcAvgRating);
     this.listenTo(this._ratings, "add change afterRemove", this._calcAvgRating);
@@ -17,11 +19,15 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
   setSimilarCocktail: function (){
     var similarCocktails = this.collection.where({liquor: this.model.get('liquor')});
-    similarCocktails.splice(_.findIndex(similarCocktails, this.model.id), 1); //debug why this is not removing the current cocktail
-    this._similarCocktail = this.collection.getOrFetch(similarCocktails[Math.floor(Math.random() * similarCocktails.length)], {
+    similarCocktails.splice(_.findIndex(similarCocktails, this.model), 1);  //not sure if i should leave this out for review tmrw
+    var randId = similarCocktails[Math.floor(Math.random() * similarCocktails.length)];
+    this._similarCocktail = this.collection.getOrFetch(randId, {
         success: function (){
           this.model.trigger("afterSimilarCocktail");
-        }.bind(this)
+        }.bind(this),
+        error: function (data){
+          console.log("something went wrong", data);
+        }
       }
     );
   },
