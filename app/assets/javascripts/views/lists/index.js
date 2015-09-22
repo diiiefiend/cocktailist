@@ -7,6 +7,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
 
   initialize: function(){
     //collection = lists
+    this.collection.fetch();
     this._user = Cocktailist.currentUser;
     this.listenTo(this._user, "sync", this.render);
     this.listenToOnce(this.collection, "sync", this.render);  //fix the infinite rendering tmrw
@@ -26,11 +27,11 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
   render: function (res, models, options){
     // var filterList = (options && options.filterList ? options.filterList : this.liquorTypes());
     var listShowId = (options && options.listShowId ? options.listShowId : 1);
-    debugger
+    // debugger
     var model = this.collection.getOrFetch(listShowId, {user: this._user});
     // var groupType = (options && options.groupFn ? options.groupFn : function (cocktail){ return cocktail.get("liquor"); });
     // var groups = this.collection.groupBy(groupType);
-    var template = this.template({user: this._user, lists: this.collection, listitems: model.listitems(), listShowId: listShowId});
+    var template = this.template({user: this._user, lists: this.collection, list: model, listShowId: listShowId});
     this.$el.html(template);
     return this;
   }

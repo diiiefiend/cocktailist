@@ -65,7 +65,6 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
   //lists stuff
   lists: function (){
-    this._lists.fetch();
     var view = new Cocktailist.Views.ListsIndex({collection: this._lists});
     this._swapView(view);
   },

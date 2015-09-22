@@ -5,7 +5,7 @@ Cocktailist.Models.List = Backbone.Model.extend({
 
   initialize: function (models, options){
     this.user = options.user;
-    debugger
+    // debugger
   },
 
   listitems: function (){
