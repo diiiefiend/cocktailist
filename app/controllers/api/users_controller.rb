@@ -14,7 +14,6 @@ class Api::UsersController < ApplicationController
       log_in!(@user)
       render :show
     else
-      byebug
       render json: @user.errors.full_messages, status: :unprocessable_entity
     end
   end
