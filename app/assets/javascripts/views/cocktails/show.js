@@ -1,22 +1,52 @@
 Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   template: JST['cocktails/show'],
 
-  initialize: function (){
+  events: {
+    "change .add-to-lists" : "addToList"
+  },
+
+  initialize: function (options){
     //model: cocktail
     //collection: cocktails
     window.scrollTo(0, 0);
 
     this._ratings = this.model.ratings();
+    this._lists = options.lists;
+    this._lists.fetch();
+
     this.ratingAvg = "N/A";
     this.collection.fetch();
+
+    // this.listenTo(this._lists, "sync", this.getListItem);
 
     this.listenToOnce(this.collection, "sync", this.setSimilarCocktail);
     this.listenToOnce(this._ratings, "sync", this._calcAvgRating);
     this.listenTo(this._ratings, "add change afterRemove", this._calcAvgRating);
+
+    this.listenTo(this._lists, "sync", this.render);
     this.listenTo(this.model, "sync afterSimilarCocktail", this.render);
     this.listenTo(this._ratings, "add change afterRemove", this.render);
     this.listenTo(this._ratings, "add change afterRemove", this.renderForm);
     this.listenTo(this._ratings, "update change", this.renderRatings); //later optimize this to only render the new comment?
+  },
+
+  getListItem: function (e){
+
+  },
+
+  addToList: function (e){
+    var listname = $(e.currentTarget).val();
+    debugger
+    var list = this._lists.findWhere({name: listname});
+    if(list){
+      if(this._lists.where(""))
+      var listitem = new Cocktailist.Models.Listitem([], {list: list});
+      listitem.save( {cocktail_id: this.model.id, list_id: list.id}, {
+        success: function (data){
+          alert("successfully saved!");
+        }
+      });
+    };
   },
 
   setSimilarCocktail: function (){
@@ -46,7 +76,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   },
 
   render: function (){
-    var template = this.template({cocktail: this.model, ratingAvg: this.ratingAvg, similarCocktail: this._similarCocktail, signedIn: Cocktailist.currentUser.isSignedIn()});
+    var template = this.template({cocktail: this.model, ratingAvg: this.ratingAvg, similarCocktail: this._similarCocktail, signedIn: Cocktailist.currentUser.isSignedIn(), lists: this._lists});
     this.$el.html(template);
 
     if(Cocktailist.currentUser.isSignedIn()){

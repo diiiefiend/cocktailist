@@ -1,0 +1,685 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+@font-face {
+  font-family: 'Montserrat';
+  src: url(/assets/montserrat_reg-40fc1142200a5c1c18f80b6915257083c528c7f7fd2b00a552aeebc42898d428.otf);
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url(/assets/montserrat_bold-576e5ed13b2a9ee2342b1eb12c9c451b395c1dde816bb2bdf685202085e5eae2.otf);
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ChaparralPro';
+  src: url(/assets/chaparralpro_reg-0818e73a76e7a9dcf7b861ce88daa5203b32b6c58a5bce46677f429e150f7df0.otf);
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ChaparralPro';
+  src: url(/assets/chaparralpro_bold-97b59c892cc6d566c1d2d6f8c6fd8775b7424ddcf8119bcc180b495cb5f30bd5.otf);
+  font-weight: bold;
+  font-style: normal;
+}
+/* line 46, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+/* line 53, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+body {
+  background: url(/assets/contbg-505763470730315fa59dae71195bda95ae861802b9d124f1046cf8d1cb8e762e.jpg);
+  font: 16px 'ChaparralPro', 'Palatino', serif;
+  color: #eee;
+}
+
+/* line 59, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 63, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+ul {
+  list-style: square inside;
+}
+
+/* line 67, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#window {
+  height: 100vh;
+  position: relative;
+}
+
+/* line 72, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#main {
+  min-height: 100vh;
+  position: relative;
+  min-width: 1100px;
+}
+
+/* login page stuff */
+/* line 79, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#signinbox {
+  width: 300px;
+  margin: 20px auto;
+  background: white;
+  position: relative;
+  color: black;
+}
+
+/* line 87, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#signinbox h1 {
+  text-align: center;
+  color: black;
+}
+
+/* line 92, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#signinbox p {
+  text-align: center;
+  margin: 10px;
+}
+
+/* line 97, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#signinbox strong {
+  color: inherit;
+}
+
+/* line 101, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#signinbox input {
+  background: url(/assets/boxbg-d095d3e000d102dd7bcee471e3ff14a5126e2d9c85c4100faeb56226ba33ea61.jpg);
+  width: 90%;
+  padding: 5%;
+  color: white;
+  font: 24px 'Montserrat', sans-serif;
+  opacity: 1;
+}
+
+/* line 110, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#signinbox button {
+  width: 100%;
+  padding: 5%;
+  margin: 0;
+  font-size: 24px;
+}
+
+/* line 116, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#signinbox button:hover {
+  background: white;
+  color: black;
+}
+
+/* line 121, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.flashbox {
+  width: 300px;
+  background: white;
+  padding: 10px;
+  position: absolute;
+  left: 350px;
+  top: 100px;
+}
+
+/* line 129, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.flashbox p.subtext {
+  text-align: left;
+}
+
+/* header area stuff */
+/* line 134, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header {
+  background: white;
+  border-bottom: 1px solid black;
+  height: 75px;
+  position: relative;
+  color: black;
+  font: 18px 'ChaparralPro', 'Palatino', serif;
+}
+
+/* line 143, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#logo {
+  float: left;
+  padding-top: 23px;
+}
+
+/* line 148, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header .search {
+  float: left;
+  position: relative;
+  margin: 48px 0 0 25px;
+}
+
+/* line 153, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header .search input {
+  font-size: 16px;
+  background: transparent;
+  border-bottom: 2px solid black;
+  width: 150px;
+  color: black;
+}
+
+/* line 161, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header #user-menu {
+  float: right;
+  margin: 40px 0 0 30px;
+  position: relative;
+  display: block;
+}
+
+/* line 168, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header #user-menu ul {
+  list-style: none;
+  font-size: 16px;
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  padding: 5px;
+  background: white;
+  left: -43px;
+}
+
+/* line 179, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header #user-menu ul:after {
+  content: "";
+  display: none;
+  position: absolute;
+  top: -10px;
+  left: 50px;
+  border-bottom: 10px solid white;
+  border-top: 0 solid white;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+
+/* line 190, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header #user-menu:hover ul,
+#header #user-menu:hover ul:after {
+  display: block;
+}
+
+/* line 195, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header #user-menu ul li:first-child {
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* line 200, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header #nav {
+  margin-top: 50px;
+  float: right;
+  list-style: none;
+}
+
+/* line 206, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header #nav li {
+  float: left;
+  margin-right: 20px;
+}
+
+/* line 210, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header #nav li:last-child a {
+  color: #cc8042;
+}
+
+/* line 214, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header a, #footer a {
+  color: black;
+}
+
+/* line 218, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header a:hover, #footer a:hover {
+  color: #cc8042;
+}
+
+/* line 222, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#header a.grayed, #header #nav li:last-child a.grayed {
+  color: #ccc;
+}
+
+/* content area stuff */
+/* line 228, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content {
+  border-top: 1px solid #cc8042;
+  padding: 10px 0 60px 0;
+}
+
+/* line 233, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .container {
+  position: relative;
+}
+
+/* line 237, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .left {
+  float: left;
+}
+
+/* line 241, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .right {
+  float: right;
+}
+
+/* line 245, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .wide, #content .bar {
+  padding: 25px;
+}
+
+/* line 249, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .wide {
+  width: 625px;
+}
+
+/* line 252, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .wide .left {
+  margin-right: 25px;
+}
+
+/* line 255, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .wide .right {
+  margin-left: 25px;
+}
+
+/* line 259, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .bar {
+  width: 225px;
+}
+
+/* line 263, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .box {
+  background: url(/assets/boxbg-d095d3e000d102dd7bcee471e3ff14a5126e2d9c85c4100faeb56226ba33ea61.jpg);
+  margin-bottom: 20px;
+  padding: 20px;
+  line-height: 200%;
+}
+
+/* line 270, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .header-box {
+  background: white;
+  color: black;
+  padding: 5px 10px;
+}
+
+/* line 276, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .box .header-box {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+/* line 281, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content .box .header-box a:hover {
+  color: black;
+}
+
+/* line 285, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.bar h1 {
+  font-size: 24px;
+}
+
+/* line 289, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.bar h2 {
+  font-size: 20px;
+}
+
+/* line 293, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.bar ul {
+  list-style: none;
+}
+
+/* line 296, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.bar ul li:first-letter {
+  text-transform: uppercase;
+}
+
+/* line 300, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#signinbox {
+  margin-top: 20px;
+}
+
+/* footer area stuff */
+/* line 305, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#footer {
+  border-top: 1px solid #130503;
+  background: white;
+  height: 50px;
+  color: black;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+
+/* line 315, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#footer * {
+  padding-top: 5px;
+}
+
+/* line 319, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#footer p {
+  float: left;
+  font-size: 14px;
+}
+
+/* line 324, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#footer a.toplink {
+  font-size: 24px;
+  float: right;
+}
+
+/* general classes stuff */
+/* line 330, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.container {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+/* line 336, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+[class*="rule-"]:before {
+  display: block;
+  position: absolute;
+  background: #4c311c;
+  top: 25px;
+  bottom: 25px;
+  width: 1px;
+  content: "";
+}
+
+/* line 345, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.rule-left:before {
+  left: 350px;
+}
+
+/* line 348, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.rule-right:before {
+  right: 350px;
+}
+
+/* line 352, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+form a[class*="toggle-"] {
+  float: right;
+}
+
+/* line 355, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+form input[class*="toggle-"] {
+  display: none;
+  margin-left: 110px;
+}
+
+/* line 360, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.clearfix:after, .box:after {
+  clear: both;
+  display: block;
+  content: "";
+}
+
+/* line 366, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+img#image-preview, img.feed-img {
+  width: 100px;
+  height: auto;
+  float: right;
+  background: black;
+  border: 3px solid white;
+  margin: 0 0 10px 10px;
+  position: relative;
+}
+
+/* line 375, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+img#image-preview:hover {
+  opacity: 0.25;
+}
+
+/* line 379, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+img.feed-img {
+  transform: translateY(-25%);
+}
+
+/* line 383, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.image-placeholder {
+  min-height: 225px;
+  min-width: 225px;
+  float: right;
+  background: url(/assets/imgborderbg-black-3fc3f23f5d5c132e07260e40c67f1e7a057586b197990b564f4800cb2389fb41.png) no-repeat;
+  background-size: contain;
+  margin-left: 20px;
+}
+
+/* line 391, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.image-placeholder img {
+  height: auto;
+  width: 150px;
+  opacity: 1;
+  display: block;
+  margin: 10px auto;
+}
+
+/* line 399, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#delete-rating {
+  float: right;
+}
+
+/* line 403, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.user-stats {
+  text-align: center;
+  clear: right;
+  float: right;
+  width: 225px;
+}
+
+/* line 410, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.user-stats select.add-to-lists {
+  margin: 0 auto;
+  width: auto;
+  background: white;
+  color: black;
+  text-transform: capitalize;
+}
+
+/* line 418, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.category-show-list li {
+  position: relative;
+  float: left;
+  height: 150px;
+  width: 100px;
+  background: #111;
+  overflow: hidden;
+  border: 3px solid #aaa;
+  margin-right: 12px;
+  margin-bottom: 15px;
+  list-style: none;
+}
+
+/* line 430, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.category-show-list li:nth-child(5n) {
+  margin-right: 0;
+}
+
+/* line 433, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.category-show-list li:hover {
+  border-color: white;
+}
+
+/* line 436, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.category-show-list li:after {
+  z-index: 1;
+  content: attr(title);
+  font-size: 14px;
+  line-height: normal;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #aaa;
+  background: black;
+  opacity: 0.75;
+}
+
+/* line 448, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.category-show-list li:hover:after {
+  color: white;
+}
+
+/* line 452, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.category-show-list li.standalone {
+  margin-left: 30px;
+}
+
+/* line 456, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.filter-list {
+  font-size: 20px;
+  list-style: none;
+}
+
+/* line 461, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+a.remove-list {
+  display: block;
+  float: right;
+  opacity: 0;
+}
+
+/* line 466, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+li:hover a.remove-list {
+  opacity: 1;
+}
+
+/* line 470, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.bolded {
+  font-weight: bold;
+}
+
+/* line 474, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.capitalize {
+  text-transform: capitalize;
+}
+
+/* line 478, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.subtext {
+  color: #aaa;
+}
+
+/* tag stuff */
+/* line 483, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+button {
+  font: 18px 'Montserrat', sans-serif;
+  background: black;
+  margin: 5px auto;
+  padding: 3px 10px;
+  color: white;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  display: block;
+  width: 50%;
+  clear: both;
+}
+
+/* line 496, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+label {
+  float: left;
+  width: 100px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+/* line 503, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+input, select, textarea {
+  display: block;
+  padding: 3px;
+  background: transparent;
+  color: white;
+  border-bottom: 1px solid #aaa;
+  font: 18px 'ChaparralPro', 'Palatino', serif;
+  margin-bottom: 10px;
+  width: 60%;
+}
+
+/* line 513, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+input:focus, select:focus, textarea:focus {
+  border-bottom: 1px solid white;
+}
+
+/* line 517, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+textarea {
+  height: 70px;
+  background: #222;
+}
+
+/* line 522, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+select option {
+  background-color: black;
+}
+
+/* line 526, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+input[type="radio"] {
+  border: 0;
+  padding: 0;
+  width: 20px;
+  float: left;
+}
+
+/* line 532, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+label.radio {
+  width: auto;
+}
+
+/* line 535, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+label.radio + label:not(.radio) {
+  clear: left;
+}
+
+/* line 539, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+h1 {
+  font: 30px 'Montserrat', sans-serif;
+}
+
+/* line 543, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+h2 {
+  font: 24px 'ChaparralPro', 'Palatino', serif;
+}
+
+/* line 547, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+h1, h2, h3, strong {
+  color: white;
+}
+
+/* line 551, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+h1, h2, h3, p {
+  margin-bottom: 10px;
+}
+
+/* line 555, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+a {
+  color: #cc8042;
+}
+
+/* line 558, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#content a:hover {
+  color: white;
+}
+
+/* line 561, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+#signinbox a:hover {
+  color: black;
+}
+
+/* line 564, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.wide h1 a {
+  color: #999;
+}
+
+/* line 567, /Users/Ariel/Desktop/cocktailist/app/assets/stylesheets/application.css.scss */
+.wide h1 a:hover {
+  color: #cc8042;
+}

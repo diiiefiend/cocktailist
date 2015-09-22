@@ -8,7 +8,14 @@
     </div>
     <div class="user-stats">
       <% if(signedIn){ %>
-        <button class="add-to-lists">want to try</button>
+        Add to List:
+        <select class="add-to-lists">
+          <option value=""></option>
+          <% lists.each( function (list){ %>
+            <% var listsCID = list.listitems().pluck('cocktail_id') %>
+            <option value="<%= list.get('name') %>" <%= _.indexOf(listsCID, cocktail.id) > -1 ? "selected" : ""  %> ><%= list.get('name') %></option>
+          <% }); %>
+        </select>
       <% } else { %>
         <p><a href="#session/new">Log in</a> to add to lists!</p>
       <% } %>

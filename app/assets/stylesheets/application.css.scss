@@ -406,11 +406,12 @@ img.feed-img{
   width: 225px;
 }
 
-.user-stats button.add-to-lists{
+.user-stats select.add-to-lists{
   margin: 0 auto;
   width: auto;
   background: white;
   color: black;
+  text-transform: capitalize;
 }
 
 .category-show-list li{
@@ -454,6 +455,15 @@ img.feed-img{
 .filter-list{
   font-size: 20px;
   list-style: none;
+}
+
+a.remove-list{
+  display: block;
+  float: right;
+  opacity: 0;
+}
+li:hover a.remove-list{
+  opacity: 1;
 }
 
 .bolded{

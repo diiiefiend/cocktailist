@@ -3,7 +3,9 @@
   <h2><%= feedItem.escape('username') %> <%= feedItem.escape('activity') %>
     <% if(feedItem.escape('activity') === 'rated'){ %>
       <%= splitData[2] %> stars
-    <% } %>
+    <% } else if(feedItem.escape('activity') === 'listed'){ %>
+      in "<%= splitData[2] %>"
+    <% }; %>  
   </h2>
   <h1 class="header-box"><a href="#cocktails/<%= feedItem.escape('cocktail_id') %>"><%= feedItem.escape('cocktailName') %></a>
     <% if(feedItem.get('cocktailPic') !== 'placeholder.png'){ %>

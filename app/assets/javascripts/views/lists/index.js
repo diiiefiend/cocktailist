@@ -43,8 +43,9 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
     };
   },
 
+  //eventually add inline edit/rename functionality
+
   deleteList: function (e){
-    debugger
     var targetModel = this.collection.findWhere({id: $(e.currentTarget).data("list")})
     targetModel.destroy({
       url: 'api/users/'+this._user.id+'/lists/'+targetModel.id

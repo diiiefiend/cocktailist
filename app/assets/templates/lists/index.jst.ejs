@@ -17,7 +17,7 @@
   <% if(list.listitems().length > 0){ %>
     <% list.listitems().each( function (listitem){%>
       <div class="box">
-        <h1><%= listitem.escape('cocktail') %></h1>
+        <h1 class="header-box"><a href="#cocktails/<%= listitem.get('cocktail_id') %>"><%= listitem.escape('name') %></a></h1>
       </div>
     <% }); %>
   <% } else { %>

@@ -10,9 +10,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
     "users/new": "newUser",
     "users/:id": "showUser",
-    "session/new": "signIn",
-
-    "lists/new" : "createList"
+    "session/new": "signIn"
   },
 
   initialize: function (options){
@@ -56,8 +54,8 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
   showEntry: function (id){
     var entry = this._cocktails.getOrFetch(id);
-    var view = new Cocktailist.Views.CocktailShow({model: entry, collection: this._cocktails});
-    this._swapView(view);
+    var view = new Cocktailist.Views.CocktailShow({model: entry, collection: this._cocktails, lists: this._lists});
+    this._swapView(view, {wait: true});
   },
 
   browse: function (){
@@ -76,14 +74,14 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this._swapView(view, {wait: true});
   },
 
-  createList: function (){
-    var callback = this.createList.bind(this);
-    if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
-
-    var list = new Cocktailist.Models.List([], {user: Cocktailist.currentUser});
-    var view = new Cocktailist.Views.ListForm({model: list, collection: this._lists});
-    this._swapView(view);
-  },
+  // createList: function (){
+  //   var callback = this.createList.bind(this);
+  //   if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
+  //
+  //   var list = new Cocktailist.Models.List([], {user: Cocktailist.currentUser});
+  //   var view = new Cocktailist.Views.ListForm({model: list, collection: this._lists});
+  //   this._swapView(view);
+  // },
 
   // user routes stuff
 
