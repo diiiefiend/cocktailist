@@ -19,6 +19,47 @@ module Api
     end
 
     def create
+      clean_params = cleanup_params(cocktail_params)
+      @cocktail = Cocktail.new(clean_params)
+      if @cocktail.save
+        Feed.create(user_id: current_user.id,
+          cocktail_id: @cocktail.id,
+          activity: "added",
+          data: @cocktail.ingredients+"; "+@cocktail.bar.name,
+          feedable_id: @cocktail.id,
+          feedable_type: "Cocktail")
+        render json: @cocktail
+      else
+        render json: @cocktail.errors.full_messages, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      @cocktail = current_cocktail
+      clean_params = cleanup_params(cocktail_params)
+      if @cocktail.update(clean_params)
+        render json: @cocktail
+      else
+        render json: @cocktail.errors.full_messages, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      @cocktail = current_cocktail
+      @cocktail.try(:destroy)
+      render json: {}
+    end
+
+    private
+    def current_cocktail
+      Cocktail.includes(:bar, :ratings).find(params[:id])
+    end
+
+    def cocktail_params
+      params.require(:cocktail).permit(:name, :liquor, :ingredients, :bar_name, :bar_address, :img)
+    end
+
+    def cleanup_params(cocktail_params)
       errors = []
       clean_params = cocktail_params
       clean_params[:ingredients] = clean_params[:ingredients].downcase
@@ -39,42 +80,8 @@ module Api
       clean_params[:bar_id] = Bar.find_by(name: clean_params[:bar_name]).id
       clean_params.delete(:bar_name)
       clean_params.delete(:bar_address)
-      @cocktail = Cocktail.new(clean_params)
-      if @cocktail.save
-        Feed.create(user_id: current_user.id,
-          cocktail_id: @cocktail.id,
-          activity: "added",
-          data: @cocktail.ingredients+"; "+@cocktail.bar.name,
-          feedable_id: @cocktail.id,
-          feedable_type: "Cocktail")
-        render json: @cocktail
-      else
-        render json: @cocktail.errors.full_messages, status: :unprocessable_entity
-      end
-    end
 
-    def update
-      @cocktail = current_cocktail
-      if @cocktail.update(cocktail_params)
-        render json: @cocktail
-      else
-        render json: @cocktail.errors.full_messages, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @cocktail = current_cocktail
-      @cocktail.try(:destroy)
-      render json: {}
-    end
-
-    private
-    def current_cocktail
-      Cocktail.includes(:bar, :ratings).find(params[:id])
-    end
-
-    def cocktail_params
-      params.require(:cocktail).permit(:name, :liquor, :ingredients, :bar_name, :bar_address, :img)
+      clean_params
     end
   end
 end

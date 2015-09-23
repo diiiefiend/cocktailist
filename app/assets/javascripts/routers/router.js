@@ -7,7 +7,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
     "cocktails/new" : "createEntry",
     "cocktails/:id" : "showEntry",
-    "cocktails/:id/edit" : "editEntry",
+    "cocktails/edit/:id" : "editEntry",
 
     "users/new": "newUser",
     "users/:id": "showUser",
@@ -21,7 +21,6 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this._lists = new Cocktailist.Collections.Lists([], {user: Cocktailist.currentUser});
 
     this._users = new Cocktailist.Collections.Users();
-    this._users.fetch();
   },
 
   feed: function (){
@@ -30,9 +29,8 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
     this._feedItems.fetch();
     this._cocktails.fetch();
-    this._lists.fetch();
     var view = new Cocktailist.Views.CocktailsFeed({collection: this._feedItems, cocktails: this._cocktails, lists: this._lists});
-    this._swapView(view);
+    this._swapView(view, {wait: true});
   },
 
   createEntry: function (){
@@ -40,17 +38,18 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
 
     var entry = new Cocktailist.Models.Cocktail();
+    this._cocktails.fetch();
     var view = new Cocktailist.Views.CocktailsForm({model: entry, collection: this._cocktails});
-    this._swapView(view);
+    this._swapView(view, {wait: true});
   },
 
-  editEntry: function (id){   //currently not used
+  editEntry: function (id){
     var callback = this.editEntry.bind(this);
     if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
 
-    var entry = this.collection.getOrFetch(id);
-    var view = new Cocktailist.Views.CocktailsForm({model: newModel, collection: this._cocktails});
-    this._swapView(view);
+    var entry = this._cocktails.getOrFetch(id);
+    var view = new Cocktailist.Views.CocktailsForm({model: entry, collection: this._cocktails});
+    this._swapView(view, {wait: true});
   },
 
   showEntry: function (id){
@@ -62,7 +61,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   browse: function (){
     this._cocktails.fetch();
     var view = new Cocktailist.Views.CocktailsIndex({collection: this._cocktails});
-    this._swapView(view);
+    this._swapView(view, {wait: true});
   },
 
   //lists stuff

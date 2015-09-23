@@ -12,7 +12,6 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
     this._ratings = this.model.ratings();
     this._lists = options.lists;
-    this._lists.fetch();
 
     this.ratingAvg = "N/A";
     this.collection.fetch();
@@ -23,8 +22,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this.listenToOnce(this._ratings, "sync", this._calcAvgRating);
     this.listenTo(this._ratings, "add change afterRemove", this._calcAvgRating);
 
-    this.listenTo(this._lists, "sync", this.render);
-    this.listenTo(this.model, "sync afterSimilarCocktail", this.render);
+    this.listenTo(this._lists, "sync", this.render);          //the main render. not sure if i like having it render just once? or render before similar cocktail as well?
+
     this.listenTo(this._ratings, "add change afterRemove", this.render);
     this.listenTo(this._ratings, "add change afterRemove", this.renderForm);
     this.listenTo(this._ratings, "update change", this.renderRatings); //later optimize this to only render the new comment?
@@ -63,7 +62,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     var randId = similarCocktails[Math.floor(Math.random() * similarCocktails.length)];
     this._similarCocktail = this.collection.getOrFetch(randId, {
         success: function (){
-          this.model.trigger("afterSimilarCocktail");
+          // this.model.trigger("afterSimilarCocktail");
+          this._lists.fetch();                        //start fetching lists
         }.bind(this),
         error: function (data){
           console.log("something went wrong", data);

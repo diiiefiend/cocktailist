@@ -9,7 +9,7 @@
     <select class="toggle-liquor" name="cocktail[liquor]">
       <option value=""></option>
       <% liquorTypes.forEach( function (liquor){ %>
-        <option value="<%= liquor %>"><%= liquor %></option>
+        <option value="<%= liquor %>" <%= entry.get('liquor')===liquor ? "selected" : "" %> ><%= liquor %></option>
       <% }); %>
     </select>
     <input class="toggle-liquor" type="text" placeholder="add new liquor" id="liquor">
@@ -22,13 +22,13 @@
     <select class="toggle-bar" name="cocktail[bar_name]">
       <option value=""></option>
         <% bars.forEach ( function (barName){ %>
-        <option value="<%= barName %>"><%= barName %></option>
+        <option value="<%= barName %>"  <%= entry.bar().name===barName ? "selected" : "" %>><%= barName %></option>
       <% }); %>
     </select>
     <input class="toggle-bar" type="text" placeholder="add new bar: name" id="bar">
     <input class="toggle-bar" type="text" placeholder="add new bar: address">
 
-    <a href="javascript: void(0);" class="remove-img"><img src="" id="image-preview"></a>
+    <a href="javascript: void(0);" class="remove-img"><img src="<%= entry.get('cocktailPic')!== 'placeholder.png' ? entry.get('cocktailPic') : "" %>" id="image-preview"></a>
     <label for="image">Image (if any)</label>
       <input type="file" name="cocktail[img]" id="attach-image">
 
