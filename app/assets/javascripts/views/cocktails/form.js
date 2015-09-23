@@ -12,6 +12,11 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
   initialize: function (){
     //model: cocktail
     //collection: cocktails
+    if(this.model.isNew()){
+      this.getCollection();
+    };
+    this._liquors = [];
+    this._bars = [];
     this.listenTo(this.model, "sync", this.getCollection);
     this.listenTo(this.collection, "sync", this.makeList);
     this.listenTo(this.collection, "sync", this.render);
