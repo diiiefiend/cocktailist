@@ -1,7 +1,11 @@
 module Api
   class ListsController < ApplicationController
     def index
-      @lists = List.all.where("user_id = #{current_user.id}")
+      if logged_in?
+        @lists = List.all.where("user_id = #{current_user.id}")
+      else
+        @lists = nil
+      end
       render :index
     end
 
