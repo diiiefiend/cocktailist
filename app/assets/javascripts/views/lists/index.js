@@ -6,14 +6,20 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
 
   events: {
     "click #add-list" : "showForm",
+    "dblclick a.filter-link" : "renameList",
+    "blur .side-input" : "saveListName",
     "click a.filter-link" : "changeList",
     "click a.remove-list" : "deleteList",
     "click a.remove-item" : "deleteItem"
   },
 
-  initialize: function (){
+  initialize: function (options){
     //collection = lists (route is rails' #index!)
     //model will be the specific list in question
+    if(options.options && options.options.listShowId){
+      this._listShowId = options.options.listShowId;
+    };
+
     this._showForm = false;
 
     this._user = Cocktailist.currentUser;
@@ -25,7 +31,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
 
     this.model = new Cocktailist.Models.List([], {user: this._user}); //placeholder model
 
-    this.listenTo(this.collection, "update change afterModelSet changeListitems", this.render);
+    this.listenTo(this.collection, "update afterModelSet changeListitems", this.render);
   },
 
   showForm: function (e){
@@ -42,7 +48,24 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
     };
   },
 
-  //eventually add inline edit/rename functionality
+  renameList: function (e){
+    var $target = $(e.currentTarget);
+    var $input = $("<input class='side-input' type='text'>");
+
+    $input.data('list', $target.data('list'));
+    $input.val($target.text());
+    $target.html($input);
+
+    $input.focus();
+  },
+
+  saveListName: function (e){
+    var list = this.collection.findWhere({id: $(e.currentTarget).data("list")});
+    list.user = this._user;
+    list.set('name', $(e.currentTarget).val());
+    list.save();
+    this.render();
+  },
 
   deleteList: function (e){
     var targetModel = this.collection.findWhere({id: $(e.currentTarget).data("list")})

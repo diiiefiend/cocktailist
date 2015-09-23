@@ -8,8 +8,10 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend({
   initialize: function (options){
     //collection = feedItems
     this._cocktails = options.cocktails;
+    this.lists = options.lists;
     this.listenToOnce(this._cocktails, "sync", this.setRandomCocktail);
     this.listenTo(this.collection, "sync afterRandomCocktail", this.render);
+    this.listenTo(this.lists, "sync", this.render);
     this._showForm = false;
   },
 
@@ -34,7 +36,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend({
   },
 
   render: function (){
-    var template = this.template({feedItems: this.collection, randomCocktail: this._randomCocktail});
+    var template = this.template({feedItems: this.collection, randomCocktail: this._randomCocktail, lists: this.lists});
     this.$el.html(template);
     return this;
   }

@@ -16,6 +16,7 @@
             <option value="<%= list.get('name') %>" <%= _.indexOf(listsCID, cocktail.id) > -1 ? "selected" : ""  %> ><%= list.get('name') %></option>
           <% }); %>
         </select>
+        <div class="flash"></div>
       <% } else { %>
         <p><a href="#session/new">Log in</a> to add to lists!</p>
       <% } %>

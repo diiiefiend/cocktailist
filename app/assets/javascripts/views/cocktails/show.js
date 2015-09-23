@@ -51,8 +51,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     if(list){
       this.getListItem(list).save( {cocktail_id: this.model.id, list_id: list.id}, {
         success: function (data){
-          alert("Successfully added!");
-        }
+          this.$el.find(".flash").html("<p class='subtext'>Successfully added!<p>");
+        }.bind(this)
       });
     };
   },

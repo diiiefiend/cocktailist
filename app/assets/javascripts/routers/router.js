@@ -3,6 +3,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     "" : "feed",
     "browse" : "browse",
     "lists" : "lists",
+    "lists/:id" : "showList",
 
     "cocktails/new" : "createEntry",
     "cocktails/:id" : "showEntry",
@@ -30,7 +31,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this._feedItems.fetch();
     this._cocktails.fetch();
     this._lists.fetch();
-    var view = new Cocktailist.Views.CocktailsFeed({collection: this._feedItems, cocktails: this._cocktails});
+    var view = new Cocktailist.Views.CocktailsFeed({collection: this._feedItems, cocktails: this._cocktails, lists: this._lists});
     this._swapView(view);
   },
 
@@ -43,7 +44,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this._swapView(view);
   },
 
-  editEntry: function (){   //currently not used
+  editEntry: function (id){   //currently not used
     var callback = this.editEntry.bind(this);
     if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
 
@@ -65,13 +66,20 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   },
 
   //lists stuff
-  lists: function (){
+  lists: function (options){
     var callback = this.lists.bind(this);
     if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
 
     //possibly can pass in Cocktailist.currentUser and save all the trouble with the user fetch thing?
-    var view = new Cocktailist.Views.ListsIndex({collection: this._lists});
+    var view = new Cocktailist.Views.ListsIndex({collection: this._lists, options});
     this._swapView(view, {wait: true});
+  },
+
+  showList: function (id){
+    var callback = this.lists.bind(this);
+    if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
+
+    this.lists({listShowId: parseInt(id)});
   },
 
   // createList: function (){

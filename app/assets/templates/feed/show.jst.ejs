@@ -12,7 +12,11 @@
   </div>
   <div class="box">
     <h1>My Lists</h1>
-    <p>(placeholder for my lists subview)</p>
+    <ul class="filter-list">
+    <% lists.each( function (list){ %>
+      <li><a href="#lists/<%= list.id %>" class="filter-link" ><%= list.escape('name') %></a></li>
+    <% }); %>
+    </ul>
   </div>
   <div class="box">
     <h1>Today's Drink</h1>
