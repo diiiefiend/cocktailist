@@ -17,7 +17,10 @@
   <% if(list.listitems().length > 0){ %>
     <% list.listitems().each( function (listitem){%>
       <div class="box">
-        <h1 class="header-box"><a href="#cocktails/<%= listitem.get('cocktail_id') %>"><%= listitem.escape('name') %></a></h1>
+        <a href="javascript:void(0);" class="remove-item" data-listitem="<%= listitem.id %>">x</a>
+        <h1 class="header-box"><a href="#cocktails/<%= listitem.get('cocktail_id') %>"><%= listitem.get('cocktail').name %></a></h1>
+        <h3><%= listitem.get('cocktail').bar.name %></h3>
+        <p class="subtext">Added on <%= listitem.get('time') %></p>
       </div>
     <% }); %>
   <% } else { %>

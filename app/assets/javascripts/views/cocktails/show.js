@@ -30,20 +30,28 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this.listenTo(this._ratings, "update change", this.renderRatings); //later optimize this to only render the new comment?
   },
 
-  getListItem: function (e){
+  getListItem: function (targetList){
+    var targetItem;
 
+    this._lists.each( function (list){
+      list.listitems().each( function(listitem){
+        if(listitem.get('cocktail_id') === this.model.id){
+          targetItem = listitem;
+          targetItem.list = targetList;
+          return targetItem;
+        };
+      }.bind(this));
+    }.bind(this));
+    return targetItem || new Cocktailist.Models.Listitem([], {list: targetList});
   },
 
   addToList: function (e){
     var listname = $(e.currentTarget).val();
-    debugger
     var list = this._lists.findWhere({name: listname});
     if(list){
-      if(this._lists.where(""))
-      var listitem = new Cocktailist.Models.Listitem([], {list: list});
-      listitem.save( {cocktail_id: this.model.id, list_id: list.id}, {
+      this.getListItem(list).save( {cocktail_id: this.model.id, list_id: list.id}, {
         success: function (data){
-          alert("successfully saved!");
+          alert("Successfully added!");
         }
       });
     };

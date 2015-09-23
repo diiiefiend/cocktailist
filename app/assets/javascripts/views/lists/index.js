@@ -7,7 +7,8 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
   events: {
     "click #add-list" : "showForm",
     "click a.filter-link" : "changeList",
-    "click a.remove-list" : "deleteList"
+    "click a.remove-list" : "deleteList",
+    "click a.remove-item" : "deleteItem"
   },
 
   initialize: function (){
@@ -22,11 +23,9 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
 
     this.listenToOnce(this.collection, "sync", this.setModel);
 
-    // this.listenTo(this.collection, "change update", this.setModel);
-
     this.model = new Cocktailist.Models.List([], {user: this._user}); //placeholder model
 
-    this.listenTo(this.collection, "update change afterModelSet", this.render);
+    this.listenTo(this.collection, "update change afterModelSet changeListitems", this.render);
   },
 
   showForm: function (e){
@@ -49,6 +48,16 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
     var targetModel = this.collection.findWhere({id: $(e.currentTarget).data("list")})
     targetModel.destroy({
       url: 'api/users/'+this._user.id+'/lists/'+targetModel.id
+    });
+  },
+
+  deleteItem: function (e){
+    var targetItem = this.model.listitems().findWhere({id: $(e.currentTarget).data("listitem")})
+    targetItem.destroy({
+      url: 'api/users/'+this._user.id+'/lists/'+this.model.id+'/listitems/'+targetItem.id,
+      success: function (){
+        this.collection.trigger("changeListitems");
+      }.bind(this)
     });
   },
 

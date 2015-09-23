@@ -457,13 +457,16 @@ img.feed-img{
   list-style: none;
 }
 
-a.remove-list{
+a.remove-item, a.remove-list{
   display: block;
   float: right;
   opacity: 0;
 }
-li:hover a.remove-list{
+li:hover a.remove-list, .box:hover a.remove-item{
   opacity: 1;
+}
+#content a.remove-item:hover{
+  color: black;
 }
 
 .bolded{
