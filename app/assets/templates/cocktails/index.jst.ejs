@@ -10,7 +10,7 @@
         <% }; %>
       </ul>
       <% if(groups[group].length > 5){ %>
-        <p><a href="#cocktails/browse/<%= group %>">View more in this category</a></p>
+        <p><a href="#browse/<%= filterType %>/<%= group %>">View more in this category</a></p>
       <% } %>
     </div>
   <% }; %>
@@ -22,8 +22,8 @@
   <div class="box">
     <h1>Categorize by:</h1>
     <ul class="filter-list">
-      <li><a href="javascript: void(0);" <%= filterType==='Liquors' ? "class='bolded'" : "" %> >Liquor</a></li>
-      <li><a href="javascript: void(0);" <%= filterType==='Establishments' ? "class='bolded'" : "" %> >Establishment</a></li>
+      <li><a href="javascript: void(0);" <%= filterType==='liquor' ? "class='bolded'" : "" %> >Liquor</a></li>
+      <li><a href="javascript: void(0);" <%= filterType==='bar' ? "class='bolded'" : "" %> >Establishment</a></li>
     </ul>
   </div>
   <div class="box">

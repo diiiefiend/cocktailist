@@ -24,7 +24,7 @@
     <ul class="category-show-list clearfix">
       <%= JST['cocktails/_categoryShowItem']({cocktail: randomCocktail, standalone: true}) %>
     </ul>
-    <p><a href="#cocktails/browse/<%= randomCocktail.escape('liquor') %>">Browse <%= randomCocktail.escape('liquor') %> drinks</a></p>
+    <p><a href="#browse/liquor/<%= randomCocktail.escape('liquor') %>">Browse <%= randomCocktail.escape('liquor') %> drinks</a></p>
     <% }; %>
   </div>
 </div>

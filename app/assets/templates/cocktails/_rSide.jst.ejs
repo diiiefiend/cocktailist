@@ -8,7 +8,7 @@
   <ul class="category-show-list clearfix">
     <%= JST['cocktails/_categoryShowItem']({cocktail: similarCocktail, standalone: true}) %>
   </ul>
-  <p><a href="#cocktails/browse/<%= similarCocktail.escape('liquor') %>">Browse <%= similarCocktail.escape('liquor') %> drinks</a></p>
+  <p><a href="#browse/liquor/<%= similarCocktail.escape('liquor') %>">Browse <%= similarCocktail.escape('liquor') %> drinks</a></p>
   <% }; %>
 </div>
 <div class="box">

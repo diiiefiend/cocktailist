@@ -14,9 +14,9 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
     $link = $(e.currentTarget);
     if(!$link.hasClass("bolded")){
       if($link.text() === "Liquor"){
-        this.render([],[], {filterList: this.liquorTypes(), filterType: "Liquors", groupFn: function (cocktail){ return cocktail.get("liquor"); }});
+        this.render([],[], {filterList: this.liquorTypes(), filterType: "liquor", groupFn: function (cocktail){ return cocktail.get("liquor"); }});
       } else if($link.text() === "Establishment"){
-        this.render([],[], {filterList: this.bars(), filterType: "Establishments", groupFn: function (cocktail){ return cocktail.bar().name; }});
+        this.render([],[], {filterList: this.bars(), filterType: "bar", groupFn: function (cocktail){ return cocktail.bar().name; }});
       };
     };
   },
@@ -24,7 +24,7 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
 
   render: function (res, models, options){
     var filterList = (options && options.filterList ? options.filterList : this.liquorTypes());
-    var filterType = (options && options.filterType ? options.filterType : "Liquors");
+    var filterType = (options && options.filterType ? options.filterType : "liquor");
     var groupType = (options && options.groupFn ? options.groupFn : function (cocktail){ return cocktail.get("liquor"); });
     var groups = this.collection.groupBy(groupType);
     var template = this.template({groups: groups, list: filterList, filterType: filterType});

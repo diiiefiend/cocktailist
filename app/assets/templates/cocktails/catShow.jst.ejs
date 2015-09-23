@@ -1,0 +1,13 @@
+<div class="left wide">
+  <h1 class="capitalize"><%= category %></h1>
+  <div class="box">
+    <ul class="category-show-list clearfix">
+      <% cocktails.forEach( function (cocktail){ %>
+        <%= JST['cocktails/_categoryShowItem']({cocktail: cocktail, standalone: false}) %>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+<div class="rule-right"></div>
+<div class="right bar">
+</div>

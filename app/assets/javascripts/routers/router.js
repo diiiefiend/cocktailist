@@ -2,6 +2,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   routes: {
     "" : "feed",
     "browse" : "browse",
+    "browse/:filterType/:category" : "browseCat",
     "lists" : "lists",
     "lists/:id" : "showList",
 
@@ -61,6 +62,12 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   browse: function (){
     this._cocktails.fetch();
     var view = new Cocktailist.Views.CocktailsIndex({collection: this._cocktails});
+    this._swapView(view, {wait: true});
+  },
+
+  browseCat: function (filterType, category){
+    this._cocktails.fetch();
+    var view = new Cocktailist.Views.CocktailCat({collection: this._cocktails, filterType: filterType, category: category});
     this._swapView(view, {wait: true});
   },
 
