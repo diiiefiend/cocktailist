@@ -10,20 +10,22 @@ Backbone.LiquorView = Backbone.CompositeView.extend({
     return this._liquors.sort();
   },
 
-  bars: function (){
-    // hash version, not sorted
-    // this._bars = this._bars || {};
-    // this.collection.each( function(cocktail){
-    //   if(!this._bars.hasOwnProperty(cocktail.bar().id)){
-    //     this._bars[cocktail.bar().id] = (cocktail.bar().name);
-    //   };
-    // }.bind(this));
+  bars: function (collection){
     this._bars = this._bars || [];
-    this.collection.each( function(cocktail){
-      if(this._bars.indexOf(cocktail.bar().name) === -1){
-        this._bars.push(cocktail.bar().name);
-      };
-    }.bind(this));
+    if(collection){
+      collection.forEach( function(cocktail){
+        if(this._bars.indexOf(cocktail.bar().name) === -1){
+          this._bars.push(cocktail.bar().name);
+        };
+      }.bind(this));
+    } else {
+      this.collection.each( function(cocktail){
+        if(this._bars.indexOf(cocktail.bar().name) === -1){
+          this._bars.push(cocktail.bar().name);
+        };
+      }.bind(this));
+    };
+
     return this._bars.sort();
   },
 

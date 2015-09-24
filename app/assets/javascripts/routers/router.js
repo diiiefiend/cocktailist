@@ -54,7 +54,6 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   },
 
   showEntry: function (id){
-    debugger
     var entry = this._cocktails.getOrFetch(id);
     var view = new Cocktailist.Views.CocktailShow({model: entry, collection: this._cocktails, lists: this._lists});
     this._swapView(view, {wait: true});

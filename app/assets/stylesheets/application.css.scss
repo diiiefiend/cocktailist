@@ -456,6 +456,9 @@ img.feed-img{
   font-size: 20px;
   list-style: none;
 }
+.filter-list.small{
+  font-size: 16px;
+}
 
 input.side-input{
   width: 80%;
@@ -476,6 +479,7 @@ li:hover a.remove-list, .box:hover a.remove-item{
 
 .bolded{
   font-weight: bold;
+  color: white;
 }
 
 .capitalize{
