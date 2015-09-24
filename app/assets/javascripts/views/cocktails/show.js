@@ -16,8 +16,6 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this.ratingAvg = "N/A";
     this.collection.fetch();
 
-    // this.listenTo(this._lists, "sync", this.getListItem);
-
     this.listenToOnce(this.collection, "sync", this.setSimilarCocktail);
     this.listenToOnce(this._ratings, "sync", this._calcAvgRating);
     this.listenTo(this._ratings, "add change afterRemove", this._calcAvgRating);
@@ -57,6 +55,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   },
 
   setSimilarCocktail: function (){
+    debugger
+    
     var similarCocktails = this.collection.where({liquor: this.model.get('liquor')});
     similarCocktails.splice(_.findIndex(similarCocktails, this.model), 1);  //not sure if i should leave this out for review tmrw
     var randId = similarCocktails[Math.floor(Math.random() * similarCocktails.length)];
@@ -84,6 +84,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   },
 
   render: function (){
+    debugger
     var template = this.template({cocktail: this.model, ratingAvg: this.ratingAvg, similarCocktail: this._similarCocktail, signedIn: Cocktailist.currentUser.isSignedIn(), lists: this._lists});
     this.$el.html(template);
 
