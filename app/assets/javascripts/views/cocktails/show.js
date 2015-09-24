@@ -42,8 +42,32 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     return targetItem || new Cocktailist.Models.Listitem([], {list: targetList});
   },
 
+  deleteListItem: function (){
+    var targetItem;
+
+    this._lists.each( function (list){
+      list.listitems().each( function(listitem){
+        if(listitem.get('cocktail_id') === this.model.id){
+          targetItem = listitem;
+          targetItem.list = list;
+          targetItem.destroy({
+            success: function (data){
+              this.$el.find(".flash").html("<p class='subtext'>Item removed!</p>");
+            }.bind(this)
+          });
+          return targetItem;
+        };
+      }.bind(this));
+    }.bind(this));
+    return targetItem || "could not find";
+  },
+
   addToList: function (e){
     var listname = $(e.currentTarget).val();
+    if(listname === ""){              //they want to remove from list
+      this.deleteListItem();
+      return;
+    }
     var list = this._lists.findWhere({name: listname});
     if(list){
       this.getListItem(list).save( {cocktail_id: this.model.id, list_id: list.id}, {

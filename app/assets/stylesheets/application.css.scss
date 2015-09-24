@@ -102,17 +102,33 @@
    width: 90%;
    padding: 5%;
    color: white;
+   margin-bottom: 0;
    font: 24px 'Montserrat', sans-serif;
    opacity: 1;
  }
 
+ #signinbox a.button-link{
+   font: 18px 'Montserrat', sans-serif;
+   background: black;
+   color: white;
+   text-transform: lowercase;
+   font-variant: small-caps;
+   display: block;
+   clear: both;
+   width: 100%;
+   margin: 0;
+   padding: 5% 0%;
+   text-align: center;
+   font-size: 20px;
+   border-top: 1px solid #eee;
+ }
  #signinbox button{
    width: 100%;
    padding: 5%;
    margin: 0;
    font-size: 24px;
  }
- #signinbox button:hover{
+ #signinbox button:hover, #signinbox a.button-link:hover{
    background: white;
    color: black;
  }

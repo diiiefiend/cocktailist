@@ -1,6 +1,7 @@
 Cocktailist.Routers.Router = Backbone.Router.extend({
   routes: {
     "" : "feed",
+    "_=_" : "redirectToFeed",
     "browse" : "browse",
     "browse/:filterType/:category" : "browseCat",
     "lists" : "lists",
@@ -22,6 +23,10 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this._lists = new Cocktailist.Collections.Lists([], {user: Cocktailist.currentUser});
 
     this._users = new Cocktailist.Collections.Users();
+  },
+
+  redirectToFeed: function (){
+    Backbone.history.navigate("", {trigger: true});
   },
 
   feed: function (){

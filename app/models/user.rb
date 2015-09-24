@@ -23,15 +23,34 @@ class User < ActiveRecord::Base
   has_many :lists,
     dependent: :destroy
 
-  has_many :list_items,
-    through: :lists,
-    dependent: :destroy
+  has_many :listitems, through: :lists, dependent: :destroy
 
   attr_reader :password
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     user && user.is_password?(password) ? user : nil
+  end
+
+  def self.find_or_create_by_fb_hash(auth_hash)
+    user = User.find_by(
+            provider: auth_hash[:provider],
+            uid: auth_hash[:uid])
+
+    unless user
+      user = User.new(
+            provider: auth_hash[:provider],
+            uid: auth_hash[:uid],
+            username: auth_hash[:info][:name],
+            email: auth_hash[:info][:image], #bad solution
+            password: SecureRandom::urlsafe_base64)
+      if user.save
+        List.create(user_id: user.id, name: 'to-try')
+        List.create(user_id: user.id, name: 'experienced')
+      end
+    end
+
+    user
   end
 
   def self.generate_token
