@@ -70,7 +70,6 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
         }
       );
     } else {
-      debugger
       this._similarCocktail = "N/A";
       this._lists.fetch();
     };
