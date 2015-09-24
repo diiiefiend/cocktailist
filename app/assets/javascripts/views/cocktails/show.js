@@ -55,21 +55,24 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   },
 
   setSimilarCocktail: function (){
-    debugger
-    
     var similarCocktails = this.collection.where({liquor: this.model.get('liquor')});
     similarCocktails.splice(_.findIndex(similarCocktails, this.model), 1);  //not sure if i should leave this out for review tmrw
     var randId = similarCocktails[Math.floor(Math.random() * similarCocktails.length)];
-    this._similarCocktail = this.collection.getOrFetch(randId, {
-        success: function (){
-          // this.model.trigger("afterSimilarCocktail");
-          this._lists.fetch();                        //start fetching lists
-        }.bind(this),
-        error: function (data){
-          console.log("something went wrong", data);
+    if(similarCocktails.length > 0){
+      this._similarCocktail = this.collection.getOrFetch(randId, {
+          success: function (){
+            // this.model.trigger("afterSimilarCocktail");
+            this._lists.fetch();                        //start fetching lists
+          }.bind(this),
+          error: function (data){
+            console.log("something went wrong", data);
+          }
         }
-      }
-    );
+      );
+    } else {
+      this._similarCocktail = "N/A";
+      this._lists.fetch();
+    };
   },
 
   _calcAvgRating: function (){
@@ -84,7 +87,6 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   },
 
   render: function (){
-    debugger
     var template = this.template({cocktail: this.model, ratingAvg: this.ratingAvg, similarCocktail: this._similarCocktail, signedIn: Cocktailist.currentUser.isSignedIn(), lists: this._lists});
     this.$el.html(template);
 

@@ -2,15 +2,15 @@
   <h1><%= bar.name %></h1>
   <p><strong><%= bar.address %></strong></p>
 </div>
+<% if(similarCocktail !== "N/A"){ %>
 <div class="box">
   <h1>Similar</h1>
-  <% if(similarCocktail){ %>
-  <ul class="category-show-list clearfix">
-    <%= JST['cocktails/_categoryShowItem']({cocktail: similarCocktail, standalone: true}) %>
-  </ul>
-  <p><a href="#browse/liquor/<%= similarCocktail.escape('liquor') %>">Browse <%= similarCocktail.escape('liquor') %> drinks</a></p>
-  <% }; %>
+    <ul class="category-show-list clearfix">
+      <%= JST['cocktails/_categoryShowItem']({cocktail: similarCocktail, standalone: true}) %>
+    </ul>
+    <p><a href="#browse/liquor/<%= similarCocktail.escape('liquor') %>">Browse <%= similarCocktail.escape('liquor') %> drinks</a></p>
 </div>
+<% }; %>
 <div class="box">
   <p>Notice something wrong? <a href="#cocktails/edit/<%= cId %>">Edit entry.</a></p>
 </div>
