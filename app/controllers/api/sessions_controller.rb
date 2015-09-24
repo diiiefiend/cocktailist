@@ -23,8 +23,6 @@ class Api::SessionsController < ApplicationController
       params[:user][:password]
     )
     if @user.nil?
-      # flash.now[:errors] = ["Invalid username/password combo"]
-      # redirect_to new_session_url
       render json: {}, status: :unprocessable_entity
     else
       log_in!(@user)
