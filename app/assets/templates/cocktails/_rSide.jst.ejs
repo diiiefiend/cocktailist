@@ -1,8 +1,9 @@
 <div class="box">
   <h1><%= bar.name %></h1>
   <p><strong><%= bar.address %></strong></p>
+  <p><a href="#browse/bar/<%= escape(bar.name) %>">Browse their other offerings</a></p>
 </div>
-<% if(similarCocktail !== "N/A"){ %>
+<% if(similarCocktail && similarCocktail !== "N/A"){ %>
 <div class="box">
   <h1>Similar</h1>
     <ul class="category-show-list clearfix">

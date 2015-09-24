@@ -1,8 +1,12 @@
 Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
-  template: JST['cocktails/catShow'],
+  template: {
+    "main" : JST['cocktails/catShow'],
+    "liquorTemp" : JST['cocktails/_catShowLiquor'],
+    "barTemp" : JST['cocktails/_catShowBar']
+  },
 
   events: {
-    "click .filter-list a" : "filterBar",
+    "click .filter-list a" : "filter",
     "click a.subtext" : "showAll"
   },
 
@@ -14,28 +18,56 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
   },
 
   setCatColl: function (){
-    this.catCollection = this.collection.where({liquor : this.category});
+    if(this.filterType === 'liquor'){
+      this.category = (this.category === "switch" ? this.collection.at(0).get('liquor') : this.category);
+      this.catCollection = this.collection.where({liquor : this.category});
+    } else if(this.filterType === 'bar'){
+      this.category = (this.category === "switch" ? this.collection.at(0).bar().name : this.category);
+      this.catCollection = [];
+      this.collection.models.forEach(function (model){
+        if(model.bar().name === this.category){
+          this.catCollection.push(model);
+        };
+      }.bind(this));
+    };
     this.render();
   },
 
-  filterBar: function (e){
-    targetBar = $(e.currentTarget).text();
-    var coll = this.catCollection.filter(function (el){
-      return el.bar().name === targetBar;
-    });
-    this.render(coll, targetBar);
+  filter: function (e){
+    target = $(e.currentTarget).text();
+    if(this.filterType==='liquor'){
+      var coll = this.catCollection.filter(function (el){
+        return el.bar().name === target;
+      });
+    } else if (this.filterType==='bar'){
+      var coll = this.catCollection.filter(function (el){
+        return el.get('liquor') === target;
+      });
+    };
+    this.render(coll, target);
   },
 
   showAll: function (e){
     this.render();
   },
 
-  render: function (coll, targetBar){
+  render: function (coll, target){
     var cocktails = coll || this.catCollection;
-    var liquors = this.liquorTypes();
-    var bars = this.bars(this.catCollection);
-    var template = this.template({category: this.category, cocktails: cocktails, liquors: liquors, bars: bars, targetBar: targetBar});
-    this.$el.html(template);
+
+    var main = this.template['main']({category: this.category, cocktails: cocktails});
+    this.$el.html(main);
+
+    if(this.filterType === 'liquor'){
+      var liquors = this.liquorTypes();
+      var bars = this.bars(this.catCollection);
+      var temp = this.template['liquorTemp']({category: this.category, liquors: liquors, bars: bars, target: target});
+    } else if(this.filterType === 'bar'){
+      var liquors = this.liquorTypes(this.catCollection);
+      var bars = this.bars();
+      var temp = this.template['barTemp']({category: this.category, liquors: liquors, bars: bars, target: target});
+    };
+
+    this.$el.find(".right").html(temp);
     return this;
   }
 });

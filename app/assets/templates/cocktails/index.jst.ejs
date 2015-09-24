@@ -10,7 +10,7 @@
         <% }; %>
       </ul>
       <% if(groups[group].length > 5){ %>
-        <p><a href="#browse/<%= filterType %>/<%= group %>">View more in this category</a></p>
+        <p><a href="#browse/<%= filterType %>/<%= escape(group) %>">View more in this category</a></p>
       <% } %>
     </div>
   <% }; %>

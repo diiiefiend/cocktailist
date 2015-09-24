@@ -10,21 +10,5 @@
 </div>
 <div class="rule-right"></div>
 <div class="right bar">
-  <div class="box">
-    <h1>Establishment</h1>
-    <ul class="filter-list small">
-      <% bars.forEach(function (bar){ %>
-        <li><a href="javascript:void(0);" <%= targetBar===bar ? "class=bolded" : "" %>><%= bar %></a></li>
-      <% }); %>
-    </ul>
-    <p><a  class="subtext" href="javascript:void(0);">Show all</a></p>
-  </div>
-  <div class="box">
-    <h1>Liquors</h1>
-    <ul>
-      <% liquors.forEach(function (liquor){ %>
-        <li><a href="#browse/liquor/<%= liquor %>" <%= liquor===category ? "class=bolded" : "" %>><%= liquor %></a></li>
-      <% }); %>
-    </ul>
-  </div>
+
 </div>
