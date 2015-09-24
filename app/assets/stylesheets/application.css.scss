@@ -413,6 +413,9 @@ img.feed-img{
   color: black;
   text-transform: capitalize;
 }
+.user-stats select.add-to-lists option{
+  background: white;
+}
 
 .category-show-list li{
   position: relative;
@@ -530,7 +533,7 @@ textarea{
   background: #222;
 }
 
-select option{
+.cocktailForm select option{
   background-color: black;
 }
 

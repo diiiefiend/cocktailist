@@ -8,6 +8,15 @@ Cocktailist.Views.SignIn = Backbone.CompositeView.extend({
   initialize: function (options){
     this.callback = options.callback;
     this.listenTo(Cocktailist.currentUser, "signIn", this.signInCallback);
+    if(options.wait){
+      this.listenTo(Cocktailist.currentUser, "sync", this.checkStatus);
+    };
+  },
+
+  checkStatus: function (){
+    if(!Cocktailist.currentUser.isSignedIn()){
+      this.render();
+    };
   },
 
   render: function (){

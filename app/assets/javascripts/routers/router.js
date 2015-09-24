@@ -25,8 +25,8 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   },
 
   feed: function (){
-    var callback = this.feed;
-    if (!this._requireSignedIn(callback.bind(this))) { return; } //if not signed in, return
+    var callback = this.feed.bind(this);
+    if (!this._requireSignedIn(callback, {wait: true})) { return; } //if not signed in, return
 
     this._feedItems.fetch();
     this._cocktails.fetch();
@@ -88,15 +88,6 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this.lists({listShowId: parseInt(id)});
   },
 
-  // createList: function (){
-  //   var callback = this.createList.bind(this);
-  //   if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
-  //
-  //   var list = new Cocktailist.Models.List([], {user: Cocktailist.currentUser});
-  //   var view = new Cocktailist.Views.ListForm({model: list, collection: this._lists});
-  //   this._swapView(view);
-  // },
-
   // user routes stuff
 
   newUser: function (){
@@ -117,25 +108,29 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     var view = new Cocktailist.Views.UserShow({
       model: model
     });
-    this._swapView(view);
+    this._swapView(view, {wait: true});
   },
 
-  signIn: function(callback){
+  signIn: function(callback, wait){
     if (!this._requireSignedOut(callback)) { return; }    //if not signed out, return
 
     var view = new Cocktailist.Views.SignIn({
-      callback: callback
+      callback: callback, wait: true
     });
-    this._swapView(view);
+    if(wait){
+      this._swapView(view, {wait: true});
+    } else {
+      this._swapView(view);
+    };
   },
 
 
 // "private" methods
 
-  _requireSignedIn: function(callback){
+  _requireSignedIn: function(callback, wait){
     if (!Cocktailist.currentUser.isSignedIn()) {
       callback = callback || this._goHome.bind(this);
-      this.signIn(callback);
+      this.signIn(callback, wait);
       return false;
     }
 

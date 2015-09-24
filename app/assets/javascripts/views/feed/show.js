@@ -11,7 +11,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend({
     this.lists = options.lists;
     this.listenToOnce(this._cocktails, "sync", this.getLists);
     this.listenTo(this.lists, "sync", this.setRandomCocktail);
-    this.listenTo(this.collection, "sync afterRandomCocktail", this.render);
+    this.listenTo(this.collection, "afterRandomCocktail", this.render);
 
     this._showForm = false;
   },
