@@ -30,7 +30,7 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
     $input = this.$el.find("input.toggle-liquor");
     $input.toggle();
     var $select = this.$el.find("select.toggle-liquor");
-    if($select.prop("disabled", true)){
+    if($select.prop("disabled")){
       $input.attr("name", "");
       $select.prop("disabled", false);
     } else {
@@ -44,7 +44,7 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
     $input = this.$el.find("input.toggle-bar");
     $input.toggle();
     var $select = this.$el.find("select.toggle-bar");
-    if($select.prop("disabled", true)){
+    if($select.prop("disabled")){
       $input.attr("name", "");
       $select.prop("disabled", false);
     } else {
