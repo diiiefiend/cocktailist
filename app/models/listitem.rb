@@ -11,4 +11,5 @@ class Listitem < ActiveRecord::Base
 
   has_many :feed_items, as: :feedable, class_name: "Feed", dependent: :destroy
 
+  paginates_per 5
 end

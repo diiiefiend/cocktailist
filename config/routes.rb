@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       member do
         resources :lists, only: [:index, :create, :update, :show, :destroy] do
           member do
-            resources :listitems, only: [:create, :update, :show, :destroy]
+            resources :listitems, only: [:index, :create, :update, :show, :destroy]
           end
         end
       end

@@ -3,6 +3,7 @@ window.Cocktailist = {
   Collections: {},
   Views: {},
   Routers: {},
+  Mixins: {},
 
   initialize: function() {
     this.currentUser = new Cocktailist.Models.CurrentUser();

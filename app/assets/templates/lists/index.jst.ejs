@@ -6,6 +6,7 @@
   <div class="box">
     <h1>Your Lists</h1>
     <ul class="filter-list">
+
     </ul>
     <p class="subtext">(double click to edit name)</p>
   </div>
@@ -14,17 +15,5 @@
 <div class="rule-left"></div>
 
 <div class="right wide">
-  <h1><%= list.escape('name') %></h1>
-  <% if(list.listitems().length > 0){ %>
-    <% list.listitems().each( function (listitem){%>
-      <div class="box">
-        <a href="javascript:void(0);" class="remove-item" data-listitem="<%= listitem.id %>">x</a>
-        <h1 class="header-box"><a href="#cocktails/<%= listitem.get('cocktail_id') %>"><%= listitem.get('cocktail').name %></a></h1>
-        <h3><%= listitem.get('cocktail').bar.name %></h3>
-        <p class="subtext">Added on <%= listitem.get('time') %></p>
-      </div>
-    <% }); %>
-  <% } else { %>
-    <h2>This list is empty!</h2>
-  <% }; %>
+
 </div>

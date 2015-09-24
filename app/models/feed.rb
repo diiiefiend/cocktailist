@@ -10,4 +10,6 @@ class Feed < ActiveRecord::Base
   belongs_to :cocktail
 
   belongs_to :feedable, polymorphic: true
+
+  paginates_per 7      #for kaminari
 end

@@ -36,7 +36,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     this._feedItems.fetch();
     this._cocktails.fetch();
     var view = new Cocktailist.Views.CocktailsFeed({collection: this._feedItems, cocktails: this._cocktails, lists: this._lists});
-    this._swapView(view, {wait: true});
+    this._swapView(view, {wait: true, iScroll: true});
   },
 
   createEntry: function (){
@@ -80,7 +80,6 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   lists: function (options){
     var callback = this.lists.bind(this);
     if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
-
     //possibly can pass in Cocktailist.currentUser and save all the trouble with the user fetch thing?
     var view = new Cocktailist.Views.ListsIndex({collection: this._lists, options});
     this._swapView(view, {wait: true});
@@ -156,7 +155,10 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     Backbone.history.navigate("", { trigger: true });
   },
 
-  _swapView: function (view, options){
+  _swapView: function (view, options, otherView){
+    if(options && options.iScroll !== true){
+      $(window).unbind();                 //get rid of infinite scrolling listener
+    };
     this._currentView && this._currentView.remove();
     this._currentView = view;
     if(options && options.wait === true){

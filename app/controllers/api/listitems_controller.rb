@@ -1,5 +1,10 @@
 module Api
   class ListitemsController < ApplicationController
+    def index
+      @listitems = Listitem.all.where("list_id = ?", params[:id]).page(params[:page])
+      render :index
+    end
+
     def create
       clean_params = listitem_params
       @listitem = Listitem.new(clean_params)
