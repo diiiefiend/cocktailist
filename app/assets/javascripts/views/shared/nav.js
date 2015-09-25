@@ -6,8 +6,12 @@ Cocktailist.Views.Nav = Backbone.View.extend({
     this.render();
   },
 
-  render: function (){
-    var template = this.template({currentUser: Cocktailist.currentUser});
+  setActive: function (section){
+      this.render(section);
+  },
+
+  render: function (section){
+    var template = this.template({currentUser: Cocktailist.currentUser, section: section});
     this.$el.html(template);
     return this;
   },

@@ -13,7 +13,7 @@ Cocktailist.Views.UserForm = Backbone.CompositeView.extend({
 
   render: function(){
     this.$el.html(this.template());
-
+    window.setTimeout(function (){ $(".loader").hide();}, 0);
     return this;
   },
 

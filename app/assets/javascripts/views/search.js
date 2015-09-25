@@ -64,6 +64,7 @@ Cocktailist.Views.Search = Backbone.LiquorView.extend({
       this.$(".q").val(this.searchResults.query);
     };
 
+    window.setTimeout(function (){ $(".loader").hide();}, 400);
     return this;
   }
 });

@@ -16,6 +16,9 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
     initialize: function (options){
       //collection = lists (route is rails' #index!)
       //model will be the specific list in question
+
+      Cocktailist.siteNav.setActive("lists");
+
       if(options.options && options.options.listShowId){
         this._listShowId = options.options.listShowId;
       };
@@ -121,6 +124,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       this.listitemView = new Cocktailist.Views.ListitemIndex({model: this.model, collection: this.model.listitems()});
       this.$el.find(".right").html(this.listitemView.render().$el);
 
+      window.setTimeout(function (){ $(".loader").hide();}, 400);
       return this;
     },
 

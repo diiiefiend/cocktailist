@@ -12,6 +12,8 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
   initialize: function (){
     //model: cocktail
     //collection: cocktails
+    Cocktailist.siteNav.setActive("form");
+
     if(this.model.isNew()){
       this.getCollection();
     };
@@ -119,6 +121,9 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
   render: function (){
     var template = this.template({entry: this.model, liquorTypes: this._liquors, bars: this._bars});
     this.$el.html(template);
+
+    window.setTimeout(function (){ $(".loader").hide();}, 300);
+
     return this;
   }
 });

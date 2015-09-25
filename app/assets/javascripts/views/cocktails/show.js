@@ -9,6 +9,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     //model: cocktail
     //collection: cocktails
     window.scrollTo(0, 0);
+    Cocktailist.siteNav.setActive("browse");
 
     this._ratings = this.model.ratings();
     this._lists = options.lists;
@@ -125,6 +126,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     // }.bind(this));
 
     this.renderRatings();
+
+    window.setTimeout(function (){ $(".loader").hide();}, 800);
 
     return this;
   },

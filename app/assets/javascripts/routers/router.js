@@ -165,6 +165,8 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   },
 
   _swapView: function (view, options, otherView){
+    $(".loader").show();
+    
     if(options && options.iScroll !== true){
       $(window).unbind();                 //get rid of infinite scrolling listener
     };

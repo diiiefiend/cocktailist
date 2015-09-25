@@ -7,6 +7,9 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
 
   initialize: function(){
     //collection = cocktails
+
+    Cocktailist.siteNav.setActive("browse");
+
     this.listenTo(this.collection, "sync", this.render);
   },
 
@@ -29,6 +32,8 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
     var groups = this.collection.groupBy(groupType);
     var template = this.template({groups: groups, list: filterList, filterType: filterType});
     this.$el.html(template);
+
+    window.setTimeout(function (){ $(".loader").hide();}, 400);
     return this;
   }
 });

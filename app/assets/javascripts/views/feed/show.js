@@ -8,11 +8,15 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
 
     initialize: function (options){
       //collection = feedItems
+
+      Cocktailist.siteNav.setActive("feed");
+
       this._cocktails = options.cocktails;
       this.lists = options.lists;
       this.listenToOnce(this._cocktails, "sync", this.getLists);
       this.listenTo(this.lists, "sync", this.setRandomCocktail);
       this.listenTo(this.collection, "afterRandomCocktail sync", this.render);
+
 
       this._showForm = false;
       this.bindScroll();
@@ -26,6 +30,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
     showForm: function (e){
       if(this._showForm){
         this._form.remove();
+        Cocktailist.siteNav.setActive("feed");
         this.render();
         this._showForm = false;
       } else {
@@ -46,6 +51,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
     render: function (){
       var template = this.template({feedItems: this.collection, randomCocktail: this._randomCocktail, lists: this.lists});
       this.$el.html(template);
+      window.setTimeout(function (){ $(".loader").hide();}, 600);
       return this;
     }
   })

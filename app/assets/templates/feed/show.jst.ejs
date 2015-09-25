@@ -14,7 +14,7 @@
     <h1>My Lists</h1>
     <ul class="filter-list">
     <% lists.each( function (list){ %>
-      <li><a href="#lists/<%= list.id %>" class="filter-link" ><%= list.escape('name') %></a></li>
+      <li><a href="#lists/<%= list.id %>" class="filter-link" ><%= list.escape('name') %> (<%= list.escape('listlength') %>)</a></li>
     <% }); %>
     </ul>
   </div>

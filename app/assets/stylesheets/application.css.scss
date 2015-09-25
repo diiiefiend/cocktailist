@@ -77,9 +77,11 @@
  /* login page stuff */
  #signinbox{
    width: 300px;
-   margin: 20px auto;
+   top: 30vh;
+   transform: translateY(-50%) translateX(-50%);
+   left: 50%;
    background: white;
-   position: relative;
+   position: absolute;
    color: black;
  }
 
@@ -222,7 +224,9 @@
   float: left;
   margin-right: 20px;
 }
-#header #nav li:last-child a{
+// #header #nav li:last-child a{
+#header #nav li a.active{
+  font-weight: bold;
   color: #cc8042;
 }
 
@@ -472,7 +476,7 @@ img.feed-img{
 }
 
 .category-show-list li img{
-  width: 100px; 
+  width: 100px;
 }
 
 .filter-list{

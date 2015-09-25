@@ -68,6 +68,8 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     };
 
     this.$el.find(".right").html(temp);
+
+    window.setTimeout(function (){ $(".loader").hide();}, 400);
     return this;
   }
 });

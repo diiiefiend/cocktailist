@@ -11,13 +11,13 @@
           <% var type = result.get('_type') %>
           <h2>
             <% if(type==="Bar"){ %>
-              <a href="#browse/bar/<%= result.id %>"><%= result.get('name')  %></a></h2>
+              <a href="#browse/bar/<%= result.id %>"><%= result.get('name')  %></a>
             <% } else if(type==="User"){ %>
               <%= result.get('username')  %>
             <% } else { %>
-              <a href="#cocktails/<%= result.id %>"><%= result.get('name')  %></a></h2>
+              <a href="#cocktails/<%= result.id %>"><%= result.get('name')  %></a>
             <% }; %>
-
+          </h2>
           <p class="subtext">
             <% if(type==="Bar"){ %>
               <%= result.get('address') %>
