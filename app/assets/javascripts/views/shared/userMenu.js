@@ -20,6 +20,7 @@ Cocktailist.Views.UserMenu = Backbone.View.extend({
     Cocktailist.currentUser.signOut({
       success: function (){
         Backbone.history.navigate("#session/new", {trigger: true});
+        Cocktailist.currentUser.trigger("transition");
       }
     });
   }

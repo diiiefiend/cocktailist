@@ -121,7 +121,7 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
   render: function (){
     var template = this.template({entry: this.model, liquorTypes: this._liquors, bars: this._bars});
     this.$el.html(template);
-
+    this.$el.find("input#cName").focus();
     window.setTimeout(function (){ $(".loader").hide();}, 300);
 
     return this;

@@ -19,7 +19,13 @@ module Api
     end
 
     def create
-      clean_params = cleanup_params(cocktail_params)
+      errors = []
+      clean_params = cleanup_params(cocktail_params, errors)
+
+      if(!errors.empty?)
+        return render json: errors, status: :unprocessable_entity
+      end
+
       @cocktail = Cocktail.new(clean_params)
       if @cocktail.save
         Feed.create(user_id: current_user.id,
@@ -36,7 +42,14 @@ module Api
 
     def update
       @cocktail = current_cocktail
-      clean_params = cleanup_params(cocktail_params)
+
+      errors = []
+      clean_params = cleanup_params(cocktail_params, errors)
+
+      if(!errors.empty?)
+        return render json: errors, status: :unprocessable_entity
+      end
+      
       if @cocktail.update(clean_params)
         render json: @cocktail
       else
@@ -59,8 +72,7 @@ module Api
       params.require(:cocktail).permit(:name, :liquor, :ingredients, :bar_name, :bar_address, :img)
     end
 
-    def cleanup_params(cocktail_params)
-      errors = []
+    def cleanup_params(cocktail_params, errors)
       clean_params = cocktail_params
       clean_params[:ingredients] = clean_params[:ingredients].downcase
       clean_params[:liquor] = clean_params[:liquor].downcase
@@ -74,7 +86,7 @@ module Api
         if !@bar.save
           errors << "Need bar details:"
           errors.concat(@bar.errors.full_messages)
-          return render json: errors, status: :unprocessable_entity
+          return errors
         end
       end
       clean_params[:bar_id] = Bar.find_by(name: clean_params[:bar_name]).id

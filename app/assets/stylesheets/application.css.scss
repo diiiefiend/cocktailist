@@ -75,14 +75,24 @@
   }
 
  /* login page stuff */
+.siCont{
+  overflow: hidden;
+  position: relative;
+  top: 30vh;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
+  width: 100vw;
+  height: 350px;
+}
+
  #signinbox{
    width: 300px;
-   top: 30vh;
-   transform: translateY(-50%) translateX(-50%);
-   left: 50%;
    background: white;
    position: absolute;
+   top: 0;
+   left: 40%;
    color: black;
+   transition: left 500ms linear;
  }
 
  #signinbox h1{
@@ -133,6 +143,11 @@
  #signinbox button:hover, #signinbox a.button-link:hover{
    background: white;
    color: black;
+ }
+
+ #signinbox.exit {
+   left: 2000px;
+   transition: left 500ms linear;
  }
 
  .flashbox{
@@ -552,9 +567,14 @@ input:focus, select:focus, textarea:focus{
   border-bottom: 1px solid white;
 }
 
+button[disabled]{
+  background: #333;
+  color: #bbb;
+}
+
 textarea{
   height: 70px;
-  background: #222;
+  background: #0E0807;
 }
 
 .cocktailForm select option{

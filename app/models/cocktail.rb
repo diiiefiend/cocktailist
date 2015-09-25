@@ -14,7 +14,7 @@ class Cocktail < ActiveRecord::Base
   has_many :ratings,
     dependent: :destroy
 
-  has_many :list_items,
+  has_many :listitems,
     dependent: :destroy
 
   belongs_to :bar,

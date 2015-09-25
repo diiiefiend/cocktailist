@@ -1,6 +1,6 @@
-<div id="signinbox">
+<div id="signinbox" <%= displayed ? "" : "class='exit'" %> >
   <h1>Create an Account</h1>
-  <p>Already have an account? <a href="#session/new">Log in.</a></p>
+  <p>Already have an account? <a href="#session/new" class="login">Log in.</a></p>
 
   <form>
     <input type="text" placeholder="username" name="user[username]">

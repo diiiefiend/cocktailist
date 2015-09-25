@@ -32,7 +32,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
 
       this.model = new Cocktailist.Models.List([], {user: this._user}); //placeholder model
 
-      this.listenTo(this.collection, "change afterModelSet changeListitems", this.render);
+      this.listenTo(this.collection, "change add afterModelSet changeListitems", this.render);
     },
 
 
@@ -40,11 +40,15 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       this.collection.fetch();
     },
 
-    setModel: function (){
+    setModel: function (reset){
       if(this.collection.length > 0){     //accounting for empty lists
-        this._listShowId = this._listShowId || this.collection.at(0).id;
+        if(reset || !this._listShowId){
+          this._listShowId = this.collection.at(0).id;
+        };
         this.model = this.collection.getOrFetch(this._listShowId, {url: 'api/users/'+this._user.id+'/lists', silent: true});
       };
+      $(window).unbind();
+
       this.collection.trigger("afterModelSet");
     },
 
@@ -58,6 +62,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
         this._form = new Cocktailist.Views.ListForm({model: newModel, collection: this.collection});
         this.$el.find(".right").html(this._form.render().$el);
         this.$el.find("a#add-list").text("Cancel");
+        this.$el.find("input#name").focus();
         this._showForm = true;
       };
     },
@@ -86,6 +91,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       targetModel.destroy({
         url: 'api/users/'+this._user.id+'/lists/'+targetModel.id
       });
+      this.setModel(true);
     },
 
     deleteItem: function (e){
