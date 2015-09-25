@@ -1,0 +1,40 @@
+<div class="left wide">
+  <h1>Search Results</h1>
+  <input class="q" type="text">
+
+  <% if(results.length > 0 ){ %>
+    <% results.each( function (result){ %>
+      <div class="box">
+
+        <% var type = result.get('_type') %>
+        <h2>
+          <% if(type==="Bar"){ %>
+            <a href="#browse/bar/<%= result.id %>">
+          <% } else if(type==="User"){ %>
+
+          <% } else { %>
+            <a href="#cocktails/<%= result.id %>">
+          <% }; %>
+            <%= result.get('name')  %></a></h2>
+
+        <h3><%= type %></h3>
+        <p class="subtext">
+          <% if(type==="Bar"){ %>
+            <%= result.get('address') %>
+          <% } else if(type==="User"){ %>
+            Member since <%= result.get('created_at') %>
+          <% } else { %>
+            <%= result.get('ingredients') %>
+          <% }; %>
+        </p>
+      </div>
+    <% }); %>
+  <% } else { %>
+    <h3>No results to display</h3>
+  <% } %>
+</div>
+
+<div class="rule-right"></div>
+
+<div class="right bar">
+</div>

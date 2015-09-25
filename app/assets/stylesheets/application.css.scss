@@ -160,12 +160,12 @@
   padding-top: 23px;
 }
 
-#header .search{
+#header #search{
   float: left;
   position: relative;
   margin: 48px 0 0 25px;
 }
-#header .search input{
+#header #search input{
   font-size: 16px;
   background: transparent;
   border-bottom: 2px solid black;
@@ -469,6 +469,10 @@ img.feed-img{
 
 .category-show-list li.standalone{
   margin-left: 30px;
+}
+
+.category-show-list li img{
+  width: 100px; 
 }
 
 .filter-list{

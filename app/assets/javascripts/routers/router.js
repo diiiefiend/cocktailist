@@ -11,6 +11,8 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     "cocktails/:id" : "showEntry",
     "cocktails/edit/:id" : "editEntry",
 
+    "search/:query" : "search",
+
     "users/new": "newUser",
     "users/:id": "showUser",
     "session/new": "signIn"
@@ -90,6 +92,13 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
 
     this.lists({listShowId: parseInt(id)});
+  },
+
+  //search
+
+  search: function (query){
+    var view = new Cocktailist.Views.Search({q: query});
+    this._swapView(view);
   },
 
   // user routes stuff

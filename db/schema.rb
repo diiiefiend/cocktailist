@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924141834) do
+ActiveRecord::Schema.define(version: 20150924224324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,14 @@ ActiveRecord::Schema.define(version: 20150924141834) do
 
   add_index "lists", ["user_id"], name: "index_lists_on_user_id", using: :btree
 
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.integer  "user_id",     null: false
     t.integer  "cocktail_id", null: false
@@ -92,5 +100,7 @@ ActiveRecord::Schema.define(version: 20150924141834) do
     t.string   "uid"
     t.string   "provider"
   end
+
+  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
 
 end

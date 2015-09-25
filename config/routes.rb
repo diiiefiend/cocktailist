@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
 
+    get "/search", to: "static#search"
+
     resources :users, only: [:create, :show, :index] do
       member do
         resources :lists, only: [:index, :create, :update, :show, :destroy] do

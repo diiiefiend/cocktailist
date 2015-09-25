@@ -6,6 +6,9 @@
 # t.datetime "updated_at",      null: false
 
 class User < ActiveRecord::Base
+  include PgSearch
+  multisearchable against: [:username, :email]
+
   validates :username, :email, :session_token, presence: true
   validates :email, uniqueness: true
   validates :password, length: {minimum: 5, allow_nil: true}

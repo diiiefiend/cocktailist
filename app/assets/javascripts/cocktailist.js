@@ -10,6 +10,7 @@ window.Cocktailist = {
     this.currentUser.fetch();
     this.siteNav = new Cocktailist.Views.Nav({el: "#nav"});
     this.userMenu = new Cocktailist.Views.UserMenu({el: "#user-menu ul"});
+    this.search = new Cocktailist.Views.Searchbox({el: "#search"});
 
     $("a[href='#header']").click(function() {
       $("html, body").animate({ scrollTop: 0 }, "slow");
