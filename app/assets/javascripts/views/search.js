@@ -53,7 +53,8 @@ Cocktailist.Views.Search = Backbone.LiquorView.extend({
   },
 
   render: function (){
-    var template = this.template({results: this.searchResults});
+    var groups = this.searchResults.groupBy(function (result){ return result.get("_type"); });
+    var template = this.template({resultGroups: groups});
     this.$el.html(template);
 
     if(!this.searchResults.query){

@@ -1,34 +1,35 @@
 <div class="left wide">
   <h1>Search Results</h1>
   <input class="q" type="text">
+  <% if(!_.isEmpty(resultGroups)){ %>
 
-  <% if(results.length > 0 ){ %>
-    <% results.each( function (result){ %>
-      <div class="box">
+    <% for(group in resultGroups){ %>
+      <h1><%= group %></h1>
+      <% resultGroups[group].forEach( function (result){%>
+        <div class="box">
 
-        <% var type = result.get('_type') %>
-        <h2>
-          <% if(type==="Bar"){ %>
-            <a href="#browse/bar/<%= result.id %>">
-          <% } else if(type==="User"){ %>
+          <% var type = result.get('_type') %>
+          <h2>
+            <% if(type==="Bar"){ %>
+              <a href="#browse/bar/<%= result.id %>"><%= result.get('name')  %></a></h2>
+            <% } else if(type==="User"){ %>
+              <%= result.get('username')  %>
+            <% } else { %>
+              <a href="#cocktails/<%= result.id %>"><%= result.get('name')  %></a></h2>
+            <% }; %>
 
-          <% } else { %>
-            <a href="#cocktails/<%= result.id %>">
-          <% }; %>
-            <%= result.get('name')  %></a></h2>
-
-        <h3><%= type %></h3>
-        <p class="subtext">
-          <% if(type==="Bar"){ %>
-            <%= result.get('address') %>
-          <% } else if(type==="User"){ %>
-            Member since <%= result.get('created_at') %>
-          <% } else { %>
-            <%= result.get('ingredients') %>
-          <% }; %>
-        </p>
-      </div>
-    <% }); %>
+          <p class="subtext">
+            <% if(type==="Bar"){ %>
+              <%= result.get('address') %>
+            <% } else if(type==="User"){ %>
+              Member since <%= result.get('created_at') %>
+            <% } else { %>
+              <%= result.get('ingredients') %>
+            <% }; %>
+          </p>
+        </div>
+      <% }); %>
+    <% } %>
   <% } else { %>
     <h3>No results to display</h3>
   <% } %>
@@ -37,4 +38,12 @@
 <div class="rule-right"></div>
 
 <div class="right bar">
+  <div class="box">
+    <h1>Results</h1>
+    <ul class="filter-list">
+      <% for(group in resultGroups){  %>
+        <li><strong><%= group %></strong> (<%= resultGroups[group].length %>)</li>
+      <% }; %>
+    </ul>
+  </div>
 </div>
