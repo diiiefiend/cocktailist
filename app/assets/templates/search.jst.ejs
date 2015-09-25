@@ -11,11 +11,11 @@
           <% var type = result.get('_type') %>
           <h2>
             <% if(type==="Bar"){ %>
-              <a href="#browse/bar/<%= result.id %>"><%= result.get('name')  %></a>
+              <a href="#browse/bar/<%= result.escape('name') %>"><%= result.escape('name')  %></a>
             <% } else if(type==="User"){ %>
               <%= result.get('username')  %>
             <% } else { %>
-              <a href="#cocktails/<%= result.id %>"><%= result.get('name')  %></a>
+              <a href="#cocktails/<%= result.id %>"><%= result.escape('name')  %></a>
             <% }; %>
           </h2>
           <p class="subtext">
