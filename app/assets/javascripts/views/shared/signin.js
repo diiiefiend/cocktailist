@@ -14,11 +14,14 @@ Cocktailist.Views.SignIn = Backbone.CompositeView.extend({
 
     this.listenTo(Cocktailist.currentUser, "transition", this.slideIn);
 
+    this.displayed = false;
+
     if(options.wait){
       this.listenTo(Cocktailist.currentUser, "sync", this.checkStatus);
+    } else {
+      this.displayed=true;
     };
 
-    this.displayed = false;
   },
 
   slideIn: function (){
