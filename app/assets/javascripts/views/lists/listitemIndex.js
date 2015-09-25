@@ -8,12 +8,14 @@ Cocktailist.Views.ListitemIndex = Backbone.CompositeView.extend(
       this.collection = options.collection;
       this.model = options.model;
 
-      // this.bindScroll();          //work on this later
+      this.bindScroll();         
 
       this.model.user = Cocktailist.currentUser;
       this.collection.list = this.model;
 
       this.collection.pageNum = 1;
+
+      this.listenTo(this.collection, "sync", this.render)
     },
 
     render: function (){

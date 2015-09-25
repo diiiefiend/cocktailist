@@ -16,7 +16,7 @@ Cocktailist.Mixins.InfiniteScroll = {
     if (this.requestingNextPage) return;
 
     this.requestingNextPage = true;
-    if(options){
+    if(options && options.collection){
       options.collection.fetch({
         remove: false,
         data: {
@@ -33,7 +33,7 @@ Cocktailist.Mixins.InfiniteScroll = {
         data: {
           page: this.collection.pageNum + 1
         },
-        success: function () {
+        success: function (data, res, options) {
           this.requestingNextPage = false;
           this.collection.pageNum++;
         }.bind(this)

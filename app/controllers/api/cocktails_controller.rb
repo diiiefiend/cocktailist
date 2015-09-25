@@ -3,7 +3,7 @@ module Api
     wrap_parameters false
 
     def index
-      @cocktails = Cocktail.all.includes(:bar, :ratings)
+      @cocktails = Cocktail.all.order(created_at: :desc).includes(:bar, :ratings)
       render :index
     end
 

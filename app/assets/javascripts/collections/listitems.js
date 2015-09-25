@@ -11,5 +11,9 @@ Cocktailist.Collections.Listitems = Backbone.BetterCollection.extend({
 
   initialize: function (models, options){
     this.list = options.list;
+  },
+
+  parse: function (res){
+    return res.listitems;
   }
 });
