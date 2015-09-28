@@ -7,7 +7,7 @@ Backbone.BetterCollection = Backbone.Collection.extend({
     } else {
       model = new collection.model({id: id}, options);
       collection.add(model);
-      model.fetch({ options,
+      model.fetch({ options: options,
         error: function (){ collection.remove(model); }
       });
     };
