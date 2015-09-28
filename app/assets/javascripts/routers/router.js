@@ -127,7 +127,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   signIn: function(callback, wait){
     if (!this._requireSignedOut(callback)) { return; }    //if not signed out, return
 
-    var view = new Cocktailist.Views.SignIn({callback: callback, wait});
+    var view = new Cocktailist.Views.SignIn({callback: callback, wait: wait});
     if(wait){
       this._swapView(view, {wait: true});
     } else {
