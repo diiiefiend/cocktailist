@@ -83,7 +83,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     var callback = this.lists.bind(this);
     if (!this._requireSignedIn(callback)) { return; } //if not signed in, return
     //possibly can pass in Cocktailist.currentUser and save all the trouble with the user fetch thing?
-    var view = new Cocktailist.Views.ListsIndex({collection: this._lists, options});
+    var view = new Cocktailist.Views.ListsIndex({collection: this._lists, options: options});
     this._swapView(view, {wait: true, iScroll: true});
   },
 
