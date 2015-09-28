@@ -13,9 +13,9 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
 
     "search/:query" : "search",
 
-    "users/new": "newUser",
-    "users/:id": "showUser",
-    "session/new": "signIn"
+    "users/new" : "newUser",
+    "users/:id" : "showUser",
+    "session/new" : "signIn"
   },
 
   initialize: function (options){

@@ -1,4 +1,5 @@
 Backbone.BetterModel = Backbone.Model.extend({
+  
   saveFormData: function(formData, options){
     var method = this.isNew() ? "POST" : "PUT";
     var model = this;

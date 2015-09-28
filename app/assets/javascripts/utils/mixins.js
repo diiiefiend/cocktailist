@@ -1,4 +1,5 @@
 Cocktailist.Mixins.InfiniteScroll = {
+
   bindScroll: function (options) {
     $(window).on("scroll", this.handleScroll.bind(this, [], options));
   },
