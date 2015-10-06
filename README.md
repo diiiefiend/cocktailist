@@ -1,9 +1,5 @@
 # cocktailist
 
-[Heroku link][heroku]
-
-[heroku]: http://cocktailist.herokuapp.com
-
 ## Minimum Viable Product
 cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
 
@@ -11,11 +7,11 @@ cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
 
 - [x] Create accounts
 - [x] Create sessions (log in)
-- [X] Create cocktail entries
+- [x] Create cocktail entries
 - [x] Review cocktails
 - [x] View cocktail summaries and reviews/scores
-- [ ] Add cocktails to had/want to try/not interested lists
-- [ ] Searching for cocktails
+- [x] Add cocktails to had/want to try/not interested lists
+- [x] Searching for cocktails
 
 ## Design Docs
 * [View Wireframes][views]
@@ -73,7 +69,7 @@ results view will be added.
 - [ ] A 2-d graph view of cocktails, plotted out based on tags, if I can find a way to quantify the tags
 - [ ] User activity feeds
 - [ ] Ability to follow users, comments on their activity, etc
-- [ ] Pagination/infinite scroll on the recommendations page/lists page
+- [x] Pagination/infinite scroll on the recommendations page/lists page
 - [ ] Smart search (i.e. autocomplete words)
 
 [phase-one]: ./docs/phases/phase1.md

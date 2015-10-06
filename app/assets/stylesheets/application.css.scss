@@ -111,9 +111,10 @@
 
  #signinbox input{
    background: asset-url("boxbg.jpg");
-   width: 90%;
+   width: 91%;
    padding: 5%;
    color: white;
+   margin-left: -1px;
    margin-bottom: 0;
    font: 24px 'Montserrat', sans-serif;
    opacity: 1;
@@ -135,9 +136,9 @@
    border-top: 1px solid #eee;
  }
  #signinbox button{
-   width: 100%;
+   width: 101%;
    padding: 5%;
-   margin: 0;
+   margin: 0 -1px;
    font-size: 24px;
  }
  #signinbox button:hover, #signinbox a.button-link:hover{

@@ -162,7 +162,7 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
     Backbone.history.navigate("", { trigger: true });
   },
 
-  _swapView: function (view, options, otherView){
+  _swapView: function (view, options){
     $(".loader").show();
 
     if(options && options.iScroll !== true){
