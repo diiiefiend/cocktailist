@@ -1,5 +1,5 @@
 # cocktailist
-Ariel Hou, Sep 2015
+## Ariel Hou, Sep 2015
 
 # About
 cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
