@@ -1,6 +1,11 @@
 # cocktailist
 Ariel Hou, Sep 2015
 
+#Live Site
+[http://cocktailist.club][link]
+
+[link]: http://cocktailist.club
+
 # About
 cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
 
