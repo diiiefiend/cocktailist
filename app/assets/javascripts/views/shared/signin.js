@@ -4,7 +4,8 @@ Cocktailist.Views.SignIn = Backbone.CompositeView.extend({
 
   events: {
     "submit form" : "submit",
-    "click .switch" : "slideOut"
+    "click .switch" : "slideOut",
+    "click .guest-login" : "loginAsGuest"
   },
 
   initialize: function (options){
@@ -46,6 +47,13 @@ Cocktailist.Views.SignIn = Backbone.CompositeView.extend({
   render: function (){
     this.$el.html(this.template({displayed: this.displayed}));
     return this;
+  },
+
+  loginAsGuest: function (e){
+    e.preventDefault();
+    this.$el.find("input[name='user[email]']").val("guest@aa.io");
+    this.$el.find("input[name='user[password]']").val("password");
+    this.$el.find("form").trigger("submit");
   },
 
   submit: function (e){
