@@ -22,6 +22,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       if(options.options && options.options.listShowId){
         this._listShowId = options.options.listShowId;
       };
+      
       this._showForm = false;
       this._user = Cocktailist.currentUser;
       this._user.fetch();
@@ -40,15 +41,15 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       this.collection.fetch();
     },
 
-    setModel: function (reset){
+    setModel: function (options){
       if(this.collection.length > 0){     //accounting for empty lists
-        if(reset || !this._listShowId){
+        if((options && options.listReset) || !this._listShowId){
           this._listShowId = this.collection.at(0).id;
         };
         this.model = this.collection.getOrFetch(this._listShowId, {url: 'api/users/'+this._user.id+'/lists', silent: true});
       };
       $(window).unbind();
-
+      
       this.collection.trigger("afterModelSet");
     },
 
@@ -91,7 +92,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       targetModel.destroy({
         url: 'api/users/'+this._user.id+'/lists/'+targetModel.id
       });
-      this.setModel(true);
+      this.setModel({listReset: true});
     },
 
     deleteItem: function (e){

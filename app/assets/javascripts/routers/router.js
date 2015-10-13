@@ -2,10 +2,12 @@ Cocktailist.Routers.Router = Backbone.Router.extend({
   routes: {
     "" : "feed",
     "_=_" : "redirectToFeed",
+
     "browse" : "browse",
     "browse/:filterType/:category" : "browseCat",
-    "lists" : "lists",
+
     "lists/:id" : "showList",
+    "lists" : "lists",
 
     "cocktails/new" : "createEntry",
     "cocktails/:id" : "showEntry",
