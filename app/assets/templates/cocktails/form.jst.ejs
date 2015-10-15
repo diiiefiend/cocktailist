@@ -13,6 +13,7 @@
       <% }); %>
     </select>
     <input class="toggle-liquor" type="text" placeholder="add new liquor" id="liquor">
+    <br class="clearfix">
 
     <label for="ingredients">Ingredients</label>
     <input type="text" value="<%= entry.escape('ingredients') %>" name="cocktail[ingredients]" id="ingredients">
@@ -27,7 +28,8 @@
     </select>
     <input class="toggle-bar" type="text" placeholder="add new bar: name" id="bar">
     <input class="toggle-bar" type="text" placeholder="add new bar: address">
-
+    <br class="clearfix">
+    
     <a href="javascript: void(0);" class="remove-img"><img src="<%= entry.get('cocktailPic')!== 'placeholder.png' ? entry.get('cocktailPic') : "" %>" id="image-preview"></a>
     <label for="image">Image (if any)</label>
       <input type="file" name="cocktail[img]" id="attach-image">
