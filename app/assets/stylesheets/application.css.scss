@@ -329,6 +329,11 @@
   text-transform: uppercase;
 }
 
+#bar-map{
+  width: 100%;
+  height: 200px;
+}
+
 #signinbox{
     margin-top: 20px;
 }
@@ -387,6 +392,9 @@ form a[class*="toggle-"]{
 form input[class*="toggle-"]{
   display: none;
   margin-left: 110px;
+}
+form input[class*="toggle-"].display{
+  display: block;
 }
 
 .clearfix:after, .box:after{

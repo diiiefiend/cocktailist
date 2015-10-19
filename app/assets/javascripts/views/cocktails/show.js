@@ -121,11 +121,26 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
       this.$el.find("#rating-form").html("<p><a href='#session/new'>Log in</a> to rate!</p>");  //placeholder for now
     };
 
-    // this._ratings.each( function(rating){
-    //   this.renderRatings(rating);
-    // }.bind(this));
-
     this.renderRatings();
+
+    //google maps stuff
+
+    var coords = new google.maps.LatLng(this.model.bar().latitude, this.model.bar().longitude);
+
+    var mapCanvas = document.getElementById('bar-map');
+    var mapOptions = {
+      center: coords,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      draggable: false
+    };
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    var marker=new google.maps.Marker({
+      position: coords,
+      });
+
+    marker.setMap(map);
 
     window.setTimeout(function (){ $(".loader").hide();}, 800);
 

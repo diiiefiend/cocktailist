@@ -1,1 +1,1 @@
-json.(bar, :id, :name, :address)
+json.(bar, :id, :name, :address, :latitude, :longitude)
