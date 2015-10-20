@@ -137,7 +137,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
           service.getDetails({placeId: results[0].place_id}, function (place, status2){
             if(status2 == google.maps.places.PlacesServiceStatus.OK){
               var $barInfo = this.$el.find(".bar-info");
-              $barInfo.html("<p>Google Rating: " + place.rating + "</p><ul>");
+              $barInfo.html("<p>Google Rating: " + place.rating + "/5.0</p><ul>");
               var hours = place.opening_hours.weekday_text;
               hours.forEach( function (day){
                 $barInfo.find("ul").append("<li>"+day+"</li>");
