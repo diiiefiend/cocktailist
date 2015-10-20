@@ -7,11 +7,14 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
   events: {
     "click .filter-list a" : "filter",
-    "click a.subtext" : "showAll"
+    "click a.subtext" : "showAll",
+    "mouseenter .category-show-list li" : "bounce",
+    "mouseleave .category-show-list li" : "stopBounce"
   },
 
   initialize: function (options){
     //collection: cocktails
+    this.markerArr = [];
     this.filterType = options.filterType;
     this.category = options.category;
     this.listenTo(this.collection, "sync", this.setCatColl);
@@ -51,6 +54,19 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     this.render();
   },
 
+  bounce: function (e){
+    var markerId = $(e.currentTarget).data("markerid");
+    var marker = this.markerArr[markerId];
+
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  },
+
+  stopBounce: function (e){
+    var markerId = $(e.currentTarget).data("markerid");
+    var marker = this.markerArr[markerId];
+    marker.setAnimation(null);
+  },
+
   render: function (coll, target){
     var cocktails = coll || this.catCollection;
 
@@ -72,26 +88,27 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     };
     var map = new google.maps.Map(mapCanvas, mapOptions);
 
-    var marker = new google.maps.Marker({
-      position: coords
-      });
-
-    marker.setMap(map);
+    var markerBounds = new google.maps.LatLngBounds();
 
     if(this.filterType === 'liquor'){
-      cocktails.forEach( function (cocktail){
-        coords = new google.maps.LatLng(cocktail.bar().latitude, cocktail.bar().longitude);
-        marker = new google.maps.Marker({
-          position: coords
-        });
-        marker.setMap(map);
-      });
-
-      map.setOptions({
-        draggable: true,
-        zoom: 13
-      });
+      markerLength = cocktails.length;
+    } else {
+      markerLength = 1;
     };
+
+    var cocktail, marker;
+    for(var i = 0; i < markerLength; i++){
+      cocktail = cocktails[i];
+      coords = new google.maps.LatLng(cocktail.bar().latitude, cocktail.bar().longitude);
+      marker = new google.maps.Marker({
+        position: coords
+      });
+      marker.setMap(map);
+      markerBounds.extend(marker.position);
+      this.markerArr.push(marker);
+    }
+
+    map.fitBounds(markerBounds);
 
     if(this.filterType === 'liquor'){
       var liquors = this.liquorTypes();

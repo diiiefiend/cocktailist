@@ -1,4 +1,7 @@
-<li title="<%= cocktail.get('name') %> @ <%= cocktail.bar().name %>" <%= standalone ? "class='standalone'" : "" %> >
+<li data-markerid="<%= index !== undefined ? index : 1 %>"
+  title="<%= cocktail.get('name') %> @ <%= cocktail.bar().name %>"
+  <%= standalone ? "class='standalone'" : "" %>
+>
   <a href="#cocktails/<%= cocktail.id %>">
   <% if(cocktail.id && cocktail.get('cocktailPic') !== 'placeholder.png'){ %>
     <% if(cocktail.get('cocktailPic').indexOf('queensparkswizzle') > -1){ %>

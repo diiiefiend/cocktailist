@@ -9,8 +9,8 @@
   </div>
   <div class="box">
     <ul class="category-show-list clearfix">
-      <% cocktails.forEach( function (cocktail){ %>
-        <%= JST['cocktails/_categoryShowItem']({cocktail: cocktail, standalone: false}) %>
+      <% cocktails.forEach( function (cocktail, idx){ %>
+        <%= JST['cocktails/_categoryShowItem']({cocktail: cocktail, standalone: false, index: idx}) %>
       <% }) %>
     </ul>
   </div>
