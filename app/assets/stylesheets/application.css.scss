@@ -330,12 +330,19 @@
 }
 
 #bar-map{
-  width: 100%;
+  width: 180px;
   height: 200px;
+  float: left;
+  margin-right: 15px;
+  border: 5px solid #aaa;
+}
+
+#bar-map.wide-map{
+  width: calc(100% - 10px);
 }
 
 #signinbox{
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 /* footer area stuff */

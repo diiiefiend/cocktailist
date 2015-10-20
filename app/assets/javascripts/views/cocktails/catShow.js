@@ -54,8 +54,44 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
   render: function (coll, target){
     var cocktails = coll || this.catCollection;
 
-    var main = this.template['main']({category: this.category, cocktails: cocktails});
+    var main = this.template['main']({category: this.category, cocktails: cocktails, filter: this.filterType});
     this.$el.html(main);
+
+
+    //google maps stuff
+
+    var coords = new google.maps.LatLng(cocktails[0].bar().latitude, cocktails[0].bar().longitude);
+
+    var mapCanvas = document.getElementById('bar-map');
+    var mapOptions = {
+      center: coords,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      draggable: false,
+      overviewMapControl: false
+    };
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: coords
+      });
+
+    marker.setMap(map);
+
+    if(this.filterType === 'liquor'){
+      cocktails.forEach( function (cocktail){
+        coords = new google.maps.LatLng(cocktail.bar().latitude, cocktail.bar().longitude);
+        marker = new google.maps.Marker({
+          position: coords
+        });
+        marker.setMap(map);
+      });
+
+      map.setOptions({
+        draggable: true,
+        zoom: 13
+      });
+    };
 
     if(this.filterType === 'liquor'){
       var liquors = this.liquorTypes();

@@ -19,7 +19,7 @@ cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
 
 
 ### To Do
-- [ ] Integrate Google API to Bar info
+- [x] Integrate Google API to Bar info
 - [ ] Tag cocktails (i.e. spicy, adventurous, traditional, etc.)
 - [ ] Browse cocktails by tag
 - [ ] Get recommendations based on drinking history, tags, and location

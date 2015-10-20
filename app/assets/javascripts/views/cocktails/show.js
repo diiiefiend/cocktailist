@@ -132,7 +132,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
       center: coords,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      draggable: false
+      draggable: false,
+      overviewMapControl: false
     };
     var map = new google.maps.Map(mapCanvas, mapOptions);
 

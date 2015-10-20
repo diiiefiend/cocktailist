@@ -1,6 +1,13 @@
 <div class="left wide">
   <h1 class="capitalize"><%= category %></h1>
   <div class="box">
+    <div id="bar-map" <%= filter === 'liquor' ? "class='wide-map'" : "" %>>
+    </div>
+    <% if(filter === 'bar'){ %>
+      <h3><%= cocktails[0].bar().address %></h3>
+    <% }; %>
+  </div>
+  <div class="box">
     <ul class="category-show-list clearfix">
       <% cocktails.forEach( function (cocktail){ %>
         <%= JST['cocktails/_categoryShowItem']({cocktail: cocktail, standalone: false}) %>
