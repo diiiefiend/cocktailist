@@ -25,7 +25,7 @@
 
     <h2><%= cocktail.escape('liquor') %></h2>
 
-    <p>Average Rating: <%= ratingAvg %>
+    <p>Average Rating: <span class="rating"></span> <strong><%= ratingAvg %></strong>
     <span class="subtext">(<%= cocktail.ratings().length %> vote<%= cocktail.ratings().length !== 1 ? "s" : "" %>)</span></p>
 
     <h3>Ingredients:</h3>
