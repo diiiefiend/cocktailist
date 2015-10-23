@@ -15,10 +15,11 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this._lists = options.lists;
 
     this.ratingAvg = "N/A";
+
     this.collection.fetch();
 
-    this.listenToOnce(this.collection, "sync", this.setSimilarCocktail);
-    this.listenToOnce(this._ratings, "sync", this._calcAvgRating);
+    this.listenToOnce(this.collection, "sync", this.setSimilarCocktail);  //not sure why this doesn't trigger on refresh on this page
+    this.listenToOnce(this.model, "sync", this._calcAvgRating);
     this.listenTo(this._ratings, "add change afterRemove", this._calcAvgRating);
 
     this.listenTo(this._lists, "sync", this.render);          //the main render. not sure if i like having it render just once? or render before similar cocktail as well?
@@ -104,7 +105,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     var ratings = this._ratings.pluck("rating");
     if(ratings.length > 0){
       var sum = ratings.reduce(function (a, b) {return a+b; });
-      this.ratingAvg = (sum/ratings.length);
+      this.ratingAvg = (sum/ratings.length).toFixed(1);
     } else {
       this.ratingAvg = "N/A";
     };
@@ -131,9 +132,12 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     var mapOptions = {
       center: coords,
       zoom: 15,
+      scrollwheel: false,
+      disableDoubleClickZoom: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       draggable: false,
       overviewMapControl: false
+
     };
     var map = new google.maps.Map(mapCanvas, mapOptions);
 
@@ -164,12 +168,13 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     if(this.ratingAvg !== "N/A"){
       var $cont = this.$el.find("#main-rating");
       $cont.empty();
+      var imgCode = "<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>";
       for(var i=0; i < Math.floor(this.ratingAvg); i++){
-        $cont.append("<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>");
+        $cont.append(imgCode);
       };
 
       var partial_rating = this.ratingAvg % 1;
-      $cont.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'><img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>");
+      $cont.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'>" + imgCode);
     };
 
     this.$el.find("#reviews").empty();

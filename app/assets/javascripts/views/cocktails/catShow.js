@@ -87,7 +87,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
       zoom: 15,
       maxZoom: 15,
       scrollwheel: false,
-      disableDoubleClickZoom: false,
+      disableDoubleClickZoom: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       draggable: false,
       overviewMapControl: false
