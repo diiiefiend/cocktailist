@@ -23,4 +23,12 @@ class Cocktail < ActiveRecord::Base
     primary_key: :id
 
   has_many :feed_items, as: :feedable, class_name: "Feed", dependent: :destroy
+
+  def avg_rating
+    if self.ratings.length > 0
+      avg = self.ratings.pluck(:rating).inject(:+) / self.ratings.length.to_f
+    else
+      avg = -1
+    end
+  end
 end

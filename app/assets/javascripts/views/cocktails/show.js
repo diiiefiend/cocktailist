@@ -104,7 +104,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     var ratings = this._ratings.pluck("rating");
     if(ratings.length > 0){
       var sum = ratings.reduce(function (a, b) {return a+b; });
-      this.ratingAvg = (sum/ratings.length).toFixed(1);
+      this.ratingAvg = (sum/ratings.length);
     } else {
       this.ratingAvg = "N/A";
     };
@@ -162,7 +162,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
   renderRatings: function (){
     if(this.ratingAvg !== "N/A"){
-      var $cont = this.$el.find(".rating");
+      var $cont = this.$el.find("#main-rating");
       $cont.empty();
       for(var i=0; i < Math.floor(this.ratingAvg); i++){
         $cont.append("<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png'>");

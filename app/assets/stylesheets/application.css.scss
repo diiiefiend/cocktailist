@@ -493,13 +493,7 @@ img.feed-img{
 }
 
 .category-show-list li{
-  position: relative;
   float: left;
-  height: 150px;
-  width: 100px;
-  background: #111;
-  overflow: hidden;
-  border: 3px solid #aaa;
   margin-right: 12px;
   margin-bottom: 15px;
   list-style: none;
@@ -507,10 +501,18 @@ img.feed-img{
 .category-show-list li:nth-child(5n){
   margin-right: 0;
 }
-.category-show-list li:hover{
+.category-show-list li:hover .cat-show-item{
   border-color: white;
 }
-.category-show-list li:after{
+.category-show-list .cat-show-item{
+  position: relative;
+  height: 150px;
+  width: 100px;
+  background: #111;
+  overflow: hidden;
+  border: 3px solid #aaa;
+}
+.category-show-list .cat-show-item:after{
   z-index: 1;
   content: attr(title);
   font-size: 14px;
@@ -522,7 +524,7 @@ img.feed-img{
   background: black;
   opacity: 0.75;
 }
-.category-show-list li:hover:after{
+.category-show-list li:hover .cat-show-item:after{
   color: white;
 }
 
@@ -532,6 +534,10 @@ img.feed-img{
 
 .category-show-list li img{
   width: 100px;
+}
+
+.category-show-list .rating{
+  margin: 5px 0 0 10px;
 }
 
 .filter-list{

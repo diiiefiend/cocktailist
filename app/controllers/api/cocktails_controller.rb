@@ -49,7 +49,7 @@ module Api
       if(!errors.empty?)
         return render json: errors, status: :unprocessable_entity
       end
-      
+
       if @cocktail.update(clean_params)
         render json: @cocktail
       else
