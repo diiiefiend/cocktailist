@@ -165,11 +165,11 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
       var $cont = this.$el.find("#main-rating");
       $cont.empty();
       for(var i=0; i < Math.floor(this.ratingAvg); i++){
-        $cont.append("<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png'>");
+        $cont.append("<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>");
       };
 
       var partial_rating = this.ratingAvg % 1;
-      $cont.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'><img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png'>");
+      $cont.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'><img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>");
     };
 
     this.$el.find("#reviews").empty();

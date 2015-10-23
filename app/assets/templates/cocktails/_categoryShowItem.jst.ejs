@@ -9,16 +9,27 @@
     >
       <% if(cocktail.id && cocktail.get('cocktailPic') !== 'placeholder.png'){ %>
         <% if(cocktail.get('cocktailPic').indexOf('queensparkswizzle') > -1){ %>
-          <img src="https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/000/000/008/small/queensparkswizzle.jpg" alt="<%= cocktail.get('name') %> <%= cocktail.get('bar') %>">
+          <img class="thumb" src="https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/000/000/008/small/queensparkswizzle.jpg" alt="<%= cocktail.get('name') %> <%= cocktail.get('bar') %>">
         <% } else { %>
-          <img src="<%= cocktail.get('cocktailPic') %>" alt="<%= cocktail.get('name') %> <%= cocktail.get('bar') %>">
+          <img class="thumb" src="<%= cocktail.get('cocktailPic') %>" alt="<%= cocktail.get('name') %> <%= cocktail.get('bar') %>">
         <% }; %>
       <% } else { %>
-        <img src="https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/placeholder.png" alt="<%= cocktail.get('name') %> <%= cocktail.get('bar') %>">
+        <img class="thumb" src="https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/placeholder.png" alt="<%= cocktail.get('name') %> <%= cocktail.get('bar') %>">
       <% }; %>
     </div>
   </a>
   <div class="rating">
-    <%= cocktail.get('avg_rating') %>
+    <% var rating = cocktail.get('avg_rating') %>
+    <% if(rating > 0){ %>
+      <% for(var i = 0; i < Math.floor(rating); i++){ %>
+        <img src="https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png" alt="*">
+      <% }; %>
+
+      <% var partial_rating = rating % 1 %>
+      <span style="overflow: hidden; display: inline-block; width: <%= Math.floor(17 * partial_rating) %>px;">
+        <img src="https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png" alt="*">
+      </span>
+
+    <% } %>
   </div>
 </li>

@@ -2,10 +2,14 @@
   <% var splitData = feedItem.get('data').split("; ") %>
   <h2><%= feedItem.escape('username') %> <%= feedItem.escape('activity') %>
     <% if(feedItem.escape('activity') === 'rated'){ %>
-      <%= splitData[2] %> stars
+      <div class="rating">
+        <% for(var i = 0; i < Math.floor(splitData[2]); i++){ %>
+          <img src="https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png" alt="*">
+        <% } %>
+      </div>
     <% } else if(feedItem.escape('activity') === 'listed'){ %>
       in "<%= splitData[2] %>"
-    <% }; %>  
+    <% }; %>
   </h2>
   <h1 class="header-box"><a href="#cocktails/<%= feedItem.escape('cocktail_id') %>"><%= feedItem.escape('cocktailName') %></a>
     <% if(feedItem.get('cocktailPic') !== 'placeholder.png'){ %>
