@@ -7,7 +7,9 @@ Ariel Hou, Sep 2015
 [link]: http://cocktailist.club
 
 # About
-cocktailist is a clone of Goodreads built on Rails and Backbone. Users can:
+cocktailist is a cocktail listing/browsing/rating app built on Rails and Backbone,
+created largely to satisfy my own perceived need to keep track of all the bars 
+and specialty drinks I've had. Users can:
 
 - Create accounts
 - Create sessions (log in)
