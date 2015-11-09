@@ -57,11 +57,11 @@ module Api
       end
     end
 
-    def destroy
-      @cocktail = current_cocktail
-      @cocktail.try(:destroy)
-      render json: {}
-    end
+    # def destroy
+    #   @cocktail = current_cocktail
+    #   @cocktail.try(:destroy)
+    #   render json: {}
+    # end
 
     private
     def current_cocktail
