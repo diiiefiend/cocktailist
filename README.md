@@ -1,5 +1,5 @@
 # cocktailist
-Ariel Hou, Sep 2015
+Ariel Hou, Sep 2015 - ongoing
 
 #Live Site
 [http://cocktailist.club][link]
@@ -18,9 +18,6 @@ and specialty drinks I've had. Users can:
 - View cocktail summaries and reviews/scores
 - Add cocktails to lists
 - Search for cocktails
-
-### Bugs To Fix
-- [ ] Floats on some browse pages is misaligned
 
 ### To Do
 - [x] Integrate Google API to Bar info
