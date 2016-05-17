@@ -9,10 +9,11 @@ module Api
       clean_params = listitem_params
       @listitem = Listitem.new(clean_params)
       if @listitem.save
+        delimiter = " | "
         Feed.create(user_id: current_user.id,
           cocktail_id: @listitem.cocktail_id,
           activity: "listed",
-          data: "; #{@listitem.cocktail.bar.name}; #{@listitem.list.name}",
+          data: delimiter+@listitem.cocktail.bar.name+delimiter+@listitem.list.name,
           feedable_id: @listitem.id,
           feedable_type: "Listitem")
         render json: @listitem

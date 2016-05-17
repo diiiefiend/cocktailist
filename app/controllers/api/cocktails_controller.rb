@@ -28,10 +28,11 @@ module Api
 
       @cocktail = Cocktail.new(clean_params)
       if @cocktail.save
+        delimiter = " | "
         Feed.create(user_id: current_user.id,
           cocktail_id: @cocktail.id,
           activity: "added",
-          data: @cocktail.ingredients+"; "+@cocktail.bar.name,
+          data: @cocktail.ingredients+delimiter+@cocktail.bar.name,
           feedable_id: @cocktail.id,
           feedable_type: "Cocktail")
         render json: @cocktail
