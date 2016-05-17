@@ -22,12 +22,15 @@ and specialty drinks I've had. Users can:
 ### To Do
 - [x] Integrate Google API to Bar info
 - [x] Pagination/infinite scroll on the recommendations page/lists page
-- [ ] Tag cocktails (i.e. spicy, adventurous, traditional, etc.)
-- [ ] Browse cocktails by tag
+Near-term:
 - [ ] "Sticky" the Google map on browse pages to top of screen so it remains in sight when scrolling
 - [ ] Filter activity feed (3 types: add, rate, and list activities)
+Mid-term:
+- [ ] Tag cocktails (i.e. spicy, adventurous, traditional, etc.)
+- [ ] Browse cocktails by tag
 - [ ] Get recommendations based on drinking history, tags, and location
 - [ ] A 2-d graph view of cocktails, plotted out based on tags, if I can find a way to quantify the tags
+Lower priority:
 - [ ] Ability to follow users, comments on their activity, etc
 - [ ] Smart search (i.e. autocomplete words)
 - [ ] Add ability to have multiple comments from same user?
