@@ -19,10 +19,6 @@ and specialty drinks I've had. Users can:
 - Add cocktails to lists
 - Search for cocktails
 
-## Bug Log
-- Updating a comment should update the feed item as well
-- Feed items should not be tripped up by single quotes in the comment/entry-strip out any symbols (between & and ;) before committing the item
-
 ### To Do
 - [x] Integrate Google API to Bar info
 - [x] Pagination/infinite scroll on the recommendations page/lists page
