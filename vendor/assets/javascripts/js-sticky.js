@@ -15,12 +15,14 @@ function moveScroller(trigger) {
       if (scrollPos > anchorPos) {
         scrollEl.css({
             position: "fixed",
-            top: "500px"
+            top: "0",
+            zIndex: 100
         });
       } else {
         scrollEl.css({
             position: "",
-            top: ""
+            top: "",
+            zIndex: ""
         });
       }
     };
