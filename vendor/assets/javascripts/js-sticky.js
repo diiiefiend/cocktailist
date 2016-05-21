@@ -7,8 +7,12 @@ function moveScroller(trigger) {
 
   var anchorPos = $("#scroller-anchor").offset().top; // always static
 
+  var scrollEl = (trigger === "top") ? $("#scroller") : $("#scroller-bottom");
+
+  var elWidth = scrollEl.outerWidth(true);
+  var elHeight = scrollEl.outerHeight(true);
+
   if (trigger === "top"){
-    scrollEl = $("#scroller");
 
     move = function() {
       scrollPos = $(window).scrollTop();
@@ -16,21 +20,24 @@ function moveScroller(trigger) {
         scrollEl.css({
             position: "fixed",
             top: "0",
-            zIndex: 100
+            width: "585px"
         });
+
+        $("#scroller-cont").css({
+          width: elWidth,
+          height: elHeight
+        });
+
       } else {
         scrollEl.css({
             position: "",
             top: "",
-            zIndex: ""
+            width: ""
         });
       }
     };
   } else if (trigger === "bottom"){
     var initialScrollPos;
-    scrollEl = $("#scroller-bottom");
-    var elHeight = scrollEl.outerHeight();
-    var elWidth = scrollEl.outerWidth();
     var stickied = false;
 
     move = function() {

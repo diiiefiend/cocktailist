@@ -1,14 +1,16 @@
 <div class="left wide">
   <h1 class="capitalize"><%= category %></h1>
   <div id="scroller-anchor"></div>
-  <div class="box" id="scroller">
-    <div id="bar-map" <%= filter === 'liquor' ? "class='wide-map'" : "" %>>
-    </div>
-    <% if(filter === 'bar'){ %>
-      <h3><%= cocktails[0].bar().address %></h3>
-      <div class="bar-info">
+  <div id="scroller-cont">
+    <div class="box" id="scroller">
+      <div id="bar-map" <%= filter === 'liquor' ? "class='wide-map'" : "" %>>
       </div>
-    <% }; %>
+      <% if(filter === 'bar'){ %>
+        <h3><%= cocktails[0].bar().address %></h3>
+        <div class="bar-info">
+        </div>
+      <% }; %>
+    </div>
   </div>
   <div class="box">
     <ul class="category-show-list clearfix">
