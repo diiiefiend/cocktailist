@@ -15,6 +15,7 @@
 //= require serializeJSON
 //= require underscore
 //= require backbone
+//= require js-sticky
 //= require cocktailist
 //= require_tree ../templates
 //= require_tree ./utils
