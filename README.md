@@ -19,12 +19,12 @@ and specialty drinks I've had. Users can:
 - Add cocktails to lists
 - Search for cocktails
 
-### To Do
+### Additional Features
 - [x] Integrate Google API to Bar info
 - [x] Pagination/infinite scroll on the recommendations page/lists page
+- [x] "Sticky" the Google map on browse pages to top of screen so it remains in sight when scrolling
 
 ##### Near-term:
-- [x] "Sticky" the Google map on browse pages to top of screen so it remains in sight when scrolling
 - [ ] Filter activity feed (3 types: add, rate, and list activities)
 
 ##### Mid-term:

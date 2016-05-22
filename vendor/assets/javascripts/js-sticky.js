@@ -1,20 +1,21 @@
 // TO USE:
-// in your document, define #scroller and #scroller-anchor (and possibly #scroller-cont)
-// to change trigger from top of #scroller to bottom of #scroller, use #scroller-bottom instead of #scroller
-// define a container div #scroller-cont if #scroller isn't a position: fixed or position: absolute element
+// in your document, define #sticky and #sticky-trigger (and possibly #sticky-cont)
+// to change trigger from top of #sticky to bottom of #sticky, use #sticky-bottom instead of #sticky
+// define a container div #sticky-cont if #sticky isn't a position: fixed or position: absolute element
+
+// define the event on which to look for sticky elements. default is document ready
+var jsStickyEventTrigger = "pageLoaded";
 
 function moveScroller(trigger) {
-  var move, scrollEl, scrollPos;
+  var move, scrollPos;
 
-  var anchorPos = $("#scroller-anchor").offset().top; // always static
+  var triggerPos = $("#sticky-trigger").offset().top; // always static
 
-  var scrollEl = (trigger === "top") ? $("#scroller") : $("#scroller-bottom");
+  var scrollEl = (trigger === "top") ? $("#sticky") : $("#sticky-bottom");
 
   // total = with margins
   var elTotalWidth = scrollEl.outerWidth(true);
   var elTotalHeight = scrollEl.outerHeight(true);
-  // doesn't include margins
-  var elHeight = scrollEl.outerHeight();
   // just the width of the inner content (no padding/border/margins)
   var elInnerWidth = scrollEl.css("width");
 
@@ -22,7 +23,7 @@ function moveScroller(trigger) {
 
     move = function() {
       scrollPos = $(window).scrollTop();
-      if (scrollPos > anchorPos) {
+      if (scrollPos > triggerPos) {
         scrollEl.css({
             position: "fixed",
             top: "0",             // change as needed
@@ -33,8 +34,8 @@ function moveScroller(trigger) {
 
         // need to create a "placeholder" for the element in the DOM if it
         // used to be position: static or position: relative
-        if(document.getElementById("scroller-cont") !== null){
-          $("#scroller-cont").css({
+        if(document.getElementById("sticky-cont") !== null){
+          $("#sticky-cont").css({
             width: elTotalWidth,
             height: elTotalHeight
           });
@@ -57,7 +58,7 @@ function moveScroller(trigger) {
     move = function() {
       scrollPos = $(window).scrollTop();
       // pt of interest is the bottom of the element
-      var triggerPos = scrollEl.offset().top + elHeight;
+      var benchmarkPos = scrollEl.offset().top + elTotalHeight;
 
       // if scrolling up, check to see if unstuck
       if ( initialScrollPos && (scrollPos < initialScrollPos)){
@@ -75,14 +76,16 @@ function moveScroller(trigger) {
         return;
       }
 
-      if (triggerPos > anchorPos) {
+      if (benchmarkPos > triggerPos) {
         // sticky it!
         // keep track of initial scroll place so can get scroll difference
         initialScrollPos = (initialScrollPos) ? initialScrollPos : scrollPos;
         stickied = true;
         scrollEl.css({
             position: "absolute",
-            top: anchorPos - elHeight - 250,
+            // may have to subtract an additional constant if your element is in a position: relative container
+            // (since triggerPos is off of absolute coords)
+            top: triggerPos - elTotalHeight - 0,
             width: elInnerWidth
         });
       }
@@ -93,20 +96,13 @@ function moveScroller(trigger) {
   move();
 }
 
-// on page load, look for scroller elements
-$(document).on("pageLoaded", function() {
-  if(document.getElementById("scroller") !== null){
+// on event trigger, look for sticky elements
+$(document).on(jsStickyEventTrigger, function() {
+  if(document.getElementById("sticky") !== null){
     moveScroller("top");
   }
 
-  if(document.getElementById("scroller-bottom") !== null){
+  if(document.getElementById("sticky-bottom") !== null){
     moveScroller("bottom");
   }
 });
-
-// keeping this for posterity even though i didn't end up using it bc of too much flickering
-// took FOREVER to figure out
-// negative margin = (overlap between anchorPos and trigger Pos) - (delta scrolling)
-//
-// marginTop: Math.round((anchorPos - triggerPos) - (scrollPos - initialScrollPos))
-// console.log("ap: " + anchorPos + " tp: " + triggerPos + " sp: " + scrollPos + " isp: " + initialScrollPos);
