@@ -24,7 +24,7 @@ and specialty drinks I've had. Users can:
 - [x] Pagination/infinite scroll on the recommendations page/lists page
 
 ##### Near-term:
-- [ ] "Sticky" the Google map on browse pages to top of screen so it remains in sight when scrolling
+- [x] "Sticky" the Google map on browse pages to top of screen so it remains in sight when scrolling
 - [ ] Filter activity feed (3 types: add, rate, and list activities)
 
 ##### Mid-term:

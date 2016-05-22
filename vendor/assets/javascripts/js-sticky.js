@@ -1,6 +1,7 @@
 // TO USE:
-// in your document, define #scroller and #scroller-anchor
+// in your document, define #scroller and #scroller-anchor (and possibly #scroller-cont)
 // to change trigger from top of #scroller to bottom of #scroller, use #scroller-bottom instead of #scroller
+// define a container div #scroller-cont if #scroller isn't a position: fixed or position: absolute element
 
 function moveScroller(trigger) {
   var move, scrollEl, scrollPos;
@@ -9,8 +10,13 @@ function moveScroller(trigger) {
 
   var scrollEl = (trigger === "top") ? $("#scroller") : $("#scroller-bottom");
 
-  var elWidth = scrollEl.outerWidth(true);
-  var elHeight = scrollEl.outerHeight(true);
+  // total = with margins
+  var elTotalWidth = scrollEl.outerWidth(true);
+  var elTotalHeight = scrollEl.outerHeight(true);
+  // doesn't include margins
+  var elHeight = scrollEl.outerHeight();
+  // just the width of the inner content (no padding/border/margins)
+  var elInnerWidth = scrollEl.css("width");
 
   if (trigger === "top"){
 
@@ -19,20 +25,28 @@ function moveScroller(trigger) {
       if (scrollPos > anchorPos) {
         scrollEl.css({
             position: "fixed",
-            top: "0",
-            width: "585px"
+            top: "0",             // change as needed
+            width: elInnerWidth,
+            zIndex: 100,
+            opacity: 0.9
         });
 
-        $("#scroller-cont").css({
-          width: elWidth,
-          height: elHeight
-        });
+        // need to create a "placeholder" for the element in the DOM if it
+        // used to be position: static or position: relative
+        if(document.getElementById("scroller-cont") !== null){
+          $("#scroller-cont").css({
+            width: elTotalWidth,
+            height: elTotalHeight
+          });
+        }
 
       } else {
         scrollEl.css({
             position: "",
             top: "",
-            width: ""
+            width: "",
+            zIndex: "",
+            opacity: ""
         });
       }
     };
@@ -52,7 +66,6 @@ function moveScroller(trigger) {
             top: "",
             width: ""
         });
-        // console.log("unstuck!");
         stickied = false;
         initialScrollPos = undefined;
       }
@@ -70,8 +83,7 @@ function moveScroller(trigger) {
         scrollEl.css({
             position: "absolute",
             top: anchorPos - elHeight - 250,
-            // need this bc position: absolute shrinks the width sometimes for some reason
-            width: elWidth
+            width: elInnerWidth
         });
       }
     };
