@@ -28,6 +28,7 @@ module Api
       clean_params[:rating] = rating_params[:rating_num]
       clean_params.delete(:rating_num)
       if @rating.update(clean_params)
+        byebug
         # create a new feeditem with the updated rating
         create_feed_item(@rating)
         render json: @rating
@@ -53,7 +54,7 @@ module Api
       Feed.create(user_id: current_user.id,
         cocktail_id: ratingObj.cocktail_id,
         activity: "rated",
-        data: truncate(ratingObj.body, length: 100, separator: ' ', ommission: '[...]')+delimiter+ratingObj.cocktail.bar.name+delimiter+ratingObj.rating,
+        data: truncate(ratingObj.body, length: 100, separator: ' ', ommission: '[...]')+delimiter+ratingObj.cocktail.bar.name+delimiter+"#{ratingObj.rating}",
         feedable_id: ratingObj.id,
         feedable_type: "Rating")
     end
