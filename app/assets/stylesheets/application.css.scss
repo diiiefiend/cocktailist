@@ -666,6 +666,14 @@ label.radio+label:not(.radio){
   clear: left;
 }
 
+input[type="checkbox"]{
+  display: inline-block;
+  width: auto;
+}
+label.checkbox{
+  width: auto;
+}
+
 h1{
   font: 30px 'Montserrat', sans-serif;
 }

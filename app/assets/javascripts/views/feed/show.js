@@ -3,7 +3,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
     template: JST['feed/show'],
 
     events: {
-      "click .addEntry" : "showForm"
+      // "click .addEntry" : "showForm"
     },
 
     initialize: function (options){
@@ -27,20 +27,20 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this.lists.fetch();
     },
 
-    showForm: function (e){
-      if(this._showForm){
-        this._form.remove();
-        Cocktailist.siteNav.setActive("feed");
-        this.render();
-        this._showForm = false;
-      } else {
-        var newModel = new Cocktailist.Models.Cocktail();
-        this._form = new Cocktailist.Views.CocktailsForm({model: newModel, collection: this._cocktails});
-        this.$el.find(".left").html(this._form.render().$el);
-        this.$el.find("a.addEntry").text("Cancel");
-        this._showForm = true;
-      };
-    },
+    // showForm: function (e){
+    //   if(this._showForm){
+    //     this._form.remove();
+    //     Cocktailist.siteNav.setActive("feed");
+    //     this.render();
+    //     this._showForm = false;
+    //   } else {
+    //     var newModel = new Cocktailist.Models.Cocktail();
+    //     this._form = new Cocktailist.Views.CocktailsForm({model: newModel, collection: this._cocktails});
+    //     this.$el.find(".left").html(this._form.render().$el);
+    //     this.$el.find("a.addEntry").text("Cancel");
+    //     this._showForm = true;
+    //   };
+    // },
 
     setRandomCocktail: function (){
       var arr = this._cocktails.pluck("id");
@@ -49,7 +49,17 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
     },
 
     render: function (){
-      var template = this.template({feedItems: this.collection, randomCocktail: this._randomCocktail, lists: this.lists});
+      var feedTypes = this.collection.pluck("activity")
+                      .filter( function(item, i, arr){
+                        return arr.indexOf(item) === i;
+                      });
+
+      var template = this.template({
+        feedItems: this.collection,
+        feedTypes: feedTypes,
+        randomCocktail: this._randomCocktail,
+        lists: this.lists
+      });
       this.$el.html(template);
       window.setTimeout(function (){ $(".loader").hide();}, 600);
       return this;

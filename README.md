@@ -30,10 +30,11 @@ and specialty drinks I've had. Users can:
 ##### Mid-term:
 - [ ] Tag cocktails (i.e. spicy, adventurous, traditional, etc.)
 - [ ] Browse cocktails by tag
-- [ ] Get recommendations based on drinking history, tags, and location
 - [ ] A 2-d graph view of cocktails, plotted out based on tags, if I can find a way to quantify the tags
 
-##### Lower priority:
+##### Long-term:
+- [ ] Get recommendations based on drinking history, tags, and location
+- [ ] User profiles
 - [ ] Ability to follow users, comments on their activity, etc
 - [ ] Smart search (i.e. autocomplete words)
 - [ ] Add ability to have multiple comments from same user?
