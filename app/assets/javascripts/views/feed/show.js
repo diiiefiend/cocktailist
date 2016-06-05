@@ -15,8 +15,8 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this.lists = options.lists;
       this.listenToOnce(this._cocktails, "sync", this.getLists);
       this.listenTo(this.lists, "sync", this.setRandomCocktail);
+      this.listenToOnce(this.collection, "sync", this.setFeedFilters);
       this.listenTo(this.collection, "afterRandomCocktail sync", this.render);
-
 
       this._showForm = false;
       this.bindScroll();
@@ -27,41 +27,41 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this.lists.fetch();
     },
 
-    filterFeed: function (e){
-      // get values of all checked items in filter-feed-list
-      // filter feed collection for all items with these activity values
-      // make sure on infinite scroll that it refilters for these values
-      var selected = $("#feed-filter-list").find("input:checked").map(function (){
-          return this.value;
-      });
-
-      var coll = this.collection.filter(function (item){
-        return _.contains(selected, item.get("activity"));
-      });
-
-      this.render(coll, selected);
-    },
-
     setRandomCocktail: function (){
       var arr = this._cocktails.pluck("id");
       this._randomCocktail = this._cocktails.get(arr[Math.floor(Math.random() * arr.length)]);
       this.collection.trigger("afterRandomCocktail");
     },
 
-    render: function (coll, feedFilters){
-      var feedItems = coll || this.collection.models;
-      var feedTypes = _.unique(this.collection.pluck("activity"));
-      feedFilters = feedFilters || feedTypes;
+    setFeedFilters: function (){
+      this._feedTypes = _.unique(this.collection.pluck("activity"));
+      this._feedFilters = this._feedTypes;
+    },
+
+    filterFeed: function (e){
+      this._feedFilters = $("#feed-filter-list").find("input:checked").map(function (){
+          return this.value;
+      });
+      this.render();
+    },
+
+    render: function (){
+      var feedItems = this.collection.filter(function (item){
+        return _.contains(this._feedFilters, item.get("activity"));
+      }.bind(this));
 
       var template = this.template({
         feedItems: feedItems,
-        feedTypes: feedTypes,
-        feedFilters: feedFilters,
+        feedTypes: this._feedTypes,
+        feedFilters: this._feedFilters,
         randomCocktail: this._randomCocktail,
         lists: this.lists
       });
+
       this.$el.html(template);
+
       window.setTimeout(function (){ $(".loader").hide();}, 600);
+
       return this;
     }
   })

@@ -25,7 +25,7 @@ and specialty drinks I've had. Users can:
 - [x] "Sticky" the Google map on browse pages to top of screen so it remains in sight when scrolling
 
 ##### Near-term:
-- [ ] Filter activity feed (3 types: add, rate, and list activities)
+- [x] Filter activity feed (3 types: add, rate, and list activities)
 
 ##### Mid-term:
 - [ ] Tag cocktails (i.e. spicy, adventurous, traditional, etc.)
@@ -34,7 +34,7 @@ and specialty drinks I've had. Users can:
 
 ##### Long-term:
 - [ ] Get recommendations based on drinking history, tags, and location
-- [ ] User profiles
+- [ ] User profiles and saved preferences
 - [ ] Ability to follow users, comments on their activity, etc
 - [ ] Smart search (i.e. autocomplete words)
 - [ ] Add ability to have multiple comments from same user?
