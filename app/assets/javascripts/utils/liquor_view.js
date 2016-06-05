@@ -6,13 +6,13 @@ Backbone.LiquorView = Backbone.CompositeView.extend({
     if(arr){
       // passing in array of cocktails
       arrLiquors = arr.map(function (cocktail){
-        return cocktail.escape('liquor');
+        return cocktail.get('liquor');
       });
     } else {
       arrLiquors = this.collection.pluck('liquor');
     };
 
-    this._liquors = Cocktailist.Util.unique(arrLiquors);
+    this._liquors = _.unique(arrLiquors);
 
     return this._liquors.sort();
   },
@@ -31,7 +31,7 @@ Backbone.LiquorView = Backbone.CompositeView.extend({
       });
     };
 
-    this._bars = Cocktailist.Util.unique(arrBars);
+    this._bars = _.unique(arrBars);
 
     return this._bars.sort();
   }

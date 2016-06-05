@@ -1,5 +1,5 @@
 <div class="left wide">
-  <% feedItems.each(function (feedItem){ %>
+  <% feedItems.forEach(function (feedItem){ %>
     <%= JST['feed/_feed']({feedItem: feedItem}) %>
   <% }); %>
 </div>
@@ -9,11 +9,17 @@
 <div class="right bar">
   <div class="box">
     <h1>Filter Feed</h1>
-    <ul class="filter-list">
+    <ul class="filter-list" id="feed-filter-list">
       <% feedTypes.forEach(function (activity){ %>
         <li class="clearfix">
-          <label for="" class="checkbox">
-            <input type="checkbox" value="<%= activity %>" checked="true" />
+          <label for="feed-filter-<%= activity %>" class="checkbox">
+            <input type="checkbox"
+              value="<%= activity %>"
+              id="feed-filter-<%= activity %>"
+              <% if (_.contains(feedFilters, activity)){ %>
+                checked
+              <% }; %>
+              />
             <%= activity %>
           </label>
         </li>

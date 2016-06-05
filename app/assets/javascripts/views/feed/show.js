@@ -3,7 +3,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
     template: JST['feed/show'],
 
     events: {
-      // "click .addEntry" : "showForm"
+      "click #feed-filter-list label.checkbox" : "filterFeed"
     },
 
     initialize: function (options){
@@ -23,24 +23,24 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this.collection.pageNum = 1;
     },
 
-    getLists: function (e){
+    getLists: function (){
       this.lists.fetch();
     },
 
-    // showForm: function (e){
-    //   if(this._showForm){
-    //     this._form.remove();
-    //     Cocktailist.siteNav.setActive("feed");
-    //     this.render();
-    //     this._showForm = false;
-    //   } else {
-    //     var newModel = new Cocktailist.Models.Cocktail();
-    //     this._form = new Cocktailist.Views.CocktailsForm({model: newModel, collection: this._cocktails});
-    //     this.$el.find(".left").html(this._form.render().$el);
-    //     this.$el.find("a.addEntry").text("Cancel");
-    //     this._showForm = true;
-    //   };
-    // },
+    filterFeed: function (e){
+      // get values of all checked items in filter-feed-list
+      // filter feed collection for all items with these activity values
+      // make sure on infinite scroll that it refilters for these values
+      var selected = $("#feed-filter-list").find("input:checked").map(function (){
+          return this.value;
+      });
+
+      var coll = this.collection.filter(function (item){
+        return _.contains(selected, item.get("activity"));
+      });
+
+      this.render(coll, selected);
+    },
 
     setRandomCocktail: function (){
       var arr = this._cocktails.pluck("id");
@@ -48,12 +48,15 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this.collection.trigger("afterRandomCocktail");
     },
 
-    render: function (){
-      var feedTypes = Cocktailist.Util.unique(this.collection.pluck("activity"));
+    render: function (coll, feedFilters){
+      var feedItems = coll || this.collection.models;
+      var feedTypes = _.unique(this.collection.pluck("activity"));
+      feedFilters = feedFilters || feedTypes;
 
       var template = this.template({
-        feedItems: this.collection,
+        feedItems: feedItems,
         feedTypes: feedTypes,
+        feedFilters: feedFilters,
         randomCocktail: this._randomCocktail,
         lists: this.lists
       });
