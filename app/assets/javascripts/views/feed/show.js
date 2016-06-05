@@ -49,10 +49,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
     },
 
     render: function (){
-      var feedTypes = this.collection.pluck("activity")
-                      .filter( function(item, i, arr){
-                        return arr.indexOf(item) === i;
-                      });
+      var feedTypes = Cocktailist.Util.unique(this.collection.pluck("activity"));
 
       var template = this.template({
         feedItems: this.collection,

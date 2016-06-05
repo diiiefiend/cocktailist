@@ -2,45 +2,37 @@ Backbone.LiquorView = Backbone.CompositeView.extend({
 
   liquorTypes: function (arr){
     this._liquors = this._liquors || [];
+    var arrLiquors;
     if(arr){
-      arr.forEach( function(cocktail){
-        if(this._liquors.indexOf(cocktail.escape('liquor')) === -1){
-          this._liquors.push(cocktail.escape('liquor'));
-        };
-      }.bind(this));
+      // passing in array of cocktails
+      arrLiquors = arr.map(function (cocktail){
+        return cocktail.escape('liquor');
+      });
     } else {
-      this.collection.each( function(cocktail){
-        if(this._liquors.indexOf(cocktail.escape('liquor')) === -1){
-          this._liquors.push(cocktail.escape('liquor'));
-        };
-      }.bind(this));
+      arrLiquors = this.collection.pluck('liquor');
     };
+
+    this._liquors = Cocktailist.Util.unique(arrLiquors);
 
     return this._liquors.sort();
   },
 
   bars: function (arr){
     this._bars = this._bars || [];
+    var arrBars;
+
     if(arr){
-      arr.forEach( function(cocktail){
-        if(this._bars.indexOf(cocktail.bar().name) === -1){
-          this._bars.push(cocktail.bar().name);
-        };
-      }.bind(this));
+      arrBars = arr.map(function (cocktail){
+        return cocktail.bar().name;
+      });
     } else {
-      this.collection.each( function(cocktail){
-        if(this._bars.indexOf(cocktail.bar().name) === -1){
-          this._bars.push(cocktail.bar().name);
-        };
-      }.bind(this));
+      arrBars = this.collection.map(function (cocktail){
+        return cocktail.bar().name;
+      });
     };
 
-    return this._bars.sort();
-  },
+    this._bars = Cocktailist.Util.unique(arrBars);
 
-  //for file input form resets
-  resetFormElement: function ($e) {
-    $e.wrap('<form>').closest('form').get(0).reset();
-    $e.unwrap();
+    return this._bars.sort();
   }
 });

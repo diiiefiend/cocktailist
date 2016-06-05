@@ -77,7 +77,7 @@ Cocktailist.Views.CocktailsForm = Backbone.LiquorView.extend({
   },
 
   removeImage: function (e){
-    this.resetFormElement(this.$("#attach-image"));
+    Cocktailist.Util.resetFormElement(this.$("#attach-image"));
     this._updatePreview("");
   },
 
