@@ -7,7 +7,8 @@
 <div class="rule-right"></div>
 
 <div class="right bar">
-  <div class="box">
+  <div id="sticky-cont">
+  <div class="box" id="sticky">
     <h1>Filter Feed</h1>
     <ul class="filter-list" id="feed-filter-list">
       <% feedTypes.forEach(function (activity){ %>
@@ -25,6 +26,7 @@
         </li>
       <% }); %>
     </ul>
+  </div>
   </div>
   <div class="box">
     <h1>My Lists</h1>
@@ -45,4 +47,5 @@
     <p><a href="#browse/liquor/<%= randomCocktail.escape('liquor') %>">Browse <%= randomCocktail.escape('liquor') %> drinks</a></p>
     <% }; %>
   </div>
+  <div id="sticky-trigger"></div>
 </div>

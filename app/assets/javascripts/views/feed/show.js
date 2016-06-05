@@ -60,7 +60,10 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
 
       this.$el.html(template);
 
-      window.setTimeout(function (){ $(".loader").hide();}, 600);
+      window.setTimeout(function (){
+        $(".loader").hide();
+        $(document).trigger("pageLoaded");
+      }, 600);
 
       return this;
     }

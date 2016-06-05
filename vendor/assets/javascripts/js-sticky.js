@@ -18,6 +18,7 @@ function moveScroller(trigger) {
   var elTotalHeight = scrollEl.outerHeight(true);
   // just the width of the inner content (no padding/border/margins)
   var elInnerWidth = scrollEl.css("width");
+  var elLeftPos = scrollEl.offset().left;
 
   if (trigger === "top"){
 
@@ -27,6 +28,7 @@ function moveScroller(trigger) {
         scrollEl.css({
             position: "fixed",
             top: "0",             // change as needed
+            left: elLeftPos,
             width: elInnerWidth,
             zIndex: 100,
             opacity: 0.9
@@ -45,6 +47,7 @@ function moveScroller(trigger) {
         scrollEl.css({
             position: "",
             top: "",
+            left: "",
             width: "",
             zIndex: "",
             opacity: ""

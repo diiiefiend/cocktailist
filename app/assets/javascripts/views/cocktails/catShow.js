@@ -17,6 +17,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     this.markerArr = [];
     this.filterType = options.filterType;
     this.category = options.category;
+
     this.listenTo(this.collection, "sync", this.setCatColl);
   },
 
@@ -28,22 +29,25 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
       this.category = (this.category === "switch" ? this.collection.at(0).bar().name : this.category);
       this.catCollection = this.collection.models.filter(function (cocktail){
         return cocktail.bar().name === this.category;
-      });
+      }.bind(this));
     };
     this.render();
   },
 
   filter: function (e){
     target = $(e.currentTarget).text();
+    var coll;
+
     if(this.filterType==='liquor'){
-      var coll = this.catCollection.filter(function (cocktail){
+      coll = this.catCollection.filter(function (cocktail){
         return cocktail.bar().name === target;
       });
     } else if (this.filterType==='bar'){
-      var coll = this.catCollection.filter(function (cocktail){
+      coll = this.catCollection.filter(function (cocktail){
         return cocktail.get('liquor') === target;
       });
     };
+
     this.render(coll, target);
   },
 
@@ -70,7 +74,11 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
   render: function (coll, target){
     var cocktails = coll || this.catCollection;
 
-    var main = this.template['main']({category: this.category, cocktails: cocktails, filter: this.filterType});
+    var main = this.template['main']({
+      category: this.category,
+      cocktails: cocktails,
+      filter: this.filterType
+    });
     this.$el.html(main);
 
 
@@ -117,7 +125,12 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
       var liquors = this.liquorTypes();
       var bars = this.bars(this.catCollection);
-      var temp = this.template['liquorTemp']({category: this.category, liquors: liquors, bars: bars, target: target});
+      var temp = this.template['liquorTemp']({
+        category: this.category,
+        liquors: liquors,
+        bars: bars,
+        target: target
+      });
 
     } else if(this.filterType === 'bar'){
 
@@ -157,7 +170,12 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
       var liquors = this.liquorTypes(this.catCollection);
       var bars = this.bars();
-      var temp = this.template['barTemp']({category: this.category, liquors: liquors, bars: bars, target: target});
+      var temp = this.template['barTemp']({
+        category: this.category,
+        liquors: liquors,
+        bars: bars,
+        target: target
+      });
     };
 
     this.$el.find(".right").html(temp);
