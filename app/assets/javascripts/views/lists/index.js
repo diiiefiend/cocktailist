@@ -22,7 +22,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       if(options.options && options.options.listShowId){
         this._listShowId = options.options.listShowId;
       };
-      
+
       this._showForm = false;
       this._user = Cocktailist.currentUser;
       this._user.fetch();
@@ -49,7 +49,7 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
         this.model = this.collection.getOrFetch(this._listShowId, {url: 'api/users/'+this._user.id+'/lists', silent: true});
       };
       $(window).unbind();
-      
+
       this.collection.trigger("afterModelSet");
     },
 
@@ -131,7 +131,11 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       this.listitemView = new Cocktailist.Views.ListitemIndex({model: this.model, collection: this.model.listitems()});
       this.$el.find(".right").html(this.listitemView.render().$el);
 
-      window.setTimeout(function (){ $(".loader").hide();}, 400);
+      window.setTimeout(function (){
+        $(".loader").hide();
+        $(document).trigger("pageLoaded");
+      }, 400);
+
       return this;
     },
 
