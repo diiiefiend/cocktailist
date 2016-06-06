@@ -25,6 +25,7 @@ function moveScroller(trigger) {
     move = function() {
       scrollPos = $(window).scrollTop();
       if (scrollPos > triggerPos) {
+        scrollEl.addClass("stickied");
         scrollEl.css({
             position: "fixed",
             top: "0",             // change as needed
@@ -44,6 +45,7 @@ function moveScroller(trigger) {
         }
 
       } else {
+        scrollEl.removeClass("stickied");
         scrollEl.css({
             position: "",
             top: "",
@@ -65,6 +67,7 @@ function moveScroller(trigger) {
 
       // if scrolling up, check to see if unstuck
       if ( initialScrollPos && (scrollPos < initialScrollPos)){
+        scrollEl.removeClass("stickied");
         scrollEl.css({
             position: "",
             top: "",
@@ -84,6 +87,7 @@ function moveScroller(trigger) {
         // keep track of initial scroll place so can get scroll difference
         initialScrollPos = (initialScrollPos) ? initialScrollPos : scrollPos;
         stickied = true;
+        scrollEl.addClass("stickied");
         scrollEl.css({
             position: "absolute",
             // may have to subtract an additional constant if your element is in a position: relative container

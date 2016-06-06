@@ -575,6 +575,19 @@ img.feed-img{
   font-size: 16px;
 }
 
+.shadow-link{
+  position: absolute;
+  right: 0;
+  bottom: -1.4em;
+  color: #170F0C;
+  font-size: 1.4em;
+  display: none;
+}
+
+.stickied .shadow-link{
+  display: block;
+}
+
 input.side-input{
   width: 80%;
   display: inline-block;
