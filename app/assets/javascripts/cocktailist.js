@@ -13,9 +13,11 @@ window.Cocktailist = {
     this.userMenu = new Cocktailist.Views.UserMenu({el: "#user-menu ul"});
     this.search = new Cocktailist.Views.Searchbox({el: "#search"});
 
-    $("a[href='#header']").click(function() {
-      $("html, body").animate({ scrollTop: 0 }, "slow");
-      return false;
+    $(document).on("pageLoaded", function (){
+      $("a.scrollToTop").click(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+      });
     });
 
     new Cocktailist.Routers.Router({$el: $("#js-main")});
