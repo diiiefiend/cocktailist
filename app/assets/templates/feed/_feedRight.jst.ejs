@@ -1,0 +1,41 @@
+<div id="sticky-cont">
+<div class="box" id="sticky">
+  <h1>Filter Feed</h1>
+  <ul class="filter-list" id="feed-filter-list">
+    <% feedTypes.forEach(function (activity){ %>
+      <li class="clearfix">
+        <label for="feed-filter-<%= activity %>" class="checkbox">
+          <input type="checkbox"
+            value="<%= activity %>"
+            id="feed-filter-<%= activity %>"
+            <% if (_.contains(feedFilters, activity)){ %>
+              checked
+            <% }; %>
+            />
+          <%= activity %>
+        </label>
+      </li>
+    <% }); %>
+  </ul>
+</div>
+</div>
+<div class="box">
+  <h1>My Lists</h1>
+  <ul class="filter-list">
+  <% lists.each( function (list){ %>
+    <li>
+      <a href="#lists/<%= list.id %>" class="filter-link" ><%= list.escape('name') %> (<%= list.escape('listlength') %>)</a>
+    </li>
+  <% }); %>
+  </ul>
+</div>
+<div class="box">
+  <h1>Today's Drink</h1>
+  <% if(randomCocktail){ %>
+  <ul class="category-show-list clearfix">
+    <%= JST['cocktails/_categoryShowItem']({cocktail: randomCocktail, standalone: true}) %>
+  </ul>
+  <p><a href="#browse/liquor/<%= randomCocktail.escape('liquor') %>">Browse <%= randomCocktail.escape('liquor') %> drinks</a></p>
+  <% }; %>
+</div>
+<div id="sticky-trigger"></div>

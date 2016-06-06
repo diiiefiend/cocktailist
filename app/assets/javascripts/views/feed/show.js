@@ -1,6 +1,10 @@
 Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
   _.extend({}, Cocktailist.Mixins.InfiniteScroll, {
-    template: JST['feed/show'],
+    template: {
+      main: JST['feed/show'],
+      feed: JST['feed/_feedLeft'],
+      sidebar: JST['feed/_feedRight']
+    },
 
     events: {
       "click #feed-filter-list label.checkbox" : "filterFeed"
@@ -15,8 +19,9 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this.lists = options.lists;
       this.listenToOnce(this._cocktails, "sync", this.getLists);
       this.listenTo(this.lists, "sync", this.setRandomCocktail);
+      this.listenTo(this.collection, "afterRandomCocktail", this.render);
       this.listenToOnce(this.collection, "sync", this.setFeedFilters);
-      this.listenTo(this.collection, "afterRandomCocktail sync", this.render);
+      this.listenTo(this.collection, "sync", this.renderLeft);
 
       this._showForm = false;
       this.bindScroll();
@@ -38,27 +43,45 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this._feedFilters = this._feedTypes;
     },
 
+    setFeedColl: function (){
+      this._feedColl = this.collection.filter(function (item){
+        return _.contains(this._feedFilters, item.get("activity"));
+      }.bind(this));
+    },
+
     filterFeed: function (e){
       this._feedFilters = $("#feed-filter-list").find("input:checked").map(function (){
           return this.value;
       });
-      this.render();
+      this.renderLeft();
     },
 
-    render: function (){
-      var feedItems = this.collection.filter(function (item){
-        return _.contains(this._feedFilters, item.get("activity"));
-      }.bind(this));
+    renderLeft: function (){
+      this.setFeedColl();
+      var template = this.template['feed']({
+        feedItems: this._feedColl
+      });
 
-      var template = this.template({
-        feedItems: feedItems,
+      this.$el.find(".left").html(template);
+    },
+
+    renderRight: function (){
+      var template = this.template['sidebar']({
         feedTypes: this._feedTypes,
         feedFilters: this._feedFilters,
         randomCocktail: this._randomCocktail,
         lists: this.lists
       });
 
+      this.$el.find(".right").html(template);
+    },
+
+    render: function (){
+      var template = this.template['main']();
       this.$el.html(template);
+
+      this.renderLeft();
+      this.renderRight();
 
       window.setTimeout(function (){
         $(".loader").hide();
