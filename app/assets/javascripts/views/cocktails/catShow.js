@@ -39,6 +39,8 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     var targetName = target.text();
 
     this.category = targetName;
+    // scroll to Top
+    window.scrollTo(0,0);
     this.setCatColl();
     this.renderFilterList();
   },
