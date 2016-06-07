@@ -186,7 +186,11 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     var $oldMap = $("#bar-map");
     var $oldInfo = $(".bar-info");
 
-    updateMap = updateMap || true;
+    // have to spell out the default or else heroku doesn't get it
+    if(updateMap === undefined){
+      updateMap = true;
+    };
+
     cocktails = cocktails || this.catCollection;
 
     var temp = this.template['categoryTemp']({
