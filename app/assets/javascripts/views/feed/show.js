@@ -21,7 +21,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this.listenTo(this.lists, "sync", this.setRandomCocktail);
       this.listenTo(this.collection, "afterRandomCocktail", this.render);
       this.listenToOnce(this.collection, "sync", this.setFeedFilters);
-      this.listenTo(this.collection, "sync", this.renderLeft);
+      this.listenTo(this.collection, "sync", this.renderFeed);
 
       this._showForm = false;
       this.bindScroll();
@@ -53,10 +53,10 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this._feedFilters = $("#feed-filter-list").find("input:checked").map(function (){
           return this.value;
       });
-      this.renderLeft();
+      this.renderFeed();
     },
 
-    renderLeft: function (){
+    renderFeed: function (){
       this.setFeedColl();
       var template = this.template['feed']({
         feedItems: this._feedColl
@@ -65,7 +65,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this.$el.find(".left").html(template);
     },
 
-    renderRight: function (){
+    renderSide: function (){
       var template = this.template['sidebar']({
         feedTypes: this._feedTypes,
         feedFilters: this._feedFilters,
@@ -80,8 +80,8 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       var template = this.template['main']();
       this.$el.html(template);
 
-      this.renderLeft();
-      this.renderRight();
+      this.renderFeed();
+      this.renderSide();
 
       window.setTimeout(function (){
         $(".loader").hide();

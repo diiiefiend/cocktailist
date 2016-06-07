@@ -7,7 +7,7 @@
         <% for(var i = 0; i < Math.min(5, groups[group].length); i++){ %>
           <% var cocktail = groups[group][i]; %>
           <%= JST['cocktails/_categoryShowItem']({cocktail: cocktail, standalone: false}) %>
-          
+
         <% }; %>
       </ul>
       <% if(groups[group].length > 5){ %>

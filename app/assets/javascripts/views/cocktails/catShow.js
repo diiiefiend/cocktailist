@@ -1,13 +1,16 @@
 Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
   template: {
-    "main" : JST['cocktails/catShow'],
-    "liquorTemp" : JST['cocktails/_catShowLiquor'],
-    "barTemp" : JST['cocktails/_catShowBar']
+    "main" : JST['cocktails/catMain'],
+    "categoryTemp" : JST['cocktails/_catShow'],
+    "catListTemp" : JST['cocktails/_catCatList'],
+    "filterListTemp" : JST['cocktails/_catFilterList']
   },
 
   events: {
     "click .filter-list a" : "filter",
     "click a.subtext" : "showAll",
+    "click .category-list a" : "switchCatEntry",
+    "click a.switch" : "swapCat",
     "mouseenter .category-show-list li" : "bounce",
     "mouseleave .category-show-list li" : "stopBounce"
   },
@@ -18,41 +21,52 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     this.filterType = options.filterType;
     this.category = options.category;
 
+    this.listenToOnce(this.collection, "sync", this.render);
     this.listenTo(this.collection, "sync", this.setCatColl);
   },
 
-  setCatColl: function (){
-    if(this.filterType === 'liquor'){
-      this.category = (this.category === "switch" ? this.collection.at(0).get('liquor') : this.category);
-      this.catCollection = this.collection.where({liquor : this.category});
-    } else if(this.filterType === 'bar'){
-      this.category = (this.category === "switch" ? this.collection.at(0).bar().name : this.category);
-      this.catCollection = this.collection.models.filter(function (cocktail){
-        return cocktail.bar().name === this.category;
-      }.bind(this));
-    };
-    this.render();
+  swapCat: function (e){
+    this.filterType = this.filterType === "bar" ? "liquor" : "bar";
+    this.category = "switch";
+    this.setCatColl();
+    this.renderSide();
+  },
+
+  switchCatEntry: function (e){
+    var target = $(e.currentTarget);
+    target.parents("ul.category-list").find(".bolded").removeClass("bolded");
+    target.addClass("bolded");
+
+    var targetName = target.text();
+
+    this.category = targetName;
+    this.setCatColl();
+    this.renderFilterList();
   },
 
   filter: function (e){
-    target = $(e.currentTarget).text();
-    var coll;
+    var target = $(e.currentTarget);
+    target.parents("ul.filter-list").find(".bolded").removeClass("bolded");
+    target.addClass("bolded");
 
+    var targetName = target.text();
+
+    var coll;
     if(this.filterType==='liquor'){
       coll = this.catCollection.filter(function (cocktail){
-        return cocktail.bar().name === target;
+        return cocktail.bar().name === targetName;
       });
     } else if (this.filterType==='bar'){
       coll = this.catCollection.filter(function (cocktail){
-        return cocktail.get('liquor') === target;
+        return cocktail.get('liquor') === targetName;
       });
     };
 
-    this.render(coll, target);
+    this.renderCategory(coll);
   },
 
   showAll: function (e){
-    this.render();
+    this.renderCategory();
   },
 
   bounce: function (e){
@@ -71,19 +85,24 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     };
   },
 
-  render: function (coll, target){
-    var cocktails = coll || this.catCollection;
+  setCatColl: function (){
+    if(this.filterType === 'liquor'){
+      this.category = (this.category === "switch" ? this.collection.at(0).get('liquor') : this.category);
+      this.catCollection = this.collection.where({liquor : this.category});
+    } else if(this.filterType === 'bar'){
+      this.category = (this.category === "switch" ? this.collection.at(0).bar().name : this.category);
+      this.catCollection = this.collection.models.filter(function (cocktail){
+        return cocktail.bar().name === this.category;
+      }.bind(this));
+    };
 
-    var main = this.template['main']({
-      category: this.category,
-      cocktails: cocktails,
-      filter: this.filterType
-    });
-    this.$el.html(main);
+    //update url
+    Backbone.history.navigate("browse/" + this.filterType + "/" + this.category, {trigger: false});
+    this.renderCategory(this.catCollection);
+  },
 
-
+  setMap: function (cocktails){
     //google maps stuff
-
     var coords = new google.maps.LatLng(cocktails[0].bar().latitude, cocktails[0].bar().longitude);
 
     var mapCanvas = document.getElementById('bar-map');
@@ -100,6 +119,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     var map = new google.maps.Map(mapCanvas, mapOptions);
 
     var markerBounds = new google.maps.LatLngBounds();
+    var markerLength;
 
     if(this.filterType === 'liquor'){
       markerLength = cocktails.length;
@@ -121,29 +141,18 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
     map.fitBounds(markerBounds);
 
-    if(this.filterType === 'liquor'){
-
-      var liquors = this.liquorTypes();
-      var bars = this.bars(this.catCollection);
-      var temp = this.template['liquorTemp']({
-        category: this.category,
-        liquors: liquors,
-        bars: bars,
-        target: target
-      });
-
-    } else if(this.filterType === 'bar'){
-
+    if(this.filterType === 'bar'){
       //retrieve some info on the bar, per Google Places API
-
       var request = {
         location: map.getCenter(),
         radius: '500',
         query: this.category
       };
+
       var service = new google.maps.places.PlacesService(map);
       service.textSearch(request, function (results, status){
         if(status == google.maps.places.PlacesServiceStatus.OK){
+
           service.getDetails({placeId: results[0].place_id}, function (place, status2){
             if(status2 == google.maps.places.PlacesServiceStatus.OK){
               var $barInfo = this.$el.find(".bar-info");
@@ -165,24 +174,74 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
             };
           }.bind(this));
+
         };
       }.bind(this));
+    };
+  },
 
+  renderCategory: function (cocktails){
+    cocktails = cocktails || this.catCollection;
+
+    var temp = this.template['categoryTemp']({
+      category: this.category,
+      cocktails: cocktails,
+      filter: this.filterType
+    });
+    this.$el.find(".left").html(temp);
+
+    this.setMap(cocktails);
+    $(document).trigger("pageLoaded");
+  },
+
+  renderFilterList: function (){
+    if(this.filterType === 'liquor'){
+      var bars = this.bars(this.catCollection);
+      var temp = this.template['filterListTemp']({
+        filterList: bars
+      });
+    } else if(this.filterType === 'bar'){
       var liquors = this.liquorTypes(this.catCollection);
-      var bars = this.bars();
-      var temp = this.template['barTemp']({
-        category: this.category,
-        liquors: liquors,
-        bars: bars,
-        target: target
+      var temp = this.template['filterListTemp']({
+        filterList: liquors
       });
     };
 
-    this.$el.find(".right").html(temp);
+    this.$el.find(".right .filterList").html(temp);
+  },
+
+  renderCatList: function (){
+    if(this.filterType === 'liquor'){
+      var liquors = this.liquorTypes();
+      var temp = this.template['catListTemp']({
+        catList: liquors,
+        category: this.filterType
+      });
+    } else if(this.filterType === 'bar'){
+      var bars = this.bars();
+      var temp = this.template['catListTemp']({
+        catList: bars,
+        category: this.filterType
+      });
+    };
+
+    this.$el.find(".right .catList").html(temp);
+  },
+
+  renderSide: function (){
+    this.renderFilterList();
+    this.renderCatList();
+  },
+
+  render: function (){
+    var temp = this.template['main']();
+    this.$el.html(temp);
+
+    this.setCatColl();
+    this.renderSide();
 
     window.setTimeout(function (){
       $(".loader").hide();
-      $(document).trigger("pageLoaded");
     }, 400);
 
     return this;
