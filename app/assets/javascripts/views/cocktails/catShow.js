@@ -17,7 +17,6 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
   initialize: function (options){
     //collection: cocktails
-    this.markerArr = [];
     this.filterType = options.filterType;
     this.category = options.category;
 
@@ -51,18 +50,20 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
     var targetName = target.text();
 
-    var coll;
+    var coll, updateMap;
     if(this.filterType==='liquor'){
+      updateMap = true;
       coll = this.catCollection.filter(function (cocktail){
         return cocktail.bar().name === targetName;
       });
     } else if (this.filterType==='bar'){
+      updateMap = false;
       coll = this.catCollection.filter(function (cocktail){
         return cocktail.get('liquor') === targetName;
       });
     };
 
-    this.renderCategory(coll);
+    this.renderCategory(coll, updateMap);
   },
 
   showAll: function (e){
@@ -103,6 +104,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
   setMap: function (cocktails){
     //google maps stuff
+    this.markerArr = [];
     var coords = new google.maps.LatLng(cocktails[0].bar().latitude, cocktails[0].bar().longitude);
 
     var mapCanvas = document.getElementById('bar-map');
@@ -180,7 +182,10 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     };
   },
 
-  renderCategory: function (cocktails){
+  renderCategory: function (cocktails, updateMap=true){
+    var oldMap = $("#bar-map");
+    var oldInfo = $(".bar-info");
+
     cocktails = cocktails || this.catCollection;
 
     var temp = this.template['categoryTemp']({
@@ -190,7 +195,14 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     });
     this.$el.find(".left").html(temp);
 
-    this.setMap(cocktails);
+    // don't make unnecessary api calls
+    if(updateMap){
+      this.setMap(cocktails);
+    } else {
+      $("#bar-map").replaceWith(oldMap);
+      $(".bar-info").replaceWith(oldInfo);
+    };
+
     $(document).trigger("pageLoaded");
   },
 
