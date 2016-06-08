@@ -8,14 +8,17 @@
     </div>
     <div class="user-stats">
       <% if(signedIn){ %>
-        Add to List:
-        <select class="add-to-lists">
-          <option value=""></option>
-          <% lists.each( function (list){ %>
-            <% var listsCID = list.listitems().pluck('cocktail_id') %>
-            <option value="<%= list.get('name') %>" <%= _.indexOf(listsCID, cocktail.id) > -1 ? "selected" : ""  %> ><%= list.get('name') %></option>
+        <h5>Lists</h5>
+        <ul class="add-to-lists clearfix">
+        <% lists.each( function (list){ %>
+          <% var listsCID = list.listitems().pluck('cocktail_id') %>
+            <li class="clearfix">
+              <label for="list_<%= list.get('name') %>">
+              <input type="checkbox" value="<%= list.get('name') %>" id="list_<%= list.get('name') %>" />
+              <%= list.get('name') %></label>
+            </li>
           <% }); %>
-        </select>
+        </ul>
         <div class="flash"></div>
       <% } else { %>
         <p><a href="#session/new">Log in</a> to add to lists!</p>

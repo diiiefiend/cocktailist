@@ -505,17 +505,27 @@ img.feed-img{
   clear: right;
   float: right;
   width: 225px;
-}
+  border: 1px solid #fff;
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 5px;
 
-.user-stats select.add-to-lists{
-  margin: 0 auto;
-  width: auto;
-  background: white;
-  color: black;
-  text-transform: capitalize;
-}
-.user-stats select.add-to-lists option{
-  background: white;
+  h5{
+    background: white;
+    color: black;
+    padding: 1px;
+    line-height: normal;
+    margin: 5px -5px;
+  }
+
+  ul.add-to-lists{
+    list-style: none;
+    font-size: 14px;
+
+    label{
+      width: auto;
+    }
+  }
 }
 
 .category-show-list li{
