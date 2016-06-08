@@ -14,7 +14,12 @@
           <% var listsCID = list.listitems().pluck('cocktail_id') %>
             <li class="clearfix">
               <label for="list_<%= list.get('name') %>">
-              <input type="checkbox" value="<%= list.get('name') %>" id="list_<%= list.get('name') %>" />
+              <input
+                type="checkbox"
+                value="<%= list.get('name') %>"
+                id="list_<%= list.get('name') %>"
+                <%= _.contains(checkedLists, list.get('name')) ? "checked" : "" %> 
+              />
               <%= list.get('name') %></label>
             </li>
           <% }); %>

@@ -2,7 +2,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   template: JST['cocktails/show'],
 
   events: {
-    "change .add-to-lists" : "addToList"
+    "click .add-to-lists li label" : "updateToList"
   },
 
   initialize: function (options){
@@ -22,6 +22,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this.listenToOnce(this.model, "sync", this._calcAvgRating);
     this.listenTo(this._ratings, "add change afterRemove", this._calcAvgRating);
 
+    this.listenToOnce(this._lists, "sync", this._setLists);
     this.listenTo(this._lists, "sync", this.render);          //the main render. not sure if i like having it render just once? or render before similar cocktail as well?
 
     this.listenTo(this._ratings, "add change afterRemove", this.render);
@@ -29,55 +30,37 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this.listenTo(this._ratings, "update change", this.renderRatings); //later optimize this to only render the new comment?
   },
 
-  getListItem: function (targetList){
-    var targetItem;
+  updateToList: function (e){
+    e.preventDefault();
+    var $targetCheckbox = $(e.currentTarget).find("input");
+    var listname = $targetCheckbox.val();
 
-    this._lists.each( function (list){
-      list.listitems().each( function(listitem){
-        if(listitem.get('cocktail_id') === this.model.id){
-          targetItem = listitem;
-          targetItem.list = targetList;
-          return targetItem;
-        };
-      }.bind(this));
-    }.bind(this));
-    return targetItem || new Cocktailist.Models.Listitem([], {list: targetList});
-  },
-
-  deleteListItem: function (){
-    var targetItem;
-
-    this._lists.each( function (list){
-      list.listitems().each( function(listitem){
-        if(listitem.get('cocktail_id') === this.model.id){
-          targetItem = listitem;
-          targetItem.list = list;
-          targetItem.destroy({
-            success: function (data){
-              this.$el.find(".flash").html("<p class='subtext'>Item removed!</p>");
-            }.bind(this)
-          });
-          return targetItem;
-        };
-      }.bind(this));
-    }.bind(this));
-    return targetItem || "could not find";
-  },
-
-  addToList: function (e){
-    var listname = $(e.currentTarget).val();
-    if(listname === ""){              //they want to remove from list
-      this.deleteListItem();
-      return;
-    }
-    var list = this._lists.findWhere({name: listname});
-    if(list){
-      this.getListItem(list).save( {cocktail_id: this.model.id, list_id: list.id}, {
-        success: function (data){
-          this.$el.find(".flash").html("<p class='subtext'>Successfully added!<p>");
-        }.bind(this)
-      });
+    var targetList = this._lists.findWhere({name: listname});
+    if (targetList){
+      var listitem = this.getListItem(targetList);
+      if (listitem){
+        //they want to remove from list
+        this.deleteListItem(targetList, listitem, $targetCheckbox);
+      } else {
+        this.addListItem(targetList, listitem, $targetCheckbox);
+      };
     };
+  },
+
+  _setLists: function (){
+    this.checkedLists = [];
+
+    this._lists.each( function (list){
+      var listname = list.get('name');
+      this[listname + "_listitems"] = list.listitems();
+
+      this[listname + "_listitems"].each( function(listitem){
+        if(listitem.get('cocktail_id') === this.model.id){
+          this.checkedLists.push(list.get('name'));
+          return;
+        };
+      }.bind(this));
+    }.bind(this));
   },
 
   setSimilarCocktail: function (){
@@ -112,8 +95,80 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this.render();
   },
 
+  getListItem: function (targetList){
+    var listname = targetList.get('name');
+    var targetItem = this[listname + "_listitems"].findWhere({cocktail_id: this.model.id});
+    return targetItem;  //undefined if targetItem not found
+  },
+
+  deleteListItem: function (list, listitem, $input){
+    var listname = list.get('name');
+    listitem.list = list;
+    listitem.destroy({
+      success: function (data){
+        // update our local collection
+        this[listname + "_listitems"].remove(listitem);
+        $input.prop("checked", false);
+      }.bind(this)
+    });
+    return listitem;
+  },
+
+  addListItem: function (list, listitem, $input){
+    var listname = list.get('name');
+    var listitem = new Cocktailist.Models.Listitem([], {list: list});
+    listitem.save({cocktail_id: this.model.id, list_id: list.id}, {
+      success: function (data){
+        // update our local collection
+        this[listname + "_listitems"].add(listitem);
+        $input.prop("checked", true);
+      }.bind(this)
+    });
+  },
+
+  renderForm: function (){
+    if(this.model.userRatingId() > -1){
+      var rating = this._ratings.getOrFetch( this.model.userRatingId(), {cocktail: this.model} );
+    } else {
+      var rating = new Cocktailist.Models.Rating([], {cocktail: this.model});
+    };
+    var reviewFormView = new Cocktailist.Views.RatingForm({model: rating, collection: this._ratings, cocktail: this.model});
+    this.$el.find("#rating-form").html(reviewFormView.render().$el);
+
+    return this;
+  },
+
+  renderRatings: function (){
+    if(this.ratingAvg !== "N/A"){
+      var $cont = this.$el.find("#main-rating");
+      $cont.empty();
+      var imgCode = "<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>";
+      for(var i=0; i < Math.floor(this.ratingAvg); i++){
+        $cont.append(imgCode);
+      };
+
+      var partial_rating = this.ratingAvg % 1;
+      $cont.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'>" + imgCode);
+    };
+
+    this.$el.find("#reviews").empty();
+    this._ratings.each( function(rating){
+      var ratingShowView = new Cocktailist.Views.RatingShow({model: rating});
+      this.$el.find("#reviews").prepend(ratingShowView.render().$el);
+    }.bind(this));
+    return this;
+  },
+
+
   render: function (){
-    var template = this.template({cocktail: this.model, ratingAvg: this.ratingAvg, similarCocktail: this._similarCocktail, signedIn: Cocktailist.currentUser.isSignedIn(), lists: this._lists});
+    var template = this.template({
+      cocktail: this.model,
+      ratingAvg: this.ratingAvg,
+      similarCocktail: this._similarCocktail,
+      signedIn: Cocktailist.currentUser.isSignedIn(),
+      lists: this._lists,
+      checkedLists: this.checkedLists
+    });
     this.$el.html(template);
 
     if(Cocktailist.currentUser.isSignedIn()){
@@ -149,39 +204,6 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
     window.setTimeout(function (){ $(".loader").hide();}, 800);
 
-    return this;
-  },
-
-  renderForm: function (){
-    if(this.model.userRatingId() > -1){
-      var rating = this._ratings.getOrFetch( this.model.userRatingId(), {cocktail: this.model} );
-    } else {
-      var rating = new Cocktailist.Models.Rating([], {cocktail: this.model});
-    };
-    var reviewFormView = new Cocktailist.Views.RatingForm({model: rating, collection: this._ratings, cocktail: this.model});
-    this.$el.find("#rating-form").html(reviewFormView.render().$el);
-
-    return this;
-  },
-
-  renderRatings: function (){
-    if(this.ratingAvg !== "N/A"){
-      var $cont = this.$el.find("#main-rating");
-      $cont.empty();
-      var imgCode = "<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>";
-      for(var i=0; i < Math.floor(this.ratingAvg); i++){
-        $cont.append(imgCode);
-      };
-
-      var partial_rating = this.ratingAvg % 1;
-      $cont.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'>" + imgCode);
-    };
-
-    this.$el.find("#reviews").empty();
-    this._ratings.each( function(rating){
-      var ratingShowView = new Cocktailist.Views.RatingShow({model: rating});
-      this.$el.find("#reviews").prepend(ratingShowView.render().$el);
-    }.bind(this));
     return this;
   }
 });
