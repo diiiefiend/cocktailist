@@ -141,16 +141,40 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
       markerLength = 1;
     };
 
+    this._infoBubble = new InfoBubble({
+      backgroundColor: "#000",
+      hideCloseButton: true,
+      maxHeight: 20,
+      padding: 5,
+      borderRadius: 5,
+      arrowSize: 5
+    });
+
     var barObj, marker;
     for(var i = 0; i < markerLength; i++){
       barObj = barsObjs[i];
       coords = new google.maps.LatLng(barObj.latitude, barObj.longitude);
       marker = new google.maps.Marker({
-        position: coords
+        position: coords,
+        icon: "favicon-32x32.png"
       });
       marker.setMap(map);
       markerBounds.extend(marker.position);
       this.markerObjs[barObj.name] = marker;
+
+      var setListeners = function (barObj, marker){
+        marker.addListener('mouseover', function (){
+          this._infoBubble = this._infoBubble;
+          this._infoBubble.setContent("<div class='map-info'>" + barObj.name + "</div>");
+          this._infoBubble.open(map, marker);
+        }.bind(this));
+        
+        marker.addListener('mouseout', function (){
+          this._infoBubble.close();
+        }.bind(this));
+      }.bind(this);
+
+      setListeners(barObj, marker);
     }
 
     map.fitBounds(markerBounds);
