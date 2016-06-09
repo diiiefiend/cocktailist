@@ -27,14 +27,13 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
   swapCat: function (e){
     this.filterType = this.filterType === "bar" ? "liquor" : "bar";
     this.category = "switch";
+    window.scrollTo(0,0);
     this.setCatColl();
     this.renderSide();
   },
 
   switchCatEntry: function (e){
     var target = $(e.currentTarget);
-    target.parents("ul.category-list").find(".bolded").removeClass("bolded");
-    target.addClass("bolded");
 
     var targetName = target.text();
 
@@ -69,6 +68,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
   },
 
   showAll: function (e){
+    $("ul.filter-list").find(".bolded").removeClass("bolded");
     this.renderCategory();
   },
 
@@ -90,10 +90,14 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
   setCatColl: function (){
     if(this.filterType === 'liquor'){
-      this.category = (this.category === "switch" ? this.collection.at(0).get('liquor') : this.category);
+      this.category = (this.category === "switch" ?
+        this.collection.at(0).get('liquor') :
+        this.category);
       this.catCollection = this.collection.where({liquor : this.category});
     } else if(this.filterType === 'bar'){
-      this.category = (this.category === "switch" ? this.collection.at(0).bar().name : this.category);
+      this.category = (this.category === "switch" ?
+        this.collection.at(0).bar().name :
+        this.category);
       this.catCollection = this.collection.models.filter(function (cocktail){
         return cocktail.bar().name === this.category;
       }.bind(this));
@@ -101,6 +105,8 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
     //update url
     Backbone.history.navigate("browse/" + this.filterType + "/" + this.category, {trigger: false});
+    $("ul.category-list").find(".bolded").removeClass("bolded");
+    $("ul.category-list").find("a:contains('"+this.category+"')").addClass("bolded");
     this.renderCategory(this.catCollection);
   },
 
@@ -234,13 +240,15 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
       var liquors = this.liquorTypes();
       var temp = this.template['catListTemp']({
         catList: liquors,
-        category: this.filterType
+        category: this.category,
+        type: this.filterType
       });
     } else if(this.filterType === 'bar'){
       var bars = this.bars();
       var temp = this.template['catListTemp']({
         catList: bars,
-        category: this.filterType
+        category: this.category,
+        type: this.filterType
       });
     };
 

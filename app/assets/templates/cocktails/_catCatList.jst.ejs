@@ -2,10 +2,13 @@
   <h1>Browse</h1>
   <ul class="category-list">
     <% catList.forEach(function (item){ %>
-      <li><a href="javascript:void(0);"><%= item %></a></li>
+      <li>
+        <a href="javascript:void(0);"
+        <%= category === item ? "class='bolded'" : "" %> ><%= item %></a>
+      </li>
     <% }); %>
   </ul>
   <p><a class="subtext switch" href="javascript:void(0);">
-    Browse by <%= category === "bar" ? "liquor" : "bar" %>
+    Browse by <%= type === "bar" ? "liquor" : "bar" %>
   </a></p>
 </div>
