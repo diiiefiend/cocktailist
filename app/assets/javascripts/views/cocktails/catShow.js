@@ -142,8 +142,9 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     };
 
     this._infoBubble = new InfoBubble({
-      backgroundColor: "#000",
+      disableAutoPan:true,
       hideCloseButton: true,
+      backgroundColor: "#000",
       maxHeight: 20,
       padding: 5,
       borderRadius: 5,
@@ -168,7 +169,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
           this._infoBubble.setContent("<div class='map-info'>" + barObj.name + "</div>");
           this._infoBubble.open(map, marker);
         }.bind(this));
-        
+
         marker.addListener('mouseout', function (){
           this._infoBubble.close();
         }.bind(this));
