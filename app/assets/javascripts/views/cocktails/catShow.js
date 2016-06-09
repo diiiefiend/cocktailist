@@ -74,16 +74,16 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
   bounce: function (e){
     if(this.filterType === 'liquor'){
-      var markerId = $(e.currentTarget).data("markerid");
-      var marker = this.markerArr[markerId];
+      var markerName = $(e.currentTarget).data("markername");
+      var marker = this.markerObjs[markerName];
       marker.setAnimation(google.maps.Animation.BOUNCE);
     };
   },
 
   stopBounce: function (e){
     if(this.filterType === 'liquor'){
-      var markerId = $(e.currentTarget).data("markerid");
-      var marker = this.markerArr[markerId];
+      var markerName = $(e.currentTarget).data("markername");
+      var marker = this.markerObjs[markerName];
       marker.setAnimation(null);
     };
   },
@@ -112,7 +112,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
   setMap: function (cocktails){
     //google maps stuff
-    this.markerArr = [];
+    this.markerObjs = {};
     var coords = new google.maps.LatLng(cocktails[0].bar().latitude, cocktails[0].bar().longitude);
 
     var mapCanvas = document.getElementById('bar-map');
@@ -121,32 +121,36 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
       zoom: 15,
       maxZoom: 15,
       scrollwheel: false,
-      disableDoubleClickZoom: true,
+      disableDoubleClickZoom: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      draggable: false,
-      overviewMapControl: false
+      draggable: true,
+      overviewMapControl: false,
+      zoomControl: true,
+      disableDefaultUI: true
     };
     var map = new google.maps.Map(mapCanvas, mapOptions);
 
     var markerBounds = new google.maps.LatLngBounds();
     var markerLength;
 
+    var barsObjs = this.barsObjs(cocktails);
+
     if(this.filterType === 'liquor'){
-      markerLength = cocktails.length;
+      markerLength = barsObjs.length;
     } else {
       markerLength = 1;
     };
 
-    var cocktail, marker;
+    var barObj, marker;
     for(var i = 0; i < markerLength; i++){
-      cocktail = cocktails[i];
-      coords = new google.maps.LatLng(cocktail.bar().latitude, cocktail.bar().longitude);
+      barObj = barsObjs[i];
+      coords = new google.maps.LatLng(barObj.latitude, barObj.longitude);
       marker = new google.maps.Marker({
         position: coords
       });
       marker.setMap(map);
       markerBounds.extend(marker.position);
-      this.markerArr.push(marker);
+      this.markerObjs[barObj.name] = marker;
     }
 
     map.fitBounds(markerBounds);

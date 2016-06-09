@@ -1,7 +1,5 @@
 <li <%= standalone ? "class='standalone'" : "" %>
-  <% if(typeof index !== 'undefined'){ %>
-    data-markerid="<%= index %>"
-  <% }; %>
+  data-markername="<%= cocktail.bar().name %>"
 >
   <a href="#cocktails/<%= cocktail.id %>">
     <div class="cat-show-item"
