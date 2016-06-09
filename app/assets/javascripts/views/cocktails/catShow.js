@@ -44,12 +44,13 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     this.renderFilterList();
   },
 
-  filter: function (e){
-    var target = $(e.currentTarget);
-    target.parents("ul.filter-list").find(".bolded").removeClass("bolded");
-    target.addClass("bolded");
-
-    var targetName = target.text();
+  filter: function (e, targetName){
+    if (e){
+      var target = $(e.currentTarget);
+      targetName = target.text();
+    }
+    $("ul.filter-list").find(".bolded").removeClass("bolded");
+    $("ul.filter-list").find("a:contains('"+ targetName +"')").addClass("bolded");
 
     var coll, updateMap;
     if(this.filterType === 'liquor'){
@@ -64,6 +65,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
       });
     };
 
+    window.scrollTo(0, 0);
     this.renderCategory(coll, updateMap);
   },
 
@@ -166,6 +168,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
       var setListeners = function (barObj, marker){
         marker.addListener('mouseover', function (){
           this._infoBubble = this._infoBubble;
+          // consider adding number of cocktails listed from bar
           this._infoBubble.setContent("<div class='map-info'>" + barObj.name + "</div>");
           this._infoBubble.open(map, marker);
         }.bind(this));
@@ -177,6 +180,10 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
             map.setCenter(marker.getPosition());
           }
         });
+
+        marker.addListener('dblclick', function (){
+          this.filter(null, barObj.name);
+        }.bind(this));
 
         marker.addListener('mouseout', function (){
           this._infoBubble.close();
