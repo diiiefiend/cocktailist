@@ -147,7 +147,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
       disableAutoPan:true,
       hideCloseButton: true,
       backgroundColor: "#000",
-      maxHeight: 20,
+      maxHeight: 30,
       padding: 5,
       borderRadius: 5,
       arrowSize: 5
@@ -167,9 +167,16 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
       var setListeners = function (barObj, marker){
         marker.addListener('mouseover', function (){
-          this._infoBubble = this._infoBubble;
-          // consider adding number of cocktails listed from bar
-          this._infoBubble.setContent("<div class='map-info'>" + barObj.name + "</div>");
+          var numDrinks = this.catCollection.filter(function (cocktail){
+            return cocktail.bar().name === barObj.name;
+          }).length;
+
+          this._infoBubble.setContent("<div class='map-info'>" +
+            "<a href='javascript:void(0);' class='bar-name'>" +
+            barObj.name +
+            "</a>" +
+            "<br />" + numDrinks + (numDrinks > 1 ? " drinks" : " drink") +
+            "</div>");
           this._infoBubble.open(map, marker);
         }.bind(this));
 
@@ -181,10 +188,6 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
           }
         });
 
-        marker.addListener('dblclick', function (){
-          this.filter(null, barObj.name);
-        }.bind(this));
-
         marker.addListener('mouseout', function (){
           this._infoBubble.close();
         }.bind(this));
@@ -192,6 +195,12 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
       setListeners(barObj, marker);
     }
+
+    google.maps.event.addListener(this._infoBubble, 'domready', function (){
+      $("a.bar-name").click(function (e){
+        this.filter(e);
+      }.bind(this));
+    }.bind(this));
 
     map.fitBounds(markerBounds);
 
