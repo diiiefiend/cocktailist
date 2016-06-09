@@ -589,16 +589,15 @@ img.feed-img{
   font-size: 16px;
 }
 
-.shadow-link{
+.under-box-link{
   position: absolute;
   right: 0;
   bottom: -1.4em;
-  color: #170F0C;
   font-size: 1.4em;
   display: none;
 }
 
-.stickied .shadow-link{
+.stickied .under-box-link{
   display: block;
 }
 

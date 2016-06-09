@@ -170,6 +170,14 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
           this._infoBubble.open(map, marker);
         }.bind(this));
 
+        marker.addListener('click', function (){
+          var zoomLevel = map.getZoom();
+          if (zoomLevel < map.maxZoom){
+            map.setZoom(zoomLevel+1);
+            map.setCenter(marker.getPosition());
+          }
+        });
+
         marker.addListener('mouseout', function (){
           this._infoBubble.close();
         }.bind(this));

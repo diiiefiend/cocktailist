@@ -198,7 +198,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
     var marker=new google.maps.Marker({
       position: coords,
-      });
+      icon: "favicon-32x32.png"
+    });
 
     marker.setMap(map);
 
