@@ -18,7 +18,7 @@
                 type="checkbox"
                 value="<%= list.get('name') %>"
                 id="list_<%= list.get('name') %>"
-                <%= _.contains(checkedLists, list.get('name')) ? "checked" : "" %> 
+                <%= _.contains(checkedLists, list.get('name')) ? "checked" : "" %>
               />
               <%= list.get('name') %></label>
             </li>
@@ -33,7 +33,7 @@
 
     <h2><%= cocktail.escape('liquor') %></h2>
 
-    <p>Average Rating: <span class="rating" id="main-rating"></span> <strong><%= ratingAvg %></strong>
+    <p>Average Rating: <span class="rating" id="main-rating"></span> <strong></strong>
     <span class="subtext">(<a href="#reviews"><%= cocktail.ratings().length %> vote<%= cocktail.ratings().length !== 1 ? "s" : "" %></a>)</span></p>
 
     <h3>Ingredients:</h3>

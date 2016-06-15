@@ -20,14 +20,15 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
     this.listenToOnce(this.collection, "sync", this.setSimilarCocktail);  //not sure why this doesn't trigger on refresh on this page
     this.listenToOnce(this.model, "sync", this._calcAvgRating);
-    this.listenTo(this._ratings, "add change afterRemove", this._calcAvgRating);
 
     this.listenToOnce(this._lists, "sync", this._setLists);
-    this.listenTo(this._lists, "sync", this.render);          //the main render. not sure if i like having it render just once? or render before similar cocktail as well?
+    this.listenTo(this._lists, "sync", this.render); // only renders everything once
 
-    this.listenTo(this._ratings, "add change afterRemove", this.render);
-    this.listenTo(this._ratings, "add change afterRemove", this.renderForm);
-    this.listenTo(this._ratings, "update change", this.renderRatings); //later optimize this to only render the new comment?
+    // all ratings-related rendering
+    this.listenTo(this._ratings, "update change", this._calcAvgRating);
+    this.listenTo(this._ratings, "update change", this.renderRatingIcons);
+    this.listenTo(this._ratings, "update change", this.renderRatingComments);
+    this.listenTo(this._ratings, "update change", this.renderForm);
   },
 
   updateToList: function (e){
@@ -92,7 +93,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     } else {
       this.ratingAvg = "N/A";
     };
-    this.render();
+    this.renderRatingIcons();
   },
 
   getListItem: function (targetList){
@@ -126,63 +127,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     });
   },
 
-  renderForm: function (){
-    if(this.model.userRatingId() > -1){
-      var rating = this._ratings.getOrFetch( this.model.userRatingId(), {cocktail: this.model} );
-    } else {
-      var rating = new Cocktailist.Models.Rating([], {cocktail: this.model});
-    };
-    var reviewFormView = new Cocktailist.Views.RatingForm({model: rating, collection: this._ratings, cocktail: this.model});
-    this.$el.find("#rating-form").html(reviewFormView.render().$el);
-
-    return this;
-  },
-
-  renderRatings: function (){
-    if(this.ratingAvg !== "N/A"){
-      var $cont = this.$el.find("#main-rating");
-      $cont.empty();
-      var imgCode = "<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>";
-      for(var i=0; i < Math.floor(this.ratingAvg); i++){
-        $cont.append(imgCode);
-      };
-
-      var partial_rating = this.ratingAvg % 1;
-      $cont.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'>" + imgCode);
-    };
-
-    this.$el.find("#reviews").empty();
-    this._ratings.each( function(rating){
-      var ratingShowView = new Cocktailist.Views.RatingShow({model: rating});
-      this.$el.find("#reviews").prepend(ratingShowView.render().$el);
-    }.bind(this));
-    return this;
-  },
-
-
-  render: function (){
-    var template = this.template({
-      cocktail: this.model,
-      ratingAvg: this.ratingAvg,
-      similarCocktail: this._similarCocktail,
-      signedIn: Cocktailist.currentUser.isSignedIn(),
-      lists: this._lists,
-      checkedLists: this.checkedLists
-    });
-    this.$el.html(template);
-
-    if(Cocktailist.currentUser.isSignedIn()){
-      this.renderForm();
-    } else {
-      this.$el.find("#rating-form").html("<p><a href='#session/new'>Log in</a> to rate!</p>");  //placeholder for now
-    };
-
-    this.renderRatings();
-
-    //google maps stuff
-
+  renderMap: function (){
     var coords = new google.maps.LatLng(this.model.bar().latitude, this.model.bar().longitude);
-
     var mapCanvas = document.getElementById('bar-map');
     var mapOptions = {
       center: coords,
@@ -202,6 +148,70 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     });
 
     marker.setMap(map);
+  },
+
+  renderForm: function (){
+    if(Cocktailist.currentUser.isSignedIn()){
+      if(this.model.userRatingId() > -1){
+        var rating = this._ratings.getOrFetch( this.model.userRatingId(), {cocktail: this.model} );
+      } else {
+        var rating = new Cocktailist.Models.Rating([], {cocktail: this.model});
+      };
+      var reviewFormView = new Cocktailist.Views.RatingForm({model: rating, collection: this._ratings, cocktail: this.model});
+      this.$el.find("#rating-form").html(reviewFormView.render().$el);
+    } else {
+      this.$el.find("#rating-form").html("<p><a href='#session/new'>Log in</a> to rate!</p>");
+    }
+
+    return this;
+  },
+
+  renderRatingIcons: function (){
+    if(this.ratingAvg !== "N/A"){
+      var $cont = this.$el.find("#main-rating");
+      $cont.empty();
+      var imgCode = "<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>";
+      for(var i=0; i < Math.floor(this.ratingAvg); i++){
+        $cont.append(imgCode);
+      };
+
+      var partial_rating = this.ratingAvg % 1;
+      $cont.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'>" + imgCode);
+      $cont.next().html(this.ratingAvg);
+    };
+
+    return this;
+  },
+
+  renderRatingComments: function (){
+    this.$el.find("#reviews").empty();
+    this._ratings.each( function(rating){
+      var ratingShowView = new Cocktailist.Views.RatingShow({model: rating});
+      this.$el.find("#reviews").prepend(ratingShowView.render().$el);
+    }.bind(this));
+
+    return this;
+  },
+
+
+  render: function (){
+    var template = this.template({
+      cocktail: this.model,
+      ratingAvg: this.ratingAvg,
+      similarCocktail: this._similarCocktail,
+      signedIn: Cocktailist.currentUser.isSignedIn(),
+      lists: this._lists,
+      checkedLists: this.checkedLists
+    });
+    this.$el.html(template);
+
+    this.renderMap();
+
+    this.renderForm();
+
+    this.renderRatingIcons();
+
+    this.renderRatingComments();
 
     window.setTimeout(function (){ $(".loader").hide();}, 800);
 

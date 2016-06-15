@@ -1,3 +1,8 @@
   <% lists.each( function (list){ %>
-    <li><a href="javascript:void(0);" data-list="<%= list.id %>" class="filter-link <%= listShowId === list.id ? 'bolded' : '' %>" ><%= list.escape('name') %></a> <a href="javascript:void(0);" class="remove-list" data-list="<%= list.id %>">x</a></li>
+    <li>
+      <a href="javascript:void(0);"
+        data-list="<%= list.id %>"
+        class="filter-link <%= listShowId === list.id ? 'bolded' : '' %>" ><%= list.escape('name') %></a>
+      <a href="javascript:void(0);" class="remove-list" data-list="<%= list.id %>">x</a>
+    </li>
   <% }); %>
