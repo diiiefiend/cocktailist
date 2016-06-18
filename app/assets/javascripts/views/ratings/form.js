@@ -60,6 +60,7 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
     this.model.save(formData, {
       success: function(){
         this.cocktail._userRatingId=this.model.id;
+        this.model.set({time: "just now"});
         this.collection.add(this.model);
         this.collection.trigger("addedComment", this.model);
         this.$el.find("button").prop("disabled", false);

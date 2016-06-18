@@ -26,9 +26,10 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
     // all ratings-related rendering
     // using custom events here so this doesn't fire at every initial 'add' when the collection syncs
+    // updating a comment triggers addedComment anyway
     this.listenTo(this._ratings, "addedComment removedComment", this._calcAvgRating);
     this.listenTo(this._ratings, "addedComment removedComment", this.renderRatingIcons);
-    this.listenTo(this._ratings, "addedComment removedComment", this.renderRatingComments); // updating a comment triggers addedComment anyway
+    this.listenTo(this._ratings, "addedComment removedComment", this.renderRatingComments);
     this.listenTo(this._ratings, "addedComment removedComment", this.renderForm);
   },
 

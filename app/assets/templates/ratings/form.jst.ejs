@@ -1,6 +1,9 @@
 <form>
   <% if(!rating.isNew()){ %>
-    <p>You reviewed this on <%= rating.escape('time') %>. Feel free to edit it below!</p>
+    <p class="form-control">
+      Reviewed <strong><%= rating.escape('time') %></strong>.
+      Feel free to update it below!
+    </p>
   <% } %>
   <label for="rating">Rating</label>
   <div class="rating">
@@ -15,6 +18,6 @@
   <button class="submitRating">submit</button>
 
   <% if(!rating.isNew()){ %>
-    <a href="javascript: void(0);" class="subtext" id="delete-rating">Delete Rating</a>
+    <a href="javascript: void(0);" class="subtext form-control" id="delete-rating">Delete Rating</a>
   <% } %>
 </form>
