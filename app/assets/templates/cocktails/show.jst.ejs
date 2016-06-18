@@ -24,7 +24,6 @@
             </li>
           <% }); %>
         </ul>
-        <div class="flash"></div>
       <% } else { %>
         <p><a href="#session/new">Log in</a> to add to lists!</p>
       <% } %>
@@ -33,8 +32,8 @@
 
     <h2><%= cocktail.escape('liquor') %></h2>
 
-    <p>Average Rating: <span class="rating" id="main-rating"></span> <strong></strong>
-    <span class="subtext">(<a href="#reviews"><%= cocktail.ratings().length %> vote<%= cocktail.ratings().length !== 1 ? "s" : "" %></a>)</span></p>
+    <p id="main-rating">Average Rating: <span class="rating"></span> <strong></strong>
+    <span class="subtext"></span></p>
 
     <h3>Ingredients:</h3>
     <ul>

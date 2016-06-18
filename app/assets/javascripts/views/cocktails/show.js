@@ -25,11 +25,11 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this.listenTo(this._lists, "sync", this.render); // only renders everything once
 
     // all ratings-related rendering
-    this.listenTo(this._ratings, "update change", this._calcAvgRating);
-    this.listenTo(this._ratings, "update change", this.renderRatingIcons);
     // using custom events here so this doesn't fire at every initial 'add' when the collection syncs
+    this.listenTo(this._ratings, "addedComment removedComment", this._calcAvgRating);
+    this.listenTo(this._ratings, "addedComment removedComment", this.renderRatingIcons);
     this.listenTo(this._ratings, "addedComment removedComment", this.renderRatingComments); // updating a comment triggers addedComment anyway
-    this.listenTo(this._ratings, "update change", this.renderForm);
+    this.listenTo(this._ratings, "addedComment removedComment", this.renderForm);
   },
 
   updateToList: function (e){
@@ -170,15 +170,20 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
   renderRatingIcons: function (){
     if(this.ratingAvg !== "N/A"){
       var $cont = this.$el.find("#main-rating");
-      $cont.empty();
+      var $iconBar = $cont.find(".rating");
+      $iconBar.empty();
       var imgCode = "<img src='https://s3.amazonaws.com/cocktailist-pro/cocktails/imgs/rating-full.png' alt='*'>";
       for(var i=0; i < Math.floor(this.ratingAvg); i++){
-        $cont.append(imgCode);
+        $iconBar.append(imgCode);
       };
 
       var partial_rating = this.ratingAvg % 1;
-      $cont.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'>" + imgCode);
-      $cont.next().html(this.ratingAvg);
+      $iconBar.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'>" + imgCode);
+      $cont.find("strong").html(this.ratingAvg);
+      $cont.find(".subtext").html(
+        "(<a href='#reviews'>" + this._ratings.length +
+        (this._ratings.length === 1 ? " vote" : " votes") + "</a>)"
+      );
     };
 
     return this;

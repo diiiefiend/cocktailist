@@ -28,13 +28,13 @@ and specialty drinks I've had. Users can:
 - [x] Filter activity feed (3 types: add, rate, and list activities)
 
 ##### Mid-term:
-- [ ] Tag cocktails (i.e. spicy, adventurous, traditional, etc.)
-- [ ] Browse cocktails by tag
-- [ ] A 2-d graph view of cocktails, plotted out based on tags, if I can find a way to quantify the tags
+- [ ] Extend browse view so user can quickly see what they have listed/rated
+- [ ] Add drink type sliders to rating cocktails (adventurous vs traditional, refreshing vs strong-spirited)
+- [ ] Browse cocktails by drink type
+- [ ] A 2-d graph view of cocktails, plotted out based on drink type (with ability to filter data based on liquor, bar, user list)
 
 ##### Long-term:
-- [ ] Get recommendations based on drinking history, tags, and location
+- [ ] Get recommendations based on drinking history, and location
 - [ ] User profiles and saved preferences
-- [ ] Ability to follow users, comments on their activity, etc
+- [ ] Ability to follow users, comment on their activity, compare graphs vs another user, etc
 - [ ] Smart search (i.e. autocomplete words)
-- [ ] Add ability to have multiple comments from same user?
