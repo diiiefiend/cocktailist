@@ -61,6 +61,7 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
       success: function(){
         this.cocktail._userRatingId=this.model.id;
         this.collection.add(this.model);
+        this.collection.trigger("addedComment", this.model);
         this.$el.find("button").prop("disabled", false);
       }.bind(this),
       error: function (data, res){
@@ -77,7 +78,7 @@ Cocktailist.Views.RatingForm = Backbone.CompositeView.extend({
     this.model.destroy({cocktail: this.cocktail,
       success: function (){
         this.cocktail._userRatingId = -1;
-        this.collection.trigger("afterRemove");
+        this.collection.trigger("removedComment", this.model);
       }.bind(this)
     });
   },

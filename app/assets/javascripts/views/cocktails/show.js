@@ -27,7 +27,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     // all ratings-related rendering
     this.listenTo(this._ratings, "update change", this._calcAvgRating);
     this.listenTo(this._ratings, "update change", this.renderRatingIcons);
-    this.listenTo(this._ratings, "update change", this.renderRatingComments);
+    // using custom events here so this doesn't fire at every initial 'add' when the collection syncs
+    this.listenTo(this._ratings, "addedComment removedComment", this.renderRatingComments); // updating a comment triggers addedComment anyway
     this.listenTo(this._ratings, "update change", this.renderForm);
   },
 
@@ -183,12 +184,30 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     return this;
   },
 
-  renderRatingComments: function (){
-    this.$el.find("#reviews").empty();
-    this._ratings.each( function(rating){
-      var ratingShowView = new Cocktailist.Views.RatingShow({model: rating});
-      this.$el.find("#reviews").prepend(ratingShowView.render().$el);
-    }.bind(this));
+  renderRatingComments: function (model){
+    var $commentArea = this.$el.find("#reviews");
+
+    // if empty, populate initially
+    if($commentArea.html() && $commentArea.html().trim() === ""){
+      this._ratings.each( function(rating){
+        var ratingShowView = new Cocktailist.Views.RatingShow({model: rating});
+        $commentArea.prepend(ratingShowView.render().$el);
+      }.bind(this));
+    } else {
+      // otherwise we're adding or removing a comment
+      if($commentArea.find("#rating-" + model.id).length){
+        $commentArea.find("#rating-" + model.id).remove();
+        if(this._ratings.contains(model)){
+          // updating
+          var ratingShowView = new Cocktailist.Views.RatingShow({model: model});
+          $commentArea.prepend(ratingShowView.render().$el);
+        }
+      } else {
+        // adding
+        var ratingShowView = new Cocktailist.Views.RatingShow({model: model});
+        $commentArea.prepend(ratingShowView.render().$el);
+      }
+    }
 
     return this;
   },
@@ -206,11 +225,8 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this.$el.html(template);
 
     this.renderMap();
-
     this.renderForm();
-
     this.renderRatingIcons();
-
     this.renderRatingComments();
 
     window.setTimeout(function (){ $(".loader").hide();}, 800);

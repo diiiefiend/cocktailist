@@ -28,7 +28,6 @@ module Api
       clean_params[:rating] = rating_params[:rating_num]
       clean_params.delete(:rating_num)
       if @rating.update(clean_params)
-        byebug
         # create a new feeditem with the updated rating
         create_feed_item(@rating)
         render json: @rating
