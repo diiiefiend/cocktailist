@@ -180,6 +180,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
 
       var partial_rating = this.ratingAvg % 1;
       $iconBar.append("<span style='overflow: hidden; display: inline-block; width: "+ Math.floor(17 * partial_rating) +"px;'>" + imgCode);
+
       $cont.find("strong").html(this.ratingAvg);
       $cont.find(".subtext").html(
         "(<a href='#reviews'>" + this._ratings.length +

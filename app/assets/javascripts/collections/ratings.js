@@ -6,7 +6,7 @@ Cocktailist.Collections.Ratings = Backbone.BetterCollection.extend({
   },
 
   comparator: function (rating){
-    return rating.get('created_at');
+    return rating.get('updated_at');
   },
 
   initialize: function (models, options){

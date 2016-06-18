@@ -108,7 +108,8 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     //update url
     Backbone.history.navigate("browse/" + this.filterType + "/" + this.category, {trigger: false});
     $("ul.category-list").find(".bolded").removeClass("bolded");
-    $("ul.category-list").find("a:contains('"+this.category+"')").addClass("bolded");
+    // the quotes really matter in the below bc some bar names have ' which makes the query invalid -.-
+    $("ul.category-list").find('a:contains("'+this.category+'")').addClass("bolded");
     this.renderCategory(this.catCollection);
   },
 
