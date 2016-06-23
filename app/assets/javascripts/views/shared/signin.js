@@ -64,7 +64,8 @@ Cocktailist.Views.SignIn = Backbone.CompositeView.extend({
       email: formData.email,
       password: formData.password,
       error: function(){
-        alert("Wrong username/password combination. Please try again.");
+        $('.flashbox').show();
+        $('.flashbox').html("Wrong username/password combination. Please try again.");
       }
     });
   },

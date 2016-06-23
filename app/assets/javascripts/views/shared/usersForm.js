@@ -47,7 +47,8 @@ Cocktailist.Views.UserForm = Backbone.CompositeView.extend({
         Backbone.history.navigate("", {trigger: true});
       }.bind(this),
       error: function(){
-        alert("Could not create user. Please try again.");
+        $('.flashbox').show();
+        $('.flashbox').html("Could not create user. Please try again.");
       }
     });
   }

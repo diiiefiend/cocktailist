@@ -231,7 +231,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     });
     this.$el.html(template);
 
-    this.renderMap();
+    // this.renderMap();
     this.renderForm();
     this.renderRatingIcons();
     this.renderRatingComments();

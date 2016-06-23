@@ -38,6 +38,7 @@ Cocktailist.Models.CurrentUser = Cocktailist.Models.User.extend({
         options.success && options.success();
       },
       error: function(){
+        console.log('here');
         options.error && options.error();
       }
     });

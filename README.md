@@ -26,9 +26,9 @@ and specialty drinks I've had. Users can:
 
 ##### Near-term:
 - [x] Filter activity feed (3 types: add, rate, and list activities)
+- [ ] Extend browse view so user can quickly see what they have listed/rated
 
 ##### Mid-term:
-- [ ] Extend browse view so user can quickly see what they have listed/rated
 - [ ] Add drink type sliders to rating cocktails (adventurous vs traditional, refreshing vs strong-spirited)
 - [ ] Browse cocktails by drink type
 - [ ] A 2-d graph view of cocktails, plotted out based on drink type (with ability to filter data based on liquor, bar, user list)

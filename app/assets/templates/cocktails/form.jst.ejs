@@ -13,7 +13,7 @@
       <% }); %>
     </select>
     <input class="toggle-liquor" type="text" placeholder="add new liquor" id="liquor">
-    
+
     <label for="ingredients">Ingredients</label>
     <input type="text" value="<%= entry.escape('ingredients') %>" name="cocktail[ingredients]" id="ingredients">
 
@@ -33,6 +33,6 @@
       <input type="file" name="cocktail[img]" id="attach-image">
 
     <ul id="errors"></ul>
-    <button class="submit">Save</button>
+    <button class="submit block">Save</button>
   </form>
 </div>

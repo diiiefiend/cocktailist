@@ -1,3 +1,4 @@
+<ul>
   <% lists.each( function (list){ %>
     <li>
       <a href="javascript:void(0);"
@@ -6,3 +7,16 @@
       <a href="javascript:void(0);" class="remove-list" data-list="<%= list.id %>">x</a>
     </li>
   <% }); %>
+</ul>
+
+<div class="modal confirm-list-delete">
+  <div>
+    <p>
+      Are you sure you want to delete this list?
+    </p>
+    <a class="confirm-list-delete button-link"
+      href="javascript:void(0);">Confirm</a>
+    <a class="cancel-confirm-delete button-link subtext"
+      href="javascript:void(0);">Cancel</a>
+  </div>
+</div>

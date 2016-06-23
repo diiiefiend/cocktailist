@@ -15,7 +15,7 @@
   <label for="body">Review</label>
   <textarea name="rating[body]" placeholder="comments (optional)"><%= rating.escape('body') %></textarea>
   <ul id="errors"></ul>
-  <button class="submitRating">submit</button>
+  <button class="submitRating block">submit</button>
 
   <% if(!rating.isNew()){ %>
     <a href="javascript: void(0);" class="subtext form-control" id="delete-rating">Delete Rating</a>

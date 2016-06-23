@@ -117,28 +117,13 @@
    opacity: 1;
  }
 
- #signinbox a.button-link{
-   font: 18px 'Montserrat', sans-serif;
-   background: black;
-   color: white;
-   text-transform: lowercase;
-   font-variant: small-caps;
-   display: block;
-   clear: both;
-   width: 101%;
-   margin: 0 -1px;
-   padding: 5% 0%;
-   text-align: center;
-   font-size: 20px;
-   border-top: 1px solid #eee;
- }
  #signinbox button{
    width: 101%;
    padding: 5%;
    margin: 0 -1px;
    font-size: 24px;
  }
- #signinbox button:hover, #signinbox a.button-link:hover{
+ #signinbox button:hover{
    background: white;
    color: black;
  }
@@ -149,12 +134,13 @@
  }
 
  .flashbox{
-   width: 300px;
+   min-width: 200px;
    background: white;
    padding: 10px;
    position: absolute;
    left: 350px;
    top: 100px;
+   display: none;
  }
  .flashbox p.subtext{
    text-align: left;
@@ -344,7 +330,7 @@
 .map-tip{
   float: right;
   margin-top: -20px;
-  color: #170F0C;
+  color: #000;
   font-size: 24px;
 }
 
@@ -624,8 +610,8 @@ a.remove-item, a.remove-list{
 li:hover a.remove-list, .box:hover a.remove-item{
   opacity: 1;
 }
-#content a.remove-item:hover{
-  color: black;
+a.remove-item:hover{
+  color: #000;
 }
 
 .bolded{
@@ -646,18 +632,48 @@ li:hover a.remove-list, .box:hover a.remove-item{
   font-size: 14px;
 }
 
+a.block-link{
+   font: 18px 'Montserrat', sans-serif;
+   background: #000;
+   color: #fff;
+   text-transform: lowercase;
+   font-variant: small-caps;
+   display: block;
+   clear: both;
+   width: 101%;
+   margin: 0 -1px;
+   padding: 5% 0%;
+   text-align: center;
+   font-size: 20px;
+   border-top: 1px solid #eee;
+
+   &:hover{
+     color: #000;
+     background: #fff;
+   }
+ }
+
 /* tag stuff */
-button{
+button, a.button-link{
   font: 18px 'Montserrat', sans-serif;
-  background: black;
-  margin: 5px auto;
+  background: #000;
   padding: 3px 10px;
-  color: white;
+  color: #fff;
   text-transform: lowercase;
   font-variant: small-caps;
-  display: block;
-  width: 50%;
+  display: inline-block;
+  width: calc(49% - 20px);
   clear: both;
+
+  &:hover{
+    background: #fff;
+    color: #000;
+  }
+
+  &.block{
+    display: block;
+    margin: 5px auto;
+  }
 }
 
 label{
@@ -738,10 +754,12 @@ h1, h2, h3, p{
 
 a{
   color: #cc8042;
+
+  &:hover{
+    color: white;
+  }
 }
-#content a:hover{
-  color: white;
-}
+
 #signinbox a:hover{
   color: black;
 }

@@ -9,7 +9,9 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       "dblclick a.filter-link" : "renameList",
       "blur .side-input" : "saveListName",
       "click a.filter-link" : "changeList",
-      "click a.remove-list" : "deleteList",
+      "click a.remove-list" : "showDeleteConfirm",
+      "click a.cancel-confirm-delete" : "hideDeleteConfirm",
+      "click a.confirm-list-delete" : "deleteList",
       "click a.remove-item" : "deleteItem"
     },
 
@@ -85,6 +87,16 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       list.set('name', $(e.currentTarget).val());
       list.save();
       this.render();
+    },
+
+    showDeleteConfirm: function (e){
+      $('.modal.confirm-list-delete').show();
+      $('a.confirm-list-delete').data('list', $(e.currentTarget).data('list'));
+    },
+
+    hideDeleteConfirm: function (e){
+      $('.modal.confirm-list-delete').hide();
+      $('a.confirm-list-delete').data('list', '');
     },
 
     deleteList: function (e){
