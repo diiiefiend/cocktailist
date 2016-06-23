@@ -1,5 +1,8 @@
 Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
-  template: JST['cocktails/index'],
+  template: {
+    "main" : JST['cocktails/index'],
+    "sidebar" : JST['cocktails/_indexSidebar'],
+  },
 
   events: {
     "click .filter-list li a" : "changeFilter"
@@ -17,21 +20,49 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
     $link = $(e.currentTarget);
     if(!$link.hasClass("bolded")){
       if($link.text() === "Liquor"){
-        this.render([],[], {filterList: this.liquorTypes(), filterType: "liquor", groupFn: function (cocktail){ return cocktail.get("liquor"); }});
+        this.renderSide({
+          filterList: this.liquorTypes(),
+          filterType: "liquor",
+          groupFn: function (cocktail){
+            return cocktail.get("liquor");
+          }
+        });
       } else if($link.text() === "Bar"){
-        this.render([],[], {filterList: this.bars(), filterType: "bar", groupFn: function (cocktail){ return cocktail.bar().name; }});
+        this.renderSide({
+          filterList: this.bars(),
+          filterType: "bar",
+          groupFn: function (cocktail){
+            return cocktail.bar().name;
+          }
+        });
       };
     };
   },
 
+  renderMap: function (){
+    //write this, maybe factor out the renderMap from catShow to a mixin so can just use that
+  },
 
-  render: function (res, models, options){
+  renderSide: function (options){
     var filterList = (options && options.filterList ? options.filterList : this.liquorTypes());
     var filterType = (options && options.filterType ? options.filterType : "liquor");
-    var groupType = (options && options.groupFn ? options.groupFn : function (cocktail){ return cocktail.get("liquor"); });
-    var groups = this.collection.groupBy(groupType);
-    var template = this.template({groups: groups, list: filterList, filterType: filterType});
+
+    var template = this.template['sidebar']({list: filterList, filterType: filterType});
+    this.$el.find('.right').html(template);
+  },
+
+
+  render: function (res, models, options){
+    var latestLimit = 10;
+    latestLimit = (this.collection.length > latestLimit) ? latestLimit : this.collection.length;
+    var latest = this.collection.slice(0, latestLimit);
+    var template = this.template['main']({latest: latest});
     this.$el.html(template);
+
+    this.renderMap();
+    this.renderSide(options);
+
+    $(document).trigger("pageLoaded");
 
     window.setTimeout(function (){ $(".loader").hide();}, 400);
     return this;

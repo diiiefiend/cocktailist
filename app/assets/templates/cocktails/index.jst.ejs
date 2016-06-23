@@ -1,38 +1,26 @@
 <div class="left wide">
-  <% for(group in groups){ %>
-    <div class="box">
-      <h2>Latest in <span class="capitalize" id="browse-<%= group %>"><%= group %></span></h2>
-      <ul class="category-show-list clearfix">
+  <h1 class="capitalize">Heat Map</h1>
 
-        <% for(var i = 0; i < Math.min(5, groups[group].length); i++){ %>
-          <% var cocktail = groups[group][i]; %>
-          <%= JST['cocktails/_categoryShowItem']({cocktail: cocktail, standalone: false}) %>
-
-        <% }; %>
-      </ul>
-      <% if(groups[group].length > 5){ %>
-        <p><a href="#browse/<%= filterType %>/<%= escape(group) %>">View more in this category</a></p>
-      <% } %>
+  <div id="sticky-trigger"></div>
+  <div id="sticky-cont">
+    <div class="box" id="sticky">
+      <div id="bar-map" class='wide-map'></div>
     </div>
-  <% }; %>
+  </div>
+
+  <div class="box">
+    <h2>Latest additions</h2>
+    <ul class="category-show-list clearfix">
+      <% for(var i = 0; i < latest.length; i++){ %>
+        <% var cocktail = latest[i]; %>
+        <%= JST['cocktails/_categoryShowItem']({cocktail: cocktail, standalone: false}) %>
+      <% }; %>
+    </ul>
+  </div>
 </div>
 
 <div class="rule-right"></div>
 
 <div class="right bar">
-  <div class="box">
-    <h1>Categorize by:</h1>
-    <ul class="filter-list">
-      <li><a href="javascript: void(0);" <%= filterType==='liquor' ? "class='bolded'" : "" %> >Liquor</a></li>
-      <li><a href="javascript: void(0);" <%= filterType==='bar' ? "class='bolded'" : "" %> >Bar</a></li>
-    </ul>
-  </div>
-  <div class="box">
-    <h1 class="capitalize"><%= filterType %></h1>
-    <ul>
-      <% list.forEach(function (listItem){ %>
-        <li><a href="#browse-<%= listItem %>"><%= listItem %></a></li>
-      <% }); %>
-    </ul>
-  </div>
+
 </div>

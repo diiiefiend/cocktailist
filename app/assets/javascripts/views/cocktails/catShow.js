@@ -264,7 +264,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
     // don't make unnecessary api calls
     if(updateMap){
-      this.setMap(cocktails);
+      // this.setMap(cocktails);
     } else {
       $("#bar-map").replaceWith($oldMap);
       $(".bar-info").replaceWith($oldInfo);

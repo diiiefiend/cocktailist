@@ -1,0 +1,15 @@
+<div class="box">
+  <h1>Browse by:</h1>
+  <ul class="filter-list">
+    <li><a href="javascript: void(0);" <%= filterType==='liquor' ? "class='bolded'" : "" %> >Liquor</a></li>
+    <li><a href="javascript: void(0);" <%= filterType==='bar' ? "class='bolded'" : "" %> >Bar</a></li>
+  </ul>
+</div>
+<div class="box">
+  <h1 class="capitalize"><%= filterType %></h1>
+  <ul class="category-list">
+    <% list.forEach(function (listItem){ %>
+      <li><a href="#browse/<%= filterType %>/<%= listItem %>"><%= listItem %></a></li>
+    <% }); %>
+  </ul>
+</div>
