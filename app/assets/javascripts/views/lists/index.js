@@ -90,8 +90,10 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
     },
 
     showDeleteConfirm: function (e){
+      $target = $(e.currentTarget);
+      $('.modal.confirm-list-delete strong').html($target.data('list-name'));
       $('.modal.confirm-list-delete').show();
-      $('a.confirm-list-delete').data('list', $(e.currentTarget).data('list'));
+      $('a.confirm-list-delete').data('list', $target.data('list'));
     },
 
     hideDeleteConfirm: function (e){

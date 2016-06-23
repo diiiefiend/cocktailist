@@ -4,7 +4,9 @@
       <a href="javascript:void(0);"
         data-list="<%= list.id %>"
         class="filter-link <%= listShowId === list.id ? 'bolded' : '' %>" ><%= list.escape('name') %></a>
-      <a href="javascript:void(0);" class="remove-list" data-list="<%= list.id %>">x</a>
+      <a href="javascript:void(0);" class="remove-list"
+        data-list="<%= list.id %>"
+        data-list-name="<%= list.escape('name') %>">x</a>
     </li>
   <% }); %>
 </ul>
@@ -12,7 +14,7 @@
 <div class="modal confirm-list-delete">
   <div>
     <p>
-      Are you sure you want to delete this list?
+      Are you sure you want to delete <strong></strong>?
     </p>
     <a class="confirm-list-delete button-link"
       href="javascript:void(0);">Confirm</a>

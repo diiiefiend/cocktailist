@@ -2,7 +2,7 @@
 <% if(listitems.length > 0){ %>
   <% listitems.forEach( function (listitem){%>
     <div class="box">
-      <a href="javascript:void(0);" class="remove-item" data-listitem="<%= listitem.id %>">x</a>
+      <a href="javascript:void(0);" class="remove-item" data-listitem="<%= listitem.id %>">Unlist</a>
       <h1 class="header-box"><a href="#cocktails/<%= listitem.get('cocktail_id') %>"><%= listitem.get('cocktail').name %></a></h1>
       <h3><%= listitem.get('cocktail').bar.name %></h3>
       <p class="subtext">Added on <%= listitem.get('time') %></p>
