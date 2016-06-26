@@ -66,6 +66,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     };
 
     window.scrollTo(0, 0);
+
     this.renderCategory(coll, updateMap);
   },
 
@@ -113,135 +114,52 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     this.renderCategory(this.catCollection);
   },
 
-  setMap: function (cocktails){
+  renderMap: function (cocktails){
     //google maps stuff
-    this.markerObjs = {};
-    var coords = new google.maps.LatLng(cocktails[0].bar().latitude, cocktails[0].bar().longitude);
-
-    var mapCanvas = document.getElementById('bar-map');
-    var mapOptions = {
-      center: coords,
-      zoom: 15,
-      maxZoom: 15,
-      scrollwheel: false,
-      disableDoubleClickZoom: false,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      draggable: true,
-      overviewMapControl: false,
-      zoomControl: true,
-      disableDefaultUI: true
-    };
-    var map = new google.maps.Map(mapCanvas, mapOptions);
-
-    var markerBounds = new google.maps.LatLngBounds();
-    var markerLength;
-
-    var barsObjs = this.barsObjs(cocktails);
-
-    if(this.filterType === 'liquor'){
-      markerLength = barsObjs.length;
-    } else {
-      markerLength = 1;
-    };
-
-    this._infoBubble = new InfoBubble({
-      disableAutoPan:true,
-      hideCloseButton: true,
-      backgroundColor: "#000",
-      maxHeight: 30,
-      padding: 5,
-      borderRadius: 5,
-      arrowSize: 5
-    });
-
-    var barObj, marker;
-    for(var i = 0; i < markerLength; i++){
-      barObj = barsObjs[i];
-      coords = new google.maps.LatLng(barObj.latitude, barObj.longitude);
-      marker = new google.maps.Marker({
-        position: coords,
-        icon: "favicon-32x32.png"
-      });
-      marker.setMap(map);
-      markerBounds.extend(marker.position);
-      this.markerObjs[barObj.name] = marker;
-
-      var setListeners = function (barObj, marker){
-        marker.addListener('mouseover', function (){
-          var numDrinks = this.catCollection.filter(function (cocktail){
-            return cocktail.bar().name === barObj.name;
-          }).length;
-
-          this._infoBubble.setContent("<div class='map-info'>" +
-            "<a href='javascript:void(0);' class='bar-name'>" +
-            barObj.name +
-            "</a>" +
-            "<br />" + numDrinks + (numDrinks > 1 ? " drinks" : " drink") +
-            "</div>");
-          this._infoBubble.open(map, marker);
-        }.bind(this));
-
-        marker.addListener('click', function (){
-          var zoomLevel = map.getZoom();
-          if (zoomLevel < map.maxZoom){
-            map.setZoom(zoomLevel+1);
-            map.setCenter(marker.getPosition());
-          }
-        });
-
-        marker.addListener('mouseout', function (){
-          this._infoBubble.close();
-        }.bind(this));
-      }.bind(this);
-
-      setListeners(barObj, marker);
-    }
-
-    google.maps.event.addListener(this._infoBubble, 'domready', function (){
-      $("a.bar-name").click(function (e){
-        this.filter(e);
-      }.bind(this));
-    }.bind(this));
-
-    map.fitBounds(markerBounds);
+    var map = this.setUpMap('bar-map', cocktails, this.catCollection, '', this.filter.bind(this));
 
     if(this.filterType === 'bar'){
-      //retrieve some info on the bar, per Google Places API
-      var request = {
-        location: map.getCenter(),
-        radius: '500',
-        query: this.category
-      };
-
-      var service = new google.maps.places.PlacesService(map);
-      service.textSearch(request, function (results, status){
-        if(status == google.maps.places.PlacesServiceStatus.OK){
-
-          service.getDetails({placeId: results[0].place_id}, function (place, status2){
-            if(status2 == google.maps.places.PlacesServiceStatus.OK){
-              var $barInfo = this.$el.find(".bar-info");
-              $barInfo.html("<p>Google Rating: " + place.rating + "/5.0</p><ul>");
-              var hours = place.opening_hours.weekday_text;
-              hours.forEach( function (day){
-                $barInfo.find("ul").append("<li>"+day+"</li>");
-              });
-
-              //style first word in the hours list
-              this.$(".bar-info").find("li").each(function (){
-                 var word = $(this).html();
-                 var index = word.indexOf(' ');
-                 if(index == -1) {
-                    index = word.length;
-                 }
-                 $(this).html('<span class="first-word">' + word.substring(0, 3) + '</span>' + word.substring(index, word.length));
-              });
-
-            };
-          }.bind(this));
-
-        };
-      }.bind(this));
+      this.getPlaceInfo(map);
     };
+  },
+
+  // consider moving this to the liquorview methods as well
+  getPlaceInfo: function (map){
+    //retrieve some info on the bar, per Google Places API
+    var request = {
+      location: map.getCenter(),
+      radius: '500',
+      query: this.category
+    };
+
+    var service = new google.maps.places.PlacesService(map);
+    service.textSearch(request, function (results, status){
+      if(status == google.maps.places.PlacesServiceStatus.OK){
+
+        service.getDetails({placeId: results[0].place_id}, function (place, status2){
+          if(status2 == google.maps.places.PlacesServiceStatus.OK){
+            var $barInfo = this.$el.find(".bar-info");
+            $barInfo.html("<p>Google Rating: " + place.rating + "/5.0</p><ul>");
+            var hours = place.opening_hours.weekday_text;
+            hours.forEach( function (day){
+              $barInfo.find("ul").append("<li>"+day+"</li>");
+            });
+
+            //style first word in the hours list
+            this.$(".bar-info").find("li").each(function (){
+               var word = $(this).html();
+               var index = word.indexOf(' ');
+               if(index == -1) {
+                  index = word.length;
+               }
+               $(this).html('<span class="first-word">' + word.substring(0, 3) + '</span>' + word.substring(index, word.length));
+            });
+
+          };
+        }.bind(this));
+
+      };
+    }.bind(this));
   },
 
   renderCategory: function (cocktails, updateMap){
@@ -264,7 +182,7 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
 
     // don't make unnecessary api calls
     if(updateMap){
-      // this.setMap(cocktails);
+      this.renderMap(cocktails);
     } else {
       $("#bar-map").replaceWith($oldMap);
       $(".bar-info").replaceWith($oldInfo);

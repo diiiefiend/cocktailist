@@ -10,6 +10,7 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
 
   initialize: function(){
     //collection = cocktails
+    this.latestLimit = 10;
 
     Cocktailist.siteNav.setActive("browse");
 
@@ -39,8 +40,14 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
     };
   },
 
-  renderMap: function (){
-    //write this, maybe factor out the renderMap from catShow to a mixin so can just use that
+  renderMap: function (cocktails){
+    //google maps stuff
+    var goToBar = function (e){
+      var barName = $(e.currentTarget).text();
+      Backbone.history.navigate("browse/bar/" + barName, {trigger: true});
+    };
+
+    var map = this.setUpMap('bar-map', cocktails, this.latest, 'added', goToBar);
   },
 
   renderSide: function (options){
@@ -53,13 +60,12 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
 
 
   render: function (res, models, options){
-    var latestLimit = 10;
-    latestLimit = (this.collection.length > latestLimit) ? latestLimit : this.collection.length;
-    var latest = this.collection.slice(0, latestLimit);
-    var template = this.template['main']({latest: latest});
+    this.latestLimit = (this.collection.length > this.latestLimit) ? this.latestLimit : this.collection.length;
+    this.latest = this.collection.slice(0, this.latestLimit);
+    var template = this.template['main']({latest: this.latest});
     this.$el.html(template);
 
-    this.renderMap();
+    this.renderMap(this.latest);
     this.renderSide(options);
 
     $(document).trigger("pageLoaded");
