@@ -39,7 +39,9 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
     },
 
     setFeedFilters: function (){
-      this._feedTypes = _.unique(this.collection.pluck("activity"));
+      // for now just hard code it, until I figure out a smarter way to pull list of all activities
+      // this._feedTypes = _.unique(this.collection.pluck("activity"));
+      this._feedTypes = ['rated', 'added', 'listed'];
       this._feedFilters = this._feedTypes;
     },
 
@@ -74,6 +76,8 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       });
 
       this.$el.find(".right").html(template);
+
+      $(document).trigger("pageLoaded");
     },
 
     render: function (){
@@ -85,7 +89,6 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
 
       window.setTimeout(function (){
         $(".loader").hide();
-        $(document).trigger("pageLoaded");
       }, 600);
 
       return this;

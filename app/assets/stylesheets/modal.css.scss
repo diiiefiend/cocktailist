@@ -13,12 +13,12 @@
   > div {
     width: 400px;
     position: relative;
-    margin: 20% auto;
+    margin: 15% auto;
     text-align: left;
     background: rgba(0, 0, 0, 1);
 
-    p{
-      padding: 20px 20px 5px 20px;
+    .modal-padding{
+      padding: 10px 20px 5px 20px;
     }
   }
 }
