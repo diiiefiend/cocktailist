@@ -5,7 +5,9 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
   },
 
   events: {
-    "click .filter-list li a" : "changeFilter"
+    "click .filter-list li a" : "changeFilter",
+    "mouseenter .category-show-list li" : "activateBounce",
+    "mouseleave .category-show-list li" : "activateStopBounce"
   },
 
   initialize: function(){
@@ -38,6 +40,16 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
         });
       };
     };
+  },
+
+  activateBounce: function (e){
+    var markerName = $(e.currentTarget).data("markername");
+    this.bounce(markerName);
+  },
+
+  activateStopBounce: function (e){
+    var markerName = $(e.currentTarget).data("markername");
+    this.stopBounce(markerName);
   },
 
   renderMap: function (cocktails){

@@ -11,8 +11,8 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     "click a.subtext" : "showAll",
     "click .category-list a" : "switchCatEntry",
     "click a.switch" : "swapCat",
-    "mouseenter .category-show-list li" : "bounce",
-    "mouseleave .category-show-list li" : "stopBounce"
+    "mouseenter .category-show-list li" : "activateBounce",
+    "mouseleave .category-show-list li" : "activateStopBounce"
   },
 
   initialize: function (options){
@@ -75,19 +75,17 @@ Cocktailist.Views.CocktailCat= Backbone.LiquorView.extend({
     this.renderCategory();
   },
 
-  bounce: function (e){
+  activateBounce: function (e){
     if(this.filterType === 'liquor'){
       var markerName = $(e.currentTarget).data("markername");
-      var marker = this.markerObjs[markerName];
-      marker.setAnimation(google.maps.Animation.BOUNCE);
+      this.bounce(markerName);
     };
   },
 
-  stopBounce: function (e){
+  activateStopBounce: function (e){
     if(this.filterType === 'liquor'){
       var markerName = $(e.currentTarget).data("markername");
-      var marker = this.markerObjs[markerName];
-      marker.setAnimation(null);
+      this.stopBounce(markerName);
     };
   },
 

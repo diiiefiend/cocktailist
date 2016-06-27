@@ -146,4 +146,13 @@ Backbone.LiquorView = Backbone.CompositeView.extend({
     return this._map;
   },
 
+  bounce: function (markerName){
+    var marker = this.markerObjs[markerName];
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  },
+
+  stopBounce: function (markerName){
+    var marker = this.markerObjs[markerName];
+    marker.setAnimation(null);
+  },
 });

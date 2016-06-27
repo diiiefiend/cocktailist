@@ -129,6 +129,7 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     });
   },
 
+  //consider moving this to liquorView
   renderMap: function (){
     var coords = new google.maps.LatLng(this.model.bar().latitude, this.model.bar().longitude);
     var mapCanvas = document.getElementById('bar-map');
