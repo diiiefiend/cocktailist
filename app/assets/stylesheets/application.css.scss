@@ -150,7 +150,7 @@
 #header{
   background: white;
   border-bottom: 1px solid black;
-  height: 75px;
+  min-height: 75px;
   position: relative;
   color: black;
   font: 18px 'ChaparralPro', 'Palatino', serif;
@@ -172,11 +172,12 @@
   border-bottom: 2px solid black;
   width: 150px;
   color: black;
+  margin-bottom: 0;
 }
 
 #header #user-menu{
   float: right;
-  margin: 40px 0 0 30px;
+  margin: 40px 0 -10px 30px;
   position: relative;
   display: block;
 }
@@ -265,7 +266,8 @@
 }
 
 #content .wide{
-  width: 625px;
+  // width: 625px;
+  width: calc(100% - 25px - 50px - 30%);
 }
 #content .wide .left{
   margin-right: 25px;
@@ -275,7 +277,14 @@
 }
 
 #content .bar{
-  width: 225px;
+  // width: 225px;
+  width: calc(30% - 25px - 50px);
+}
+
+// for single column elements (currently just the add/edit cocktail form)
+#content .single-col{
+  margin: 25px auto;
+  width: 80%;
 }
 
 #content .box{
@@ -421,7 +430,8 @@
 
 /* general classes stuff */
 .container{
-  width: 1000px;
+  // width: 1000px;
+  width: calc(100% - 100px);
   margin: 0 auto;
   padding: 0 50px;
 }
