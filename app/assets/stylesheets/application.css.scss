@@ -71,7 +71,6 @@
  #main{
     min-height: 100vh;
     position: relative;
-    min-width: 1100px;
   }
 
  /* login page stuff */
@@ -154,6 +153,10 @@
   position: relative;
   color: black;
   font: 18px 'ChaparralPro', 'Palatino', serif;
+
+  .container {
+    width: 1000px;
+  }
 }
 
 #logo{
@@ -165,14 +168,15 @@
   float: left;
   position: relative;
   margin: 48px 0 0 25px;
-}
-#header #search input{
-  font-size: 16px;
-  background: transparent;
-  border-bottom: 2px solid black;
-  width: 150px;
-  color: black;
-  margin-bottom: 0;
+
+  input{
+    font-size: 16px;
+    background: transparent;
+    border-bottom: 2px solid black;
+    width: 150px;
+    color: black;
+    margin-bottom: 0;
+  }
 }
 
 #header #user-menu{
@@ -180,54 +184,55 @@
   margin: 40px 0 -10px 30px;
   position: relative;
   display: block;
-}
 
-#header #user-menu ul{
-  list-style: none;
-  font-size: 16px;
-  display: none;
-  position: absolute;
-  z-index: 1;
-  width: 100px;
-  padding: 5px;
-  background: white;
-  left: -43px;
-}
-#header #user-menu ul:after{
-  content: "";
-  display: none;
-  position: absolute;
-  top: -10px;
-  left: 50px;
-  border-bottom: 10px solid white;
-  border-top: 0 solid white;
-  border-right: 10px solid transparent;
-  border-left: 10px solid transparent;
-}
-#header #user-menu:hover ul,
-#header #user-menu:hover ul:after{
-  display: block;
-}
+  ul{
+    list-style: none;
+    font-size: 16px;
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    padding: 5px;
+    background: white;
+    left: -43px;
 
-#header #user-menu ul li:first-child{
-  font-size: 14px;
-  color: #aaa;
+    &:after{
+      content: "";
+      display: none;
+      position: absolute;
+      top: -10px;
+      left: 50px;
+      border-bottom: 10px solid white;
+      border-top: 0 solid white;
+      border-right: 10px solid transparent;
+      border-left: 10px solid transparent;
+    }
+
+    li:first-child{
+      font-size: 14px;
+      color: #aaa;
+    }
+  }
+
+  &:hover ul, &:hover ul:after{
+    display: block;
+  }
 }
 
 #header #nav{
   margin-top: 50px;
   float: right;
   list-style: none;
-}
 
-#header #nav li{
-  float: left;
-  margin-right: 20px;
-}
-// #header #nav li:last-child a{
-#header #nav li a.active{
-  font-weight: bold;
-  color: #cc8042;
+  li{
+    float: left;
+    margin-right: 20px;
+
+    a.active{
+      font-weight: bold;
+      color: #cc8042;
+    }
+  }
 }
 
 #header a, #footer a{
@@ -247,10 +252,12 @@
 #content{
   border-top: 1px solid #cc8042;
   padding: 10px 0 60px 0;
-}
 
-#content .container{
-  position: relative;
+  .container{
+    position: relative;
+    width: 1000px;
+    margin: 0 auto;
+  }
 }
 
 #content .left{
@@ -267,18 +274,18 @@
 
 #content .wide{
   // width: 625px;
-  width: calc(100% - 25px - 50px - 30%);
+  width: calc(100% - 2% - 50px - 30%);
 }
 #content .wide .left{
-  margin-right: 25px;
+  margin-right: 4%;
 }
 #content .wide .right{
-  margin-left: 25px;
+  margin-left: 4%;
 }
 
 #content .bar{
   // width: 225px;
-  width: calc(30% - 25px - 50px);
+  width: calc(30% - 2% - 50px);
 }
 
 // for single column elements (currently just the add/edit cocktail form)
@@ -421,6 +428,7 @@
 #footer p{
   float: left;
   font-size: 14px;
+  width: 90%;
 }
 
 #footer a.toplink{
@@ -430,7 +438,6 @@
 
 /* general classes stuff */
 .container{
-  // width: 1000px;
   width: calc(100% - 100px);
   margin: 0 auto;
   padding: 0 50px;
@@ -446,10 +453,10 @@
   content: "";
 }
 .rule-left:before{
-  left: 350px;
+  left: 32%;
 }
 .rule-right:before{
-  right: 350px;
+  right: 32%;
 }
 
 form a[class*="toggle-"]{
