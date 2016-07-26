@@ -9,7 +9,7 @@ Cocktailist.Views.SignIn = Backbone.CompositeView.extend({
   },
 
   initialize: function (options){
-    window.setTimeout(function (){ $(".loader").hide();}, 0);
+    window.setTimeout(function (){ Cocktailist.mainLoadAni.hide();}, 0);
     this.callback = options.callback;
     this.listenTo(Cocktailist.currentUser, "signIn", this.signInCallback);
 

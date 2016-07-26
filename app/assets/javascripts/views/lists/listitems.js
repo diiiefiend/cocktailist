@@ -1,6 +1,6 @@
-Cocktailist.Views.ListitemIndex = Backbone.CompositeView.extend(
+Cocktailist.Views.Listitems = Backbone.CompositeView.extend(
   _.extend({}, Cocktailist.Mixins.InfiniteScroll, {
-    template: JST['lists/listitemIndex'],
+    template: JST['lists/listitems'],
 
     initialize: function (options){
       //model: list
@@ -8,7 +8,7 @@ Cocktailist.Views.ListitemIndex = Backbone.CompositeView.extend(
       this.collection = options.collection;
       this.model = options.model;
 
-      this.bindScroll();         
+      this.bindScroll();
 
       this.model.user = Cocktailist.currentUser;
       this.collection.list = this.model;

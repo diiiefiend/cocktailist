@@ -30,9 +30,18 @@
   transform: translateZ(0) translateX(-50%) translateY(-50%);
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
-  top: 40vh;
-  left: 50%;
+
+  &.main-loader{
+    top: 40vh;
+    left: 50%;
+  }
+
+  &.scroll-loader{
+    bottom: 0;
+    transform: translateX(25em);
+  }
 }
+
 .loader:after {
   left: 1.5em;
 }

@@ -12,7 +12,7 @@ Cocktailist.Views.UserForm = Backbone.CompositeView.extend({
     //collection: all users
     this.callback = options.callback;
 
-    window.setTimeout(function (){ $(".loader").hide();}, 0);
+    window.setTimeout(function (){ Cocktailist.mainLoadAni.hide();}, 0);
     this.displayed = false;
     this.listenTo(Cocktailist.currentUser, "transition2", this.slideIn);
   },
@@ -32,7 +32,7 @@ Cocktailist.Views.UserForm = Backbone.CompositeView.extend({
 
   render: function(){
     this.$el.html(this.template({displayed: this.displayed}));
-    window.setTimeout(function (){ $(".loader").hide();}, 0);
+    window.setTimeout(function (){ Cocktailist.mainLoadAni.hide();}, 0);
     return this;
   },
 

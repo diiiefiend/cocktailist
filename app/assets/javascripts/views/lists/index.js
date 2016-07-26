@@ -142,12 +142,13 @@ Cocktailist.Views.ListsIndex = Backbone.CompositeView.extend({
       this.$el.html(template);
 
       this.renderSidebar();
-      this.listitemView = new Cocktailist.Views.ListitemIndex({model: this.model, collection: this.model.listitems()});
-      this.$el.find(".right").html(this.listitemView.render().$el);
+      this.listitemView = new Cocktailist.Views.Listitems({model: this.model, collection: this.model.listitems()});
+      this.$el.find(".listitems").html(this.listitemView.render().$el);
 
+      $(document).trigger("pageLoaded");
+      
       window.setTimeout(function (){
-        $(".loader").hide();
-        $(document).trigger("pageLoaded");
+        Cocktailist.mainLoadAni.hide();
       }, 400);
 
       return this;

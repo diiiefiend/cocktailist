@@ -17,6 +17,9 @@ Cocktailist.Mixins.InfiniteScroll = {
     if (this.requestingNextPage) return;
 
     this.requestingNextPage = true;
+
+    Cocktailist.scrollLoadAni.show();
+
     if(options && options.collection){
       options.collection.fetch({
         remove: false,
@@ -26,6 +29,7 @@ Cocktailist.Mixins.InfiniteScroll = {
         success: function () {
           this.requestingNextPage = false;
           this.collection.pageNum++;
+          Cocktailist.scrollLoadAni.hide();
         }.bind(this)
       });
     } else {
@@ -37,6 +41,7 @@ Cocktailist.Mixins.InfiniteScroll = {
         success: function (data, res, options) {
           this.requestingNextPage = false;
           this.collection.pageNum++;
+          Cocktailist.scrollLoadAni.hide();
         }.bind(this)
       });
     };

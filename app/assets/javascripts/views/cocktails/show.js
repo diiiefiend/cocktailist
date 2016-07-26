@@ -237,7 +237,9 @@ Cocktailist.Views.CocktailShow = Backbone.CompositeView.extend({
     this.renderRatingIcons();
     this.renderRatingComments();
 
-    window.setTimeout(function (){ $(".loader").hide();}, 800);
+    $(document).trigger("pageLoaded");
+
+    window.setTimeout(function (){ Cocktailist.mainLoadAni.hide();}, 800);
 
     return this;
   }

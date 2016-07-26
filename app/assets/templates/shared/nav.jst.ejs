@@ -1,5 +1,5 @@
 <li><a href="" <%= !currentUser.isSignedIn() ? "class=grayed" : "" %> <%= section==="feed" ? "class=active" : "" %> >Feed</a></li>
 <li><a href="#lists" <%= !currentUser.isSignedIn() ? "class=grayed" : "" %> <%= section==="lists" ? "class=active" : "" %> >My Lists</a></li>
 <li><a href="#browse" <%= section==="browse" ? "class=active" : "" %> >Browse</a></li>
-<li><a href="" class="grayed" >Recommendations</a></li>
+<li><a href="" class="grayed" >Analytics</a></li>
 <li><a href="#cocktails/new" <%= !currentUser.isSignedIn() ? "class=grayed" : "" %> <%= section==="form" ? "class=active" : "" %> >Add Entry</a></li>

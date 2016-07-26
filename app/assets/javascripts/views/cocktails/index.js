@@ -82,7 +82,7 @@ Cocktailist.Views.CocktailsIndex = Backbone.LiquorView.extend({
 
     $(document).trigger("pageLoaded");
 
-    window.setTimeout(function (){ $(".loader").hide();}, 400);
+    window.setTimeout(function (){ Cocktailist.mainLoadAni.hide();}, 400);
     return this;
   }
 });

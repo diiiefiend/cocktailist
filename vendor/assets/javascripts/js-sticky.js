@@ -18,6 +18,7 @@ function moveScroller(trigger) {
   var elTotalHeight = scrollEl.outerHeight(true);
   // just the width of the inner content (no padding/border/margins)
   var elInnerWidth = scrollEl.css("width");
+  // doesn't respond well to user resizing window after initial render =.=
   var elLeftPos = scrollEl.offset().left;
 
   if (trigger === "top"){

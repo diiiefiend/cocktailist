@@ -2,8 +2,8 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
   _.extend({}, Cocktailist.Mixins.InfiniteScroll, {
     template: {
       main: JST['feed/show'],
-      feed: JST['feed/_feedLeft'],
-      sidebar: JST['feed/_feedRight']
+      feed: JST['feed/_feeditems'],
+      sidebar: JST['feed/_side']
     },
 
     events: {
@@ -64,7 +64,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
         feedItems: this._feedColl
       });
 
-      this.$el.find(".left").html(template);
+      this.$el.find(".feeditems").html(template);
     },
 
     renderSide: function (){
@@ -88,7 +88,7 @@ Cocktailist.Views.CocktailsFeed = Backbone.CompositeView.extend(
       this.renderSide();
 
       window.setTimeout(function (){
-        $(".loader").hide();
+        Cocktailist.mainLoadAni.hide();
       }, 600);
 
       return this;
