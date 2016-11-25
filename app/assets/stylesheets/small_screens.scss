@@ -1,0 +1,59 @@
+@media screen and (max-width: 1000px) {
+  #header {
+    #nav {
+      display: none;
+    }
+
+    #search {
+      display: none;
+    }
+
+    #user-menu {
+      ul {
+        left: -76px;
+
+        &::after {
+          left: 82px;
+        }
+      }
+    }
+  }
+
+  .container {
+    padding: 0 10px;
+    width: auto;
+  }
+
+  .siCont {
+    top: 5vh;
+    
+    #signinbox {
+      left: 10%;
+    }
+  }
+
+  #content {
+    .wide {
+      padding: 0;
+      width: auto;
+    }
+
+    .bar {
+      display: none;
+    }
+  }
+
+  #footer {
+    .subtext {
+      display: none;
+    }
+  }
+
+  [class*="rule-"] {
+    display: none;
+  }
+
+  .user-stats {
+    width: 150px;
+  }
+}
