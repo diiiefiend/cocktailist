@@ -69,9 +69,10 @@
  #signinbox{
    width: 300px;
    background: white;
-   position: absolute;
-   top: 0;
-   left: 40%;
+  //  position: absolute;
+  //  top: 0;
+  //  left: 40%;
+   margin: 20px auto 0;
    color: black;
    transition: left 500ms linear;
  }
@@ -324,6 +325,10 @@
   border: 5px solid #aaa;
 }
 
+.right.bar #bar-map {
+  width: 100%;
+}
+
 #bar-map.wide-map{
   width: calc(100% - 10px);
 }
@@ -389,10 +394,6 @@
 }
 .rating-click-box:nth-child(5){
   left: 68px;
-}
-
-#signinbox{
-  margin-top: 20px;
 }
 
 /* footer area stuff */

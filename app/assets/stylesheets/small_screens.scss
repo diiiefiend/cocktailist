@@ -1,13 +1,21 @@
 @media screen and (max-width: 1000px) {
   #header {
-    #nav {
-      display: none;
-    }
-
     #search {
       display: none;
     }
+  }
+}
 
+@media screen and (max-width: 820px) {
+  #header {
+    #nav {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  #header {
     #user-menu {
       ul {
         left: -76px;
@@ -25,17 +33,17 @@
   }
 
   .siCont {
-    top: 5vh;
-    
-    #signinbox {
-      left: 10%;
-    }
+    top: 0;
   }
 
   #content {
     .wide {
       padding: 0;
       width: auto;
+    }
+
+    .left {
+      float: none;
     }
 
     .bar {
