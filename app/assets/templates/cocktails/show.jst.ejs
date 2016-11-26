@@ -11,7 +11,6 @@
         <h5>Lists</h5>
         <ul class="add-to-lists clearfix">
         <% lists.each( function (list){ %>
-          <% var listsCID = list.listitems().pluck('cocktail_id') %>
             <li class="clearfix">
               <label for="list_<%= list.get('name') %>">
               <input
@@ -28,9 +27,20 @@
         <p><a href="#session/new">Log in</a> to add to lists!</p>
       <% } %>
     </div>
-    <h3>at <%= cocktail.bar().name %></h3>
 
-    <h2><%= cocktail.escape('liquor') %></h2>
+    <h3>at
+      <% var bar = cocktail.bar().name %>
+      <a href="#browse/bar/<%= bar %>">
+        <%= bar %>
+      </a>
+    </h3>
+
+    <h2>
+      <% var liquor = cocktail.escape('liquor') %>
+      <a href="#browse/liquor/<%= liquor %>">
+        <%= liquor %>
+      </a>
+    </h2>
 
     <p id="main-rating">Average Rating: <span class="rating"></span> <strong></strong>
     <span class="subtext"></span></p>

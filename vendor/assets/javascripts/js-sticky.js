@@ -32,14 +32,14 @@ function moveScroller(trigger) {
             left: elLeftPos,
             width: elInnerWidth,
             zIndex: 100,
-            opacity: 0.9
+            opacity: 0.95
         });
 
         // need to create a "placeholder" for the element in the DOM if it
         // used to be position: static or position: relative
         if(document.getElementById("sticky-cont") !== null){
           $("#sticky-cont").css({
-            width: elTotalWidth,
+            width: 'auto',
             height: elTotalHeight
           });
         }

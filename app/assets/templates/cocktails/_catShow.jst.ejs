@@ -1,16 +1,22 @@
   <h1 class="capitalize"><%= category %></h1>
-  <%= filter === 'liquor' ? "<div class='map-tip'>click marker to zoom</div>" : "" %>
 
-  <div class="box">
-    <div id="bar-map" <%= filter === 'liquor' ? "class='wide-map'" : "" %>>
-    </div>
-    <% if(filter === 'bar'){ %>
+  <% if(filter === 'bar'){ %>
+    <div class="box">
+      <div id="bar-map"></div>
       <h3><%= cocktails[0].bar().address %></h3>
       <div class="bar-info">
       </div>
-    <% }; %>
   </div>
-  
+<% } else { %>
+  <div class='map-tip'>click marker to zoom</div>
+  <div id="sticky-trigger"></div>
+  <div id="sticky-cont">
+    <div class="box" id="sticky">
+      <div id="bar-map" class="wide-map"></div>
+    </div>
+  </div>
+<% } %>
+
   <div class="box">
     <ul class="category-show-list clearfix">
       <% cocktails.forEach( function (cocktail){ %>

@@ -61,6 +61,12 @@
     display: none;
   }
 
+  .image-placeholder {
+    min-height: auto;
+    min-width: auto;
+    background: transparent;
+  }
+
   .user-stats {
     width: 150px;
   }
