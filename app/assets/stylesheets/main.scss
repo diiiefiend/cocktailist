@@ -553,7 +553,7 @@ img.feed-img{
 .category-show-list .cat-show-item:after{
   z-index: 1;
   content: attr(title);
-  font-size: 14px;
+  font-size: 12px;
   line-height: normal;
   position: absolute;
   bottom: 0;
@@ -561,6 +561,8 @@ img.feed-img{
   color: #aaa;
   background: black;
   opacity: 0.75;
+  height: 40px;
+  width: 100%;
 }
 .category-show-list li:hover .cat-show-item:after{
   color: white;
