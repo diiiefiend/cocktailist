@@ -12,6 +12,15 @@
     <% } %>
   </div>
   <br class="clearfix">
+  <label for="composition">Composition</label>
+  <div class="composition">
+    <input type="range" min="1" max="10" value="<%= rating.escape('scale_composition') %>">
+  </div>
+  <label for="spirits">Spirits</label>
+  <div class="spirits">
+    <input type="range" min="1" max="10" value="<%= rating.escape('scale_spirited') %>">
+  </div>
+  <br class="clearfix">
   <label for="body">Review</label>
   <textarea name="rating[body]" placeholder="comments (optional)"><%= rating.escape('body') %></textarea>
   <ul id="errors"></ul>

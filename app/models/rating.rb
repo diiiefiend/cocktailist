@@ -4,6 +4,8 @@
 # t.text     "body"
 # t.datetime "created_at"
 # t.datetime "updated_at"
+# t.integer  "scale_composition"
+# t.integer  "scale_spirited"
 
 class Rating < ActiveRecord::Base
   validates :user_id, :cocktail_id, :rating, presence: true
