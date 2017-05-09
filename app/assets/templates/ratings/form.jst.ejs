@@ -14,11 +14,12 @@
   <br class="clearfix">
   <label for="composition">Composition</label>
   <div class="composition">
-    <input type="range" min="1" max="10" value="<%= rating.escape('scale_composition') %>">
+    <input type="range" min="1" max="10" class="slider" value="<%= rating.escape('scale_composition') %>">
   </div>
+  <br class="clearfix">
   <label for="spirits">Spirits</label>
   <div class="spirits">
-    <input type="range" min="1" max="10" value="<%= rating.escape('scale_spirited') %>">
+    <input type="range" min="1" max="10" class="slider" value="<%= rating.escape('scale_spirited') %>">
   </div>
   <br class="clearfix">
   <label for="body">Review</label>

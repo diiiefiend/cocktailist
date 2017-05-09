@@ -1,0 +1,198 @@
+form a[class*="toggle-"]{
+  float: right;
+}
+form input[class*="toggle-"]{
+  display: none;
+  margin-left: 110px;
+}
+form input[class*="toggle-"].display{
+  display: block;
+}
+
+input.side-input{
+  width: 80%;
+  display: inline-block;
+}
+
+label{
+  float: left;
+  width: 100px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+input, select, textarea{
+  display: block;
+  padding: 3px;
+  background: transparent;
+  color: white;
+  border-bottom: 1px solid #aaa;
+  font: 18px 'ChaparralPro', 'Palatino', serif;
+  margin-bottom: 10px;
+  width: 60%;
+}
+input:focus, select:focus, textarea:focus{
+  border-bottom: 1px solid white;
+}
+
+button[disabled]{
+  background: #333;
+  color: #bbb;
+}
+
+textarea{
+  height: 70px;
+  background: #0E0807;
+}
+
+input[type="radio"]{
+  border: 0;
+  padding: 0;
+  width: 20px;
+  float: left;
+}
+label.radio{
+  width: auto;
+}
+label.radio+label:not(.radio){
+  clear: left;
+}
+
+input[type="checkbox"]{
+  display: inline-block;
+  width: auto;
+}
+label.checkbox{
+  width: auto;
+}
+
+/* sliders */
+/* thanks http://danielstern.ca/range.css/?ref=css-tricks#/ */
+input[type=range].slider {
+  -webkit-appearance: none;
+  // width: 100%;
+  margin: 3.55px 0;
+  border: 0;
+}
+input[type=range].slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #010;
+  border-radius: 0px;
+}
+
+input[type=range].slider::-moz-range-track {
+  width: 100%;
+  height: 9px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #010;
+  border-radius: 0px;
+}
+
+input[type=range].slider::-ms-track {
+  width: 100%;
+  height: 9px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range].slider::-ms-fill-lower {
+  background: #010;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].slider::-ms-fill-upper {
+  background: #010;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range].slider:focus::-webkit-slider-runnable-track {
+  background: #fff;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range].slider:focus::-ms-fill-lower {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].slider:focus::-ms-fill-upper {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range].slider::-webkit-slider-thumb {
+  box-shadow: 0px 0px 1px #6e0000, 0px 0px 0px #880000;
+  border: 1px solid rgba(0, 0, 0, 0.64);
+  height: 16px;
+  width: 12px;
+  border-radius: 2px;
+  background: #ff9e3e;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.55px;
+}
+
+input[type=range].slider::-moz-range-thumb {
+  box-shadow: 0px 0px 1px #6e0000, 0px 0px 0px #880000;
+  border: 1px solid rgba(0, 0, 0, 0.64);
+  height: 16px;
+  width: 12px;
+  border-radius: 2px;
+  background: #ff9e3e;
+  cursor: pointer;
+}
+
+input[type=range].slider::-ms-thumb {
+  box-shadow: 0px 0px 1px #6e0000, 0px 0px 0px #880000;
+  border: 1px solid rgba(0, 0, 0, 0.64);
+  height: 16px;
+  width: 12px;
+  border-radius: 2px;
+  background: #ff9e3e;
+  cursor: pointer;
+  height: 9px;
+}
+
+/* more specific styling */
+.cocktailForm select option{
+  background-color: black;
+}
+
+#signinbox {
+  input{
+    background: asset-url("boxbg.jpg");
+    width: 91%;
+    padding: 5%;
+    color: white;
+    margin-left: -1px;
+    margin-bottom: 0;
+    font: 24px 'Montserrat', sans-serif;
+    opacity: 1;
+  }
+
+  button{
+    width: 101%;
+    padding: 5%;
+    margin: 0 -1px;
+    font-size: 24px;
+
+    &:hover{
+      background: white;
+      color: black;
+    }
+  }
+}
+
+#header #search{
+  input{
+    font-size: 16px;
+    background: transparent;
+    border-bottom: 2px solid black;
+    width: 150px;
+    color: black;
+    margin-bottom: 0;
+  }
+}

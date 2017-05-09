@@ -14,3 +14,9 @@
 
 # Ignore application configuration
 /config/application.yml
+
+Gemfile.lock
+.tags
+.tags1
+.DS_Store
+**/*/.DS_Store

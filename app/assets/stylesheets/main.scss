@@ -1,32 +1,3 @@
-
-  @font-face {
-    font-family: 'Montserrat';
-    src: font-url("montserrat_reg.otf");
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Montserrat';
-    src: asset-url("montserrat_bold.otf");
-    font-weight: bold;
-    font-style: normal;
-  }
-
- @font-face {
-   font-family: 'ChaparralPro';
-   src: font-url("chaparralpro_reg.otf");
-   font-weight: normal;
-   font-style: normal;
- }
-
- @font-face {
-   font-family: 'ChaparralPro';
-   src: asset-url("chaparralpro_bold.otf");
-   font-weight: bold;
-   font-style: normal;
- }
-
  *{
    margin: 0;
    padding: 0;
@@ -75,47 +46,25 @@
    margin: 20px auto 0;
    color: black;
    transition: left 500ms linear;
- }
 
- #signinbox h1{
-   text-align: center;
-   color: black;
- }
+   &.exit {
+     left: 2000px;
+     transition: left 500ms linear;
+   }
 
- #signinbox p{
-   text-align: center;
-   margin: 10px;
- }
+   h1{
+     text-align: center;
+     color: black;
+   }
 
- #signinbox strong{
-   color: inherit;
- }
+   p{
+     text-align: center;
+     margin: 10px;
+   }
 
- #signinbox input{
-   background: asset-url("boxbg.jpg");
-   width: 91%;
-   padding: 5%;
-   color: white;
-   margin-left: -1px;
-   margin-bottom: 0;
-   font: 24px 'Montserrat', sans-serif;
-   opacity: 1;
- }
-
- #signinbox button{
-   width: 101%;
-   padding: 5%;
-   margin: 0 -1px;
-   font-size: 24px;
- }
- #signinbox button:hover{
-   background: white;
-   color: black;
- }
-
- #signinbox.exit {
-   left: 2000px;
-   transition: left 500ms linear;
+   strong{
+     color: inherit;
+   }
  }
 
  .flashbox{
@@ -126,9 +75,10 @@
    left: 350px;
    top: 100px;
    display: none;
- }
- .flashbox p.subtext{
-   text-align: left;
+
+   p.subtext{
+     text-align: left;
+   }
  }
 
  /* header area stuff */
@@ -143,82 +93,73 @@
   .container {
     max-width: 1000px;
   }
+
+  #search{
+    float: left;
+    position: relative;
+    margin: 48px 0 0 25px;
+  }
+
+  #user-menu{
+    float: right;
+    margin: 40px 0 -10px 30px;
+    position: relative;
+    display: block;
+
+    ul{
+      list-style: none;
+      font-size: 16px;
+      display: none;
+      position: absolute;
+      z-index: 1;
+      width: 100px;
+      padding: 5px;
+      background: white;
+      left: -43px;
+
+      &:after{
+        content: "";
+        display: none;
+        position: absolute;
+        top: -10px;
+        left: 50px;
+        border-bottom: 10px solid white;
+        border-top: 0 solid white;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+      }
+
+      li:first-child{
+        font-size: 14px;
+        color: #aaa;
+      }
+    }
+
+    &:hover ul, &:hover ul:after{
+      display: block;
+    }
+  }
+
+  #nav{
+    margin-top: 50px;
+    float: right;
+    list-style: none;
+
+    li{
+      float: left;
+      margin-right: 20px;
+
+      a.active{
+        font-weight: bold;
+        color: #cc8042;
+      }
+    }
+  }
 }
 
 #logo{
   float: left;
   padding-top: 23px;
-}
-
-#header #search{
-  float: left;
-  position: relative;
-  margin: 48px 0 0 25px;
-
-  input{
-    font-size: 16px;
-    background: transparent;
-    border-bottom: 2px solid black;
-    width: 150px;
-    color: black;
-    margin-bottom: 0;
-  }
-}
-
-#header #user-menu{
-  float: right;
-  margin: 40px 0 -10px 30px;
-  position: relative;
-  display: block;
-
-  ul{
-    list-style: none;
-    font-size: 16px;
-    display: none;
-    position: absolute;
-    z-index: 1;
-    width: 100px;
-    padding: 5px;
-    background: white;
-    left: -43px;
-
-    &:after{
-      content: "";
-      display: none;
-      position: absolute;
-      top: -10px;
-      left: 50px;
-      border-bottom: 10px solid white;
-      border-top: 0 solid white;
-      border-right: 10px solid transparent;
-      border-left: 10px solid transparent;
-    }
-
-    li:first-child{
-      font-size: 14px;
-      color: #aaa;
-    }
-  }
-
-  &:hover ul, &:hover ul:after{
-    display: block;
-  }
-}
-
-#header #nav{
-  margin-top: 50px;
-  float: right;
-  list-style: none;
-
-  li{
-    float: left;
-    margin-right: 20px;
-
-    a.active{
-      font-weight: bold;
-      color: #cc8042;
-    }
-  }
 }
 
 #header a, #footer a{
@@ -233,7 +174,6 @@
   color: #ccc;
 }
 
-
 /* content area stuff */
 #content{
   border-top: 1px solid #cc8042;
@@ -244,77 +184,80 @@
     max-width: 1000px;
     margin: 0 auto;
   }
+
+  .left{
+    float: left;
+  }
+
+  .right{
+    float: right;
+  }
+
+  .wide{
+    padding: 25px;
+    // width: 625px;
+    width: calc(100% - 2% - 50px - 30%);
+
+    .left{
+      margin-right: 4%;
+    }
+
+    .right{
+      margin-left: 4%;
+    }
+  }
+
+  .bar{
+    padding: 25px;
+    // width: 225px;
+    width: calc(30% - 2% - 50px);
+  }
+
+  // for single column elements (currently just the add/edit cocktail form)
+  .single-col{
+    margin: 25px auto;
+    width: 80%;
+  }
+
+  .box{
+    background: asset-url("boxbg.jpg");
+    margin-bottom: 20px;
+    padding: 20px;
+    line-height: 200%;
+  }
+
+  .header-box{
+    background: white;
+    color: black;
+    padding: 5px 10px;
+  }
+
+  .box .header-box{
+    margin-left: -20px;
+    margin-right: -20px;
+
+    a:hover{
+      color: black;
+    }
+  }
 }
 
-#content .left{
-  float: left;
-}
+.bar {
+  h1{
+    font-size: 24px;
+  }
 
-#content .right{
-  float: right;
-}
+  h2{
+    font-size: 20px;
+  }
 
-#content .wide, #content .bar{
-  padding: 25px;
-}
+  ul{
+    list-style: none;
 
-#content .wide{
-  // width: 625px;
-  width: calc(100% - 2% - 50px - 30%);
-}
-#content .wide .left{
-  margin-right: 4%;
-}
-#content .wide .right{
-  margin-left: 4%;
-}
-
-#content .bar{
-  // width: 225px;
-  width: calc(30% - 2% - 50px);
-}
-
-// for single column elements (currently just the add/edit cocktail form)
-#content .single-col{
-  margin: 25px auto;
-  width: 80%;
-}
-
-#content .box{
-  background: asset-url("boxbg.jpg");
-  margin-bottom: 20px;
-  padding: 20px;
-  line-height: 200%;
-}
-
-#content .header-box{
-  background: white;
-  color: black;
-  padding: 5px 10px;
-}
-
-#content .box .header-box{
-  margin-left: -20px;
-  margin-right: -20px;
-}
-
-#content .box .header-box a:hover{
-  color: black;
-}
-
-.bar h1{
-  font-size: 24px;
-}
-
-.bar h2{
-  font-size: 20px;
-}
-
-.bar ul{
-  list-style: none;
-}
-.bar ul li:first-letter{
-  text-transform: uppercase;
+    li:first-letter{
+      text-transform: uppercase;
+    }
+  }
 }
 
 #bar-map{
@@ -323,14 +266,19 @@
   float: left;
   margin-right: 15px;
   border: 5px solid #aaa;
+
+  &.wide-map{
+    width: calc(100% - 10px);
+  }
+
+  .map-info{
+    font: 14px 'ChaparralPro', 'Palatino', serif;
+    overflow-y: hidden;
+  }
 }
 
 .right.bar #bar-map {
   width: 100%;
-}
-
-#bar-map.wide-map{
-  width: calc(100% - 10px);
 }
 
 .map-tip{
@@ -340,23 +288,21 @@
   font-size: 24px;
 }
 
-#bar-map .map-info{
-  font: 14px 'ChaparralPro', 'Palatino', serif;
-}
+.bar-info {
+  ul{
+    list-style: none;
+    margin: 0;
+    line-height: 100%;
+    text-transform: lowercase;
+    font-variant: small-caps;
+  }
 
-.bar-info ul{
-  list-style: none;
-  margin: 0;
-  line-height: 100%;
-  text-transform: lowercase;
-  font-variant: small-caps;
-}
-
-.bar-info .first-word{
-  display: inline-block;
-  width: 25px;
-  text-align: right;
-  color: #aaa;
+  .first-word{
+    display: inline-block;
+    width: 25px;
+    text-align: right;
+    color: #aaa;
+  }
 }
 
 .rating{
@@ -366,11 +312,11 @@
   height: 20px;
   display: inline-block;
   position: relative;
-}
 
-.rating img{
-  float: left;
-  margin-top: 4px;
+  img{
+    float: left;
+    margin-top: 4px;
+  }
 }
 
 .rating-click-box{
@@ -405,22 +351,22 @@
   bottom: 0;
   position: absolute;
   width: 100%;
-}
 
-#footer *{
-  padding-top: 5px;
-  margin-bottom: -2px;
-}
+  *{
+    padding-top: 5px;
+    margin-bottom: -2px;
+  }
 
-#footer p{
-  float: left;
-  font-size: 14px;
-  width: 90%;
-}
+  p{
+    float: left;
+    font-size: 14px;
+    width: 90%;
+  }
 
-#footer a.toplink{
-  font-size: 24px;
-  float: right;
+  a.toplink{
+    font-size: 24px;
+    float: right;
+  }
 }
 
 /* general classes stuff */
@@ -444,17 +390,6 @@
 }
 .rule-right:before{
   right: 32%;
-}
-
-form a[class*="toggle-"]{
-  float: right;
-}
-form input[class*="toggle-"]{
-  display: none;
-  margin-left: 110px;
-}
-form input[class*="toggle-"].display{
-  display: block;
 }
 
 .clearfix:after, .box:after{
@@ -488,13 +423,14 @@ img.feed-img{
   background: asset-url("imgborderbg-black.png") no-repeat;
   background-size: contain;
   margin-left: 20px;
-}
-.image-placeholder img{
-  height: auto;
-  width: 150px;
-  opacity: 1;
-  display: block;
-  margin: 10px auto;
+
+  img{
+    height: auto;
+    width: 150px;
+    opacity: 1;
+    display: block;
+    margin: 10px auto;
+  }
 }
 
 #delete-rating{
@@ -583,9 +519,10 @@ img.feed-img{
 .filter-list{
   font-size: 20px;
   list-style: none;
-}
-.filter-list.small{
-  font-size: 16px;
+
+  &.filter-list.small{
+    font-size: 16px;
+  }
 }
 
 .under-box-link{
@@ -598,11 +535,6 @@ img.feed-img{
 
 .stickied .under-box-link{
   display: block;
-}
-
-input.side-input{
-  width: 80%;
-  display: inline-block;
 }
 
 a.remove-item, a.remove-list{
@@ -678,62 +610,6 @@ button, a.button-link{
     display: block;
     margin: 5px auto;
   }
-}
-
-label{
-  float: left;
-  width: 100px;
-  text-align: right;
-  padding-right: 10px;
-}
-
-input, select, textarea{
-  display: block;
-  padding: 3px;
-  background: transparent;
-  color: white;
-  border-bottom: 1px solid #aaa;
-  font: 18px 'ChaparralPro', 'Palatino', serif;
-  margin-bottom: 10px;
-  width: 60%;
-}
-input:focus, select:focus, textarea:focus{
-  border-bottom: 1px solid white;
-}
-
-button[disabled]{
-  background: #333;
-  color: #bbb;
-}
-
-textarea{
-  height: 70px;
-  background: #0E0807;
-}
-
-.cocktailForm select option{
-  background-color: black;
-}
-
-input[type="radio"]{
-  border: 0;
-  padding: 0;
-  width: 20px;
-  float: left;
-}
-label.radio{
-  width: auto;
-}
-label.radio+label:not(.radio){
-  clear: left;
-}
-
-input[type="checkbox"]{
-  display: inline-block;
-  width: auto;
-}
-label.checkbox{
-  width: auto;
 }
 
 h1{
