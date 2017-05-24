@@ -3,7 +3,7 @@ module Api
     wrap_parameters false
 
     def index
-      @cocktails = Cocktail.all.order(created_at: :desc).includes(:bar, :ratings)
+      @cocktails = Cocktail.recent.includes_items
       render :index
     end
 
@@ -28,13 +28,7 @@ module Api
 
       @cocktail = Cocktail.new(clean_params)
       if @cocktail.save
-        delimiter = " | "
-        Feed.create(user_id: current_user.id,
-          cocktail_id: @cocktail.id,
-          activity: "added",
-          data: @cocktail.ingredients+delimiter+@cocktail.bar.name,
-          feedable_id: @cocktail.id,
-          feedable_type: "Cocktail")
+        Feed.new_feed_item_from_cocktail!(current_user, @cocktail)
         render json: @cocktail
       else
         render json: @cocktail.errors.full_messages, status: :unprocessable_entity
@@ -66,13 +60,14 @@ module Api
 
     private
     def current_cocktail
-      Cocktail.includes(:bar, :ratings).find(params[:id])
+      Cocktail.includes_items.find(params[:id])
     end
 
     def cocktail_params
       params.require(:cocktail).permit(:name, :liquor, :ingredients, :bar_name, :bar_address, :img)
     end
 
+    #TODO rewrite this whole method...this is NOT how you do this
     def cleanup_params(cocktail_params, errors)
       clean_params = cocktail_params
       clean_params[:ingredients] = clean_params[:ingredients].downcase

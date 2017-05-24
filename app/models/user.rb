@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   validates :password, length: {minimum: 5, allow_nil: true}
   after_initialize :ensure_session_token
+  after_create :create_default_lists!
 
   has_many :feed_items,
     class_name: "Feed",
@@ -79,5 +80,9 @@ class User < ActiveRecord::Base
   private
   def ensure_session_token
     self.session_token ||= self.class.generate_token
+  end
+
+  def create_default_lists!
+    lists.create!(List::DEFAULT_LISTS.map {|name| { name: name } })
   end
 end

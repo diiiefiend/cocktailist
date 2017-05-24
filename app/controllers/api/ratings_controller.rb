@@ -10,7 +10,7 @@ module Api
       clean_params.delete(:rating_num)
       @rating = Rating.new(clean_params)
       if @rating.save
-        create_feed_item(@rating)
+        Feed.new_feed_item_from_rating!(current_user, @rating)
         render :create
       else
         render json: @rating.errors.full_messages, status: :unprocessable_entity
@@ -29,7 +29,7 @@ module Api
       clean_params.delete(:rating_num)
       if @rating.update(clean_params)
         # create a new feeditem with the updated rating
-        create_feed_item(@rating)
+        Feed.new_feed_item_from_rating!(current_user, @rating)
         render json: @rating
       else
         render json: @rating.errors.full_messages, status: :unprocessable_entity
@@ -48,14 +48,5 @@ module Api
       params.require(:rating).permit(:cocktail_id, :rating_num, :body)
     end
 
-    def create_feed_item(ratingObj)
-      delimiter = " | "
-      Feed.create(user_id: current_user.id,
-        cocktail_id: ratingObj.cocktail_id,
-        activity: "rated",
-        data: truncate(ratingObj.body, length: 100, separator: ' ', ommission: '[...]')+delimiter+ratingObj.cocktail.bar.name+delimiter+"#{ratingObj.rating}",
-        feedable_id: ratingObj.id,
-        feedable_type: "Rating")
-    end
   end
 end

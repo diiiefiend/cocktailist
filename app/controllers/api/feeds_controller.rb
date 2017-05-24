@@ -3,7 +3,7 @@ module Api
     wrap_parameters false
 
     def show
-      @feedItems = Feed.all.order(created_at: :desc).includes(:user, :cocktail).page(params[:page])
+      @feedItems = Feed.recent.includes_items.page(params[:page])
       render :show
     end
 

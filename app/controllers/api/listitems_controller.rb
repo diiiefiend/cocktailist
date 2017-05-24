@@ -1,7 +1,7 @@
 module Api
   class ListitemsController < ApplicationController
     def index
-      @listitems = Listitem.all.where("list_id = ?", params[:id]).page(params[:page])
+      @listitems = Listitem.find_by(list_id: params[:id]).page(params[:page])
       render :index
     end
 
@@ -9,13 +9,7 @@ module Api
       clean_params = listitem_params
       @listitem = Listitem.new(clean_params)
       if @listitem.save
-        delimiter = " | "
-        Feed.create(user_id: current_user.id,
-          cocktail_id: @listitem.cocktail_id,
-          activity: "listed",
-          data: delimiter+@listitem.cocktail.bar.name+delimiter+@listitem.list.name,
-          feedable_id: @listitem.id,
-          feedable_type: "Listitem")
+        Feed.new_feed_item_from_listitem!(current_user, listitem)
         render json: @listitem
       else
         render json: @listitem.errors.full_messages, status: :unprocessable_entity
@@ -44,7 +38,7 @@ module Api
 
     private
     def current_listitem
-      Listitem.includes(:cocktail, :list).find(params[:id])
+      Listitem.includes_items.find(params[:id])
     end
 
     def listitem_params
