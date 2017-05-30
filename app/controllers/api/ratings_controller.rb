@@ -45,7 +45,7 @@ module Api
     private
 
     def rating_params
-      params.require(:rating).permit(:cocktail_id, :rating_num, :body, :scale_composition, :scale_spirited)
+      params.require(:rating).permit(:cocktail_id, :rating_num, :body)
     end
 
   end
