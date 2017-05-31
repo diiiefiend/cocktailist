@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730001708) do
+ActiveRecord::Schema.define(version: 20170524011326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160730001708) do
     t.string   "img_content_type"
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
+    t.float    "avg_rating"
   end
 
   add_index "cocktails", ["bar_id"], name: "index_cocktails_on_bar_id", using: :btree

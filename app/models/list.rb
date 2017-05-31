@@ -12,4 +12,9 @@ class List < ActiveRecord::Base
   has_many :listitems,
     dependent: :destroy
 
+  DEFAULT_LISTS = [
+    TO_TRY = "to_try",
+    EXPERIENCED = "experienced"
+  ]
+
 end

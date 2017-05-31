@@ -24,11 +24,16 @@ class Cocktail < ActiveRecord::Base
 
   has_many :feed_items, as: :feedable, class_name: "Feed", dependent: :destroy
 
-  def avg_rating
-    if self.ratings.length > 0
-      avg = self.ratings.pluck(:rating).inject(:+) / self.ratings.length.to_f
+  scope :includes_items, -> { includes(:bar, :ratings) }
+  scope :recent, -> { order(created_at: :desc) }
+
+  def calculate_avg_rating
+    current_ratings = ratings
+    if current_ratings.length > 0
+      avg = current_ratings.pluck(:rating).inject(:+) / current_ratings.length.to_f
     else
       avg = -1
     end
   end
+
 end
