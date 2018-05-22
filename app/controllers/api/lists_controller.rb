@@ -2,7 +2,7 @@ module Api
   class ListsController < ApplicationController
     def index
       if logged_in?
-        @lists = List.all.where("user_id = #{current_user.id}")
+        @lists = current_user.lists.includes(listitems: { cocktail: {} })
       else
         @lists = nil
       end
