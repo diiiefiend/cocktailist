@@ -38,7 +38,7 @@ module Api
 
     private
     def current_listitem
-      Listitem.includes_items.find(params[:id])
+      Listitem.include_additional_info.find(params[:id])
     end
 
     def listitem_params

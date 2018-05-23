@@ -3,7 +3,7 @@ module Api
     wrap_parameters false
 
     def show
-      @feedItems = Feed.recent.includes_items.page(params[:page])
+      @feedItems = Feed.recent.include_additional_info.page(params[:page])
       render :show
     end
 

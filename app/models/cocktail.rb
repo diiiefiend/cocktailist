@@ -24,7 +24,7 @@ class Cocktail < ActiveRecord::Base
 
   has_many :feed_items, as: :feedable, class_name: "Feed", dependent: :destroy
 
-  scope :includes_items, -> { includes(:bar, :ratings) }
+  scope :include_additional_info, -> { includes(:bar, :ratings) }
   scope :recent, -> { order(created_at: :desc) }
 
   def calculate_avg_rating

@@ -3,7 +3,7 @@ module Api
     wrap_parameters false
 
     def index
-      @cocktails = Cocktail.recent.includes_items
+      @cocktails = Cocktail.recent.include_additional_info
       render :index
     end
 
@@ -60,7 +60,7 @@ module Api
 
     private
     def current_cocktail
-      Cocktail.includes_items.find(params[:id])
+      Cocktail.include_additional_info.find(params[:id])
     end
 
     def cocktail_params

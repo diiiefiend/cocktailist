@@ -12,7 +12,7 @@ class Feed < ActiveRecord::Base
 
   belongs_to :feedable, polymorphic: true
 
-  scope :includes_items, -> { includes(:user, :cocktail) }
+  scope :include_additional_info, -> { includes(:user, :cocktail) }
   scope :recent, -> { order(created_at: :desc) }
 
   paginates_per 7      #for kaminari
