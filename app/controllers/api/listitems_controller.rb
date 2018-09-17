@@ -1,7 +1,7 @@
 module Api
   class ListitemsController < ApplicationController
     def index
-      @listitems = Listitem.find_by(list_id: params[:id]).page(params[:page])
+      @listitems = Listitem.where(list_id: params[:id]).page(params[:page])
       render :index
     end
 
