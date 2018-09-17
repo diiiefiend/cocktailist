@@ -24,7 +24,7 @@ class Feed < ActiveRecord::Base
       user_id: current_user.id,
       cocktail_id: cocktail.id,
       activity: "added",
-      data: cocktail.ingredients+delimiter+cocktail.bar.name,
+      data: cocktail.ingredients + delimiter + cocktail.bar.name,
       feedable_id: cocktail.id,
       feedable_type: "Cocktail"
     )
@@ -36,7 +36,7 @@ class Feed < ActiveRecord::Base
       user_id: current_user.id,
       cocktail_id: listitem.cocktail_id,
       activity: "listed",
-      data: delimiter+listitem.cocktail.bar.name+delimiter+@listitem.list.name,
+      data: delimiter + listitem.cocktail.bar.name + delimiter + listitem.list.name,
       feedable_id: listitem.id,
       feedable_type: "Listitem"
     )
