@@ -11,7 +11,7 @@ class Listitem < ActiveRecord::Base
 
   has_many :feed_items, as: :feedable, class_name: "Feed", dependent: :destroy
 
-  scope :include_additional_info, -> { includes(:user, :cocktail) }
+  scope :include_additional_info, -> { includes(:cocktail, list: { user: {} }) }
 
   paginates_per 5
 end
