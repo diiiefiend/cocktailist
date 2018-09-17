@@ -9,7 +9,7 @@ module Api
       clean_params = listitem_params
       @listitem = Listitem.new(clean_params)
       if @listitem.save
-        Feed.new_feed_item_from_listitem!(current_user, listitem)
+        Feed.new_feed_item_from_listitem!(current_user, @listitem)
         render json: @listitem
       else
         render json: @listitem.errors.full_messages, status: :unprocessable_entity
