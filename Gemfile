@@ -23,6 +23,7 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console'
   gem 'spring'
+  gem 'thin'
 end
 
 group :development do
