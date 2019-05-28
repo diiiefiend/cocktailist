@@ -7,7 +7,7 @@
 # t.integer  "scale_composition"
 # t.integer  "scale_spirited"
 
-class Rating < ActiveRecord::Base
+class Rating < ApplicationRecord
   validates :user_id, :cocktail_id, :rating, presence: true
   validates :rating, numericality: {greater_than: 0}
 

@@ -3,7 +3,7 @@
 # t.float "longitude"
 # t.float "latitude"
 
-class Bar < ActiveRecord::Base
+class Bar < ApplicationRecord
   include PgSearch
   multisearchable against: [:name, :address]
 

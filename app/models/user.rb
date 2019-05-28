@@ -5,7 +5,7 @@
 # t.datetime "created_at",      null: false
 # t.datetime "updated_at",      null: false
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include PgSearch
   multisearchable against: [:username, :email]
 
