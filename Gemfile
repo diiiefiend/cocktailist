@@ -18,6 +18,8 @@ gem 'pg_search'
 gem 'geocoder'
 gem 'paperclip'
 gem 'bootsnap'
+gem 'doorkeeper'
+gem 'oauth2'
 
 group :development, :test do
   gem 'byebug'

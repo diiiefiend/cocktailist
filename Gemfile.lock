@@ -787,6 +787,8 @@ GEM
     crass (1.0.4)
     daemons (1.3.1)
     debug_inspector (0.0.3)
+    doorkeeper (5.1.0)
+      railties (>= 5)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -968,12 +970,14 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   byebug
+  doorkeeper
   figaro
   geocoder
   jbuilder
   jquery-rails
   kaminari
   listen
+  oauth2
   omniauth-facebook
   paperclip
   pg
