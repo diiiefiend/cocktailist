@@ -2,7 +2,7 @@
 # t.integer  "cocktail_id", null: false
 # t.string   "activity",    null: false
 
-class Feed < ActiveRecord::Base
+class Feed < ApplicationRecord
 
   validates :user_id, :cocktail_id, :activity, presence: true
   validates :activity, inclusion: {in: %w(added rated listed), message: "invalid activity"}

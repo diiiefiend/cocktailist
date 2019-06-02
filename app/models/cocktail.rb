@@ -3,7 +3,7 @@
 # t.string  "ingredients", null: false
 # t.integer "bar_id"
 
-class Cocktail < ActiveRecord::Base
+class Cocktail < ApplicationRecord
   include PgSearch
   multisearchable against: [:name, :liquor, :ingredients]
 

@@ -3,7 +3,7 @@
 # t.datetime "created_at",  null: false
 # t.datetime "updated_at",  null: false
 
-class Listitem < ActiveRecord::Base
+class Listitem < ApplicationRecord
   validates :cocktail_id, :list_id, presence: true
 
   belongs_to :list
