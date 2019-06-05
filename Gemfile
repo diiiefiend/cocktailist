@@ -20,6 +20,8 @@ gem 'paperclip'
 gem 'bootsnap'
 gem 'doorkeeper'
 gem 'oauth2'
+gem 'graphql'
+gem 'graphql-batch'
 
 group :development, :test do
   gem 'byebug'
@@ -34,4 +36,5 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'listen'
+  gem 'graphiql-rails'
 end
