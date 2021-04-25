@@ -31,7 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 gem 'backbone-on-rails'
-gem 'paperclip', '~> 4.3'
+gem 'paperclip', '~> 5.2'
 gem 'figaro', '~> 1.0.0'
 gem 'aws-sdk', '< 2.0'
 gem 'omniauth-facebook'
