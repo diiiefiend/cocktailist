@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
-ruby "2.2.7"
+ruby "2.6.9"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.11.3'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg', '~> 0.18.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -30,14 +30,14 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'backbone-on-rails'
-gem 'paperclip', '~> 5.2'
+gem 'paperclip', '~> 5.2.1'
 gem 'figaro', '~> 1.0.0'
-gem 'aws-sdk', '< 2.0'
+gem 'aws-sdk', '2.3.0'
 gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'pg_search'
 gem 'geocoder'
+gem 'rails-backbone'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
