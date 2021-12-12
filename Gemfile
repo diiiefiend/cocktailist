@@ -32,7 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'paperclip', '~> 5.2.1'
 gem 'figaro', '~> 1.0.0'
-gem 'aws-sdk', '< 2.0'
+gem 'aws-sdk', '2.3.0'
 gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'pg_search'

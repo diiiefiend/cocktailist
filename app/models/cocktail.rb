@@ -4,7 +4,7 @@
 # t.integer "bar_id"
 
 class Cocktail < ActiveRecord::Base
-  include PgSearch
+  include PgSearch::Model
   multisearchable against: [:name, :liquor, :ingredients]
 
   validates :name, :liquor, :ingredients, presence: true
