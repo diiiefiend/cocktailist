@@ -139,6 +139,7 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mysql2 (0.5.4)
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
@@ -163,7 +164,6 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
-    pg (0.18.4)
     pg_search (2.3.0)
       activerecord (>= 4.2)
       activesupport (>= 4.2)
@@ -269,9 +269,9 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
+  mysql2 (>= 0.3.13, < 0.6.0)
   omniauth-facebook
   paperclip (~> 5.2.1)
-  pg (~> 0.18.4)
   pg_search
   pry-rails
   rails (= 4.2.11.3)
