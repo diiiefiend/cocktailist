@@ -1,5 +1,5 @@
 <div class="box">
-  <% var splitData = feedItem.get('data').split(" | ") %>
+  <% var splitData = feedItem.get('data').split("| ") %>
   <h2><%= feedItem.escape('username') %> <%= feedItem.escape('activity') %>
     <% if(feedItem.escape('activity') === 'rated'){ %>
       <div class="rating">
