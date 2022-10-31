@@ -4,8 +4,8 @@
 # t.float "latitude"
 
 class Bar < ActiveRecord::Base
-  include PgSearch
-  multisearchable against: [:name, :address]
+  # include PgSearch
+  # multisearchable against: [:name, :address]
 
   geocoded_by :full_address
   after_validation :geocode

@@ -4,8 +4,8 @@
 # t.integer "bar_id"
 
 class Cocktail < ActiveRecord::Base
-  include PgSearch::Model
-  multisearchable against: [:name, :liquor, :ingredients]
+  # include PgSearch::Model
+  # multisearchable against: [:name, :liquor, :ingredients]
 
   validates :name, :liquor, :ingredients, presence: true
   has_attached_file :img, default_url: "placeholder.png", styles: {small: "150x150>"}
