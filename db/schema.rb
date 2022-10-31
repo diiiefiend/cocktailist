@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20221031210919) do
+ActiveRecord::Schema.define(version: 20221031214706) do
 
   create_table "bars", force: :cascade do |t|
     t.string "name",      limit: 255, null: false
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20221031210919) do
     t.float    "avg_rating",       limit: 53
   end
 
+  add_index "cocktails", ["bar_id"], name: "index_cocktails_on_bar_id", using: :btree
+
   create_table "feeds", force: :cascade do |t|
     t.integer  "user_id",       limit: 4,   null: false
     t.integer  "cocktail_id",   limit: 4,   null: false
@@ -45,6 +47,10 @@ ActiveRecord::Schema.define(version: 20221031210919) do
     t.string   "feedable_type", limit: 255, null: false
   end
 
+  add_index "feeds", ["cocktail_id"], name: "index_feeds_on_cocktail_id", using: :btree
+  add_index "feeds", ["feedable_id"], name: "index_feeds_on_feedable_id", using: :btree
+  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
+
   create_table "listitems", force: :cascade do |t|
     t.integer  "cocktail_id", limit: 4, null: false
     t.integer  "list_id",     limit: 4, null: false
@@ -52,12 +58,17 @@ ActiveRecord::Schema.define(version: 20221031210919) do
     t.datetime "updated_at",            null: false
   end
 
+  add_index "listitems", ["cocktail_id"], name: "index_listitems_on_cocktail_id", using: :btree
+  add_index "listitems", ["list_id"], name: "index_listitems_on_list_id", using: :btree
+
   create_table "lists", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
     t.integer  "user_id",    limit: 4,   null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "lists", ["user_id"], name: "index_lists_on_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "user_id",           limit: 4,     null: false
@@ -70,6 +81,9 @@ ActiveRecord::Schema.define(version: 20221031210919) do
     t.integer  "scale_spirited",    limit: 4
   end
 
+  add_index "ratings", ["cocktail_id"], name: "index_ratings_on_cocktail_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "username",        limit: 255, null: false
     t.string   "email",           limit: 255, null: false
@@ -80,5 +94,7 @@ ActiveRecord::Schema.define(version: 20221031210919) do
     t.string   "uid",             limit: 255
     t.string   "provider",        limit: 255
   end
+
+  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
 
 end
