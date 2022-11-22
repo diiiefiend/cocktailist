@@ -10,7 +10,6 @@ Cocktailist.Collections.SearchResults = Backbone.BetterCollection.extend({
 
   model: function (attrs){
     var type = attrs._type;
-    // delete attrs._type;
 
     return new Cocktailist.Models[type](attrs);
   }

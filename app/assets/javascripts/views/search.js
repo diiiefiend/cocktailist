@@ -1,10 +1,9 @@
+// because this is super confusing: this view is for the search results page
 Cocktailist.Views.Search = Backbone.LiquorView.extend({
   template: JST['search'],
 
   events: {
     "change .q" : "search",
-    "click a.next-page" : "nextPage",
-    "click a.prev-page" : "prevPage"
   },
 
   initialize: function (options){
@@ -15,40 +14,14 @@ Cocktailist.Views.Search = Backbone.LiquorView.extend({
   },
 
   search: function (e){
-    if(e){
+    if (e) {
       e.preventDefault();
     };
-    this.searchResults.pageNum = 1;
     this.searchResults.query = $(".q").val() || this.origQ;
     this.searchResults.fetch({
       data: {
         query: this.searchResults.query,
-        page: 1
       }
-    });
-  },
-
-  nextPage: function (e){
-    this.searchResults.fetch({
-        data: {
-          query: this.searchResults.query,
-          page: this.searchResults.pageNum + 1
-        },
-        success: function (){
-          this.searchResults.pageNum = this.searchResults.pageNum + 1;
-        }.bind(this)
-    });
-  },
-
-  prevPage: function (e){
-    this.searchResults.fetch({
-        data: {
-          query: this.searchResults.query,
-          page: this.searchResults.pageNum - 1
-        },
-        success: function (){
-          this.searchResults.pageNum = this.searchResults.pageNum - 1;
-        }.bind(this)
     });
   },
 

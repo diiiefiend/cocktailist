@@ -20,3 +20,6 @@ Gemfile.lock
 .tags1
 .DS_Store
 **/*/.DS_Store
+
+# search related stuff
+solr/

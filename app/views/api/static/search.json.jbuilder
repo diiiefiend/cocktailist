@@ -1,16 +1,20 @@
-json.total_count @search_results.total_count
+json.total_count @cocktail_search_results.results.total_count + @bar_search_results.results.total_count + @user_search_results.results.total_count
 
-json.results do
-  json.array! @search_results do |search_result|
-    if search_result.searchable_type == "Cocktail"
-      json.partial! "api/cocktails/cocktail", cocktail: search_result.searchable
-      json._type "Cocktail"
-    elsif search_result.searchable_type == "Bar"
-      json.partial! "api/bars/bar", bar: search_result.searchable
-      json._type "Bar"
-    else
-      json.partial! "api/users/user", user: search_result.searchable
-      json._type "User"
-    end
+json.results do 
+  # need this to be 1 big array so it's properly parsed as a collection, sigh
+
+  cocktailsArr = json.array! @cocktail_search_results.results.each do | result |
+    json.partial! "api/cocktails/cocktail", cocktail: result
+    json._type "Cocktail"
   end
+  barsArr = json.array! @bar_search_results.results.each do | result |
+    json.partial! "api/bars/bar", bar: result
+    json._type "Bar"
+  end
+  usersArr = json.array! @user_search_results.results.each do | result |
+    json.partial! "api/users/user", user: result
+    json._type "User"
+  end
+
+  cocktailsArr + barsArr + usersArr
 end

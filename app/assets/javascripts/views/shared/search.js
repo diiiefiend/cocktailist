@@ -1,3 +1,4 @@
+// this view is for the search box at the top
 Cocktailist.Views.Searchbox = Backbone.View.extend({
   template: JST['shared/searchbox'],
 
@@ -11,7 +12,7 @@ Cocktailist.Views.Searchbox = Backbone.View.extend({
 
   goToSearch: function (e){
     e.preventDefault();
-    Backbone.history.navigate("search/"+escape(this.$(".header-search").val()), {trigger: true});
+    Backbone.history.navigate("search/" + escape(this.$(".header-search").val()), {trigger: true});
     this.$(".header-search").val("");
   },
 
